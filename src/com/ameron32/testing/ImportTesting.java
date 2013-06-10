@@ -19,9 +19,13 @@ public class ImportTesting {
     static final List<Item> libraryMeleeWeapon = new ArrayList<Item>();
     static final List<AttackOption> libraryMeleeWeaponOption = new ArrayList<AttackOption>();
     static final List<Item> libraryShield = new ArrayList<Item>();
-    static final String dirPath = "C:\\Users\\klemeilleur\\Dropbox\\Public\\GURPS\\";
+    static String dirPath;
+    
+    public ImportTesting (String[] args) {
+        dirPath = args[0];
+    }
 
-    public static void main(String[] args) {
+    public void main() {
         Importer i = new Importer();
         i.readCSVIntoList(dirPath + "item155-armor.csv", libraryArmor, ImportType.Armor);
         i.readCSVIntoList(dirPath + "item155-meleeattackoptions.csv", libraryMeleeWeaponOption,
@@ -72,13 +76,13 @@ public class ImportTesting {
 
     }
 
-    public static void p(String s) {
+    public void p(String s) {
 //        System.out.println(s);
 //        log(s);
         sb.append("\n" + s);
     }
 
-    public static void addAttackOptionsForWeapons(
+    public void addAttackOptionsForWeapons(
             List<Item> weaponsOnly, List<AttackOption> attackOptions) {
         for (Item item : weaponsOnly) {
             for (AttackOption ao : attackOptions) {
