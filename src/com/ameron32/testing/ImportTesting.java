@@ -7,6 +7,7 @@ import com.ameron32.gurpsbattleflow.Importer;
 import com.ameron32.gurpsbattleflow.Importer.ImportType;
 import com.ameron32.gurpsbattleflow.attackoptions.AttackOption;
 import com.ameron32.gurpsbattleflow.attackoptions.MeleeAttackOption;
+import com.ameron32.gurpsbattleflow.items.design.Armor;
 import com.ameron32.gurpsbattleflow.items.design.Item;
 import com.ameron32.gurpsbattleflow.items.design.Weapon;
 
@@ -42,34 +43,42 @@ public class ImportTesting {
         p(libraryShield.size() + " shields" + "\n\n");
 
         for (Item item : libraryArmor) {
-            p(item.getName()
-                    + "\n" + "    $" + item.getCost() + ", " + item.getWeight() + ", "
-                    + item.getId()
-                    + "\n" + "      " + item.getDescription()
-                    + "\n" + "    " + item.toString()
-                    + "\n\n");
+            Armor armor = (Armor) item;
+            p(armor.getClass().getSimpleName() + ": " + armor.getName()
+                    + "\n" + "    " + "[" + armor.getCoversString() + "]" + ", " + "$" + armor.getCost() + ", " + armor.getWeight() + " lb" + ", "
+                    + "id:" + armor.getId()
+                    + "\n" + "      " + "D: " + armor.getDescription()
+//                    + "\n" + "    " + armor.toString()
+//                    + "\n"
+                    );
         }
 
         for (Item item : libraryMeleeWeapon) {
-            p(item.getName()
-                    + "\n" + "    $" + item.getCost() + ", " + item.getWeight() + ", "
-                    + item.getId()
-                    + "\n" + "      " + item.getDescription()
-                    + "\n" + "    " + item.toString()
-                    + "\n\n");
+            Weapon weapon = (Weapon) item;
+            p(weapon.getClass().getSimpleName() + ": " + weapon.getName()
+                    + "\n" + "    $" + weapon.getCost() + ", " + weapon.getWeight() + " lb" + ", " + "id:" + weapon.getId()
+                    + "\n" + "      " + weapon.getAttackOptionsNumber()  
+                    + "\n" + weapon.getAttackOptionsString() 
+                    + "      " + weapon.getWeaponId()
+                    + "\n" + "      " + "D: " + weapon.getDescription()
+//                    + "\n\n"
+                    );
         }
 
         for (AttackOption ao : libraryMeleeWeaponOption) {
-            p(ao.toString() + "\n\n");
+            p(ao.toString() 
+//                    + "\n\n"
+                    );
         }
 
         for (Item item : libraryShield) {
-            p(item.getName()
-                    + "\n" + "    $" + item.getCost() + ", " + item.getWeight() + ", "
-                    + item.getId()
-                    + "\n" + "      " + item.getDescription()
-                    + "\n" + "    " + item.toString()
-                    + "\n\n");
+            p(item.getClass().getSimpleName() + ": " + item.getName()
+                    + "\n" + "    $" + item.getCost() + ", " + item.getWeight() + " lb" + ", "
+                    + "id:" + item.getId()
+                    + "\n" + "      " + "D: " + item.getDescription()
+//                    + "\n" + "    " + item.toString()
+//                    + "\n\n"
+                    );
         }
         
 //        logClose();

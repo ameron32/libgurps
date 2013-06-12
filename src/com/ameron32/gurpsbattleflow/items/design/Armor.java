@@ -135,6 +135,18 @@ public class Armor extends Item {
     public short getDr() {
         return dr;
     }
+    
+    public String[] getCovers() {
+        return covers;
+    }
+    
+    public String getCoversString() {
+        StringBuilder sb = new StringBuilder();
+        for (String s : getCovers()) {
+            sb.append(s + ";");
+        }
+        return sb.toString();
+    }
 
 
     @Override

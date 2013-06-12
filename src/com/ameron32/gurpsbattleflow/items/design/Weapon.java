@@ -96,6 +96,14 @@ public abstract class Weapon extends Item {
         return weaponId;
     }
 
+    
+    public int getAttackOptionsNumber() {
+        if (attackOptions != null)
+            return attackOptions.size();
+        else
+            return 0;
+    }
+    
     public String getAttackOptionsString() {
         StringBuilder sb = new StringBuilder();
         if (attackOptions != null) {
