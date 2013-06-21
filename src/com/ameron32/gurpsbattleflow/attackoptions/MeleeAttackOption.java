@@ -99,11 +99,13 @@ public class MeleeAttackOption extends AttackOption {
 
     @Override
     public String toString() {
-        return "MeleeAttackOption [reach=" + Arrays.toString(reach) + ", baseRoll=" + baseRoll
+        return "MAO: " + weaponName + ": reach=" + Arrays.toString(reach) + ", baseRoll=" + baseRoll
                 + ", modifier=" + modifier + ", id=" + id + ", weaponId=" + weaponId + ", group="
-                + group + ", weaponName=" + weaponName + ", damageDescription=" + damageDescription
-                + ", attackNotes=" + attackNotes + ", loReachChoices=" + loReachChoices
-                + ", attackNumber=" + attackNumber + ", minST=" + minST + "]";
+                + group + ", " 
+                + "\n" + "      " + "weaponName=" + weaponName + ", damageDescription=[" + damageDescription
+                + "], attackNotes=" + attackNotes + ", " 
+                + "\n" + "      " + "loReachChoices=[" + loReachChoices
+                + "], attackNumber=" + attackNumber + ", minST=" + minST + "";
     }
     
     
