@@ -1,17 +1,23 @@
 package com.ameron32.testing;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
-import com.ameron32.gurpsbattleflow.Advantage;
-import com.ameron32.gurpsbattleflow.Importer;
-import com.ameron32.gurpsbattleflow.Skill;
-import com.ameron32.gurpsbattleflow.Importer.ImportType;
-import com.ameron32.gurpsbattleflow.attackoptions.AttackOption;
-import com.ameron32.gurpsbattleflow.attackoptions.MeleeAttackOption;
-import com.ameron32.gurpsbattleflow.items.design.Armor;
-import com.ameron32.gurpsbattleflow.items.design.Item;
-import com.ameron32.gurpsbattleflow.items.design.Weapon;
+import com.ameron32.libgurps.attackoptions.AttackOption;
+import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
+import com.ameron32.libgurps.character.stats.Advantage;
+import com.ameron32.libgurps.character.stats.Skill;
+import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.items.design.Armor;
+import com.ameron32.libgurps.items.design.Item;
+import com.ameron32.libgurps.items.design.Weapon;
+import com.ameron32.libgurps.tools.Importer;
+import com.ameron32.libgurps.tools.Importer.ImportType;
 
 public class ImportTesting {
 
@@ -67,71 +73,76 @@ public class ImportTesting {
         
         for (Item item : libraryArmor) {
             Armor armor = (Armor) item;
+            p(armor.getObjectId() + "");
             p(armor.getClass().getSimpleName() + ": " + armor.getName()
                     + "\n" + "    " + "[" + armor.getCoversString() + "]" + ", " + "$" + armor.getCost() + ", " + armor.getWeight() + " lb" + ", "
                     + "id:" + armor.getId()
                     + "\n" + "      " + "D: " + truncate(armor.getDescription(), 50)
-//                    + "\n" + "    " + armor.toString()
-//                    + "\n"
                     );
         }
 
         for (Item item : libraryMeleeWeapon) {
             Weapon weapon = (Weapon) item;
+            p(weapon.getObjectId() + "");
             p(weapon.getClass().getSimpleName() + ": " + weapon.getName()
                     + "\n" + "    $" + weapon.getCost() + ", " + weapon.getWeight() + " lb" + ", " + "id:" + weapon.getId()
                     + "\n" + "      " + weapon.getAttackOptionsNumber()  
                     + "\n" + weapon.getAttackOptionsString() 
                     + "      " + weapon.getWeaponId()
                     + "\n" + "      " + "D: " + truncate(weapon.getDescription(), 50)
-//                    + "\n\n"
                     );
         }
 
         for (AttackOption ao : libraryMeleeWeaponOption) {
-            p(ao.toString() 
-//                    + "\n\n"
-                    );
+            p(ao.toString());
         }
 
         for (Item item : libraryShield) {
+            p(item.getObjectId() + "");
             p(item.getClass().getSimpleName() + ": " + item.getName()
                     + "\n" + "    $" + item.getCost() + ", " + item.getWeight() + " lb" + ", "
                     + "id:" + item.getId()
                     + "\n" + "      " + "D: " + truncate(item.getDescription(), 50)
-//                    + "\n" + "    " + item.toString()
-//                    + "\n\n"
                     );
         }
         
         for (Advantage a : libraryAdvs) {
+            p(a.getObjectId() + "");
             p(a.getClass().getSimpleName() + ": " + a.getsName()
                     + "\n" + "    c:" + a.getiCalcCost() + ", p#" + a.getiPage() + "" + ", "
                     + "id:" + a.getiId()
                     + "\n" + "      " + "D: " + truncate(a.getsDescription(), 50)
-//                    + "\n" + "    " + item.toString()
-//                    + "\n\n"
                     );
         }
         
         for (Skill s : librarySkills) {
+            p(s.getObjectId() + "");
             p(s.getClass().getSimpleName() + ": " + s.getsNameString()
                     + "\n" + "    att:" + s.getsAttribute() + ", diff:" + s.getsDifficulty() + "" + ", "
                     + "id:" + s.getiId()
                     + "\n" + "      " + "D: " + truncate(s.getsDescription(), 50)
                     + "\n" + "      " + "Def: " + s.getLsDefaults()
-//                    + "\n" + "    " + item.toString()
-//                    + "\n\n"
                     );
         }
-        
-//        logClose();
+
+        /* TEST FOR UNIQUE IDs
+        @SuppressWarnings("unchecked")
+        boolean bID = hasConflictingId(new ArrayList<List<GURPSObject>>((Collection<? extends List<GURPSObject>>) Arrays.asList(libraryAdvs, libraryArmor, libraryMeleeWeapon, libraryShield, librarySkills)));
+        if (bID) {
+            for (Long l : allIds) p(l + "");
+            p(bID + " failed");
+        } else {
+            p("" + bID);
+        }
+        */
+    
+        /* WRITE OUTPUT TO A TEXT FILE
+        logClose();
+        */
 
     }
 
     public void p(String s) {
-//        System.out.println(s);
-//        log(s);
         sb.append("\n" + s);
     }
 
@@ -151,7 +162,7 @@ public class ImportTesting {
         }
     }
 
-    /*
+    /* WRITE OUTPUT TO A TEXT FILE
     static PrintWriter out;
     static final String newline = System.getProperty("line.separator");
     public static void log(String s) {
@@ -176,6 +187,7 @@ public class ImportTesting {
         out.close();
     }
     */
+    
     private String truncate(String input) {
         return truncate(input, 15);
     }
@@ -188,6 +200,38 @@ public class ImportTesting {
         else
             return input.substring(0, max) + "~";
     }
+
+    /* TEST FOR UNIQUE IDs
+    List<Long> allIds;
+    private boolean hasConflictingId(List<List<GURPSObject>> all){
+        allIds = new ArrayList<Long>();
+        for (List<GURPSObject> list : all) {
+            for (GURPSObject o : list) {
+                allIds.add(o.getObjectId());
+            }
+        }
+        
+        Comparator<Long> c = new Comparator<Long>() {
+            @Override
+            public int compare(Long lhs, Long rhs) {
+                if (lhs == rhs)
+                    return 0;
+                else 
+                    return -1;
+            }
+        };
+        
+        Set<Long> longSet = new TreeSet<Long>(c);
+        for (Long l : allIds) {
+            if (!longSet.add(l)) {
+                System.out.println(l + " failed");
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    */
 
 
 }
