@@ -1,18 +1,13 @@
 package com.ameron32.testing;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
+import com.ameron32.libcharacter.library.PersonalityTraits;
 import com.ameron32.libgurps.attackoptions.AttackOption;
 import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
-import com.ameron32.libgurps.frmwk.GURPSObject;
 import com.ameron32.libgurps.items.design.Armor;
 import com.ameron32.libgurps.items.design.Item;
 import com.ameron32.libgurps.items.design.Weapon;
@@ -43,10 +38,16 @@ public class ImportTesting {
     public static String[] getAllFiles() { return allFiles.clone(); }
     
     public ImportTesting (String[] args) {
-        dirPath = args[0];
+        dirPath = args[0] + "GURPSBuilder\\";
+        TestingTools.setDirPath(dirPath);
     }
 
     public void main() {
+//      runImporter();
+        runRandomizer();
+    }
+    
+    private void runImporter() {
         Importer i = new Importer();
         i.readCSVIntoList(dirPath + "item155-armor.csv", 
                 libraryArmor, ImportType.Armor);
@@ -73,17 +74,17 @@ public class ImportTesting {
         
         for (Item item : libraryArmor) {
             Armor armor = (Armor) item;
-            p(armor.getObjectId() + "");
             p(armor.getClass().getSimpleName() + ": " + armor.getName()
                     + "\n" + "    " + "[" + armor.getCoversString() + "]" + ", " + "$" + armor.getCost() + ", " + armor.getWeight() + " lb" + ", "
                     + "id:" + armor.getId()
                     + "\n" + "      " + "D: " + truncate(armor.getDescription(), 50)
                     );
+            p("     id: " + armor.getObjectId() + "\n");
         }
 
         for (Item item : libraryMeleeWeapon) {
             Weapon weapon = (Weapon) item;
-            p(weapon.getObjectId() + "");
+            
             p(weapon.getClass().getSimpleName() + ": " + weapon.getName()
                     + "\n" + "    $" + weapon.getCost() + ", " + weapon.getWeight() + " lb" + ", " + "id:" + weapon.getId()
                     + "\n" + "      " + weapon.getAttackOptionsNumber()  
@@ -91,6 +92,7 @@ public class ImportTesting {
                     + "      " + weapon.getWeaponId()
                     + "\n" + "      " + "D: " + truncate(weapon.getDescription(), 50)
                     );
+            p("     id: " + weapon.getObjectId() + "\n");
         }
 
         for (AttackOption ao : libraryMeleeWeaponOption) {
@@ -98,50 +100,60 @@ public class ImportTesting {
         }
 
         for (Item item : libraryShield) {
-            p(item.getObjectId() + "");
             p(item.getClass().getSimpleName() + ": " + item.getName()
                     + "\n" + "    $" + item.getCost() + ", " + item.getWeight() + " lb" + ", "
                     + "id:" + item.getId()
                     + "\n" + "      " + "D: " + truncate(item.getDescription(), 50)
                     );
+            p("     id: " + item.getObjectId() + "\n");
         }
         
         for (Advantage a : libraryAdvs) {
-            p(a.getObjectId() + "");
             p(a.getClass().getSimpleName() + ": " + a.getsName()
                     + "\n" + "    c:" + a.getiCalcCost() + ", p#" + a.getiPage() + "" + ", "
                     + "id:" + a.getiId()
                     + "\n" + "      " + "D: " + truncate(a.getsDescription(), 50)
                     );
+            p("     id: " + a.getObjectId() + "\n");
         }
         
         for (Skill s : librarySkills) {
-            p(s.getObjectId() + "");
             p(s.getClass().getSimpleName() + ": " + s.getsNameString()
                     + "\n" + "    att:" + s.getsAttribute() + ", diff:" + s.getsDifficulty() + "" + ", "
                     + "id:" + s.getiId()
                     + "\n" + "      " + "D: " + truncate(s.getsDescription(), 50)
                     + "\n" + "      " + "Def: " + s.getLsDefaults()
                     );
+            p("      id: " + s.getObjectId() + "\n");
         }
 
-        /* TEST FOR UNIQUE IDs
-        @SuppressWarnings("unchecked")
-        boolean bID = hasConflictingId(new ArrayList<List<GURPSObject>>((Collection<? extends List<GURPSObject>>) Arrays.asList(libraryAdvs, libraryArmor, libraryMeleeWeapon, libraryShield, librarySkills)));
-        if (bID) {
-            for (Long l : allIds) p(l + "");
-            p(bID + " failed");
-        } else {
-            p("" + bID);
-        }
-        */
+//        /* TEST FOR UNIQUE IDs */
+//        @SuppressWarnings("unchecked")
+//        boolean bID = TestingTools.hasConflictingId(
+//              new ArrayList<List<GURPSObject>>(
+//                  (Collection<? extends List<GURPSObject>>) Arrays.asList(
+//                      libraryAdvs, libraryArmor, libraryMeleeWeapon, libraryShield, librarySkills)));
+//        if (bID) {
+//            for (Long l : allIds) p(l + "");
+//            p(bID + " failed");
+//        } else {
+//            p("" + bID);
+//        }
+        
     
-        /* WRITE OUTPUT TO A TEXT FILE
-        logClose();
-        */
-
+//        /* WRITE OUTPUT TO A TEXT FILE */
+//        logClose();
+        
     }
 
+    private void runRandomizer() {
+        PersonalityTraits pt = new PersonalityTraits();
+        int ptId = pt.genOnePersonalityTraitId();
+        p("[" + ptId + "] "
+                + pt.getOnePersonalityTraitString(ptId, PersonalityTraits.NAME) + " : " 
+        + pt.getOnePersonalityTraitString(ptId, PersonalityTraits.DESCRIPTION));
+    }
+    
     public void p(String s) {
         sb.append("\n" + s);
     }
@@ -162,32 +174,6 @@ public class ImportTesting {
         }
     }
 
-    /* WRITE OUTPUT TO A TEXT FILE
-    static PrintWriter out;
-    static final String newline = System.getProperty("line.separator");
-    public static void log(String s) {
-        
-        if (out == null) {
-            try {
-                String outPath = dirPath + "completeList155.txt";
-                File f = new File(outPath);
-                if (f.exists()) 
-                    f.delete();
-                out = new PrintWriter(new FileWriter(outPath), true);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } 
-        if (out != null) {
-            out.write(s.replaceAll("\n", newline));
-        }
-    }
-    
-    public static void logClose() {
-        out.close();
-    }
-    */
-    
     private String truncate(String input) {
         return truncate(input, 15);
     }
@@ -200,38 +186,5 @@ public class ImportTesting {
         else
             return input.substring(0, max) + "~";
     }
-
-    /* TEST FOR UNIQUE IDs
-    List<Long> allIds;
-    private boolean hasConflictingId(List<List<GURPSObject>> all){
-        allIds = new ArrayList<Long>();
-        for (List<GURPSObject> list : all) {
-            for (GURPSObject o : list) {
-                allIds.add(o.getObjectId());
-            }
-        }
-        
-        Comparator<Long> c = new Comparator<Long>() {
-            @Override
-            public int compare(Long lhs, Long rhs) {
-                if (lhs == rhs)
-                    return 0;
-                else 
-                    return -1;
-            }
-        };
-        
-        Set<Long> longSet = new TreeSet<Long>(c);
-        for (Long l : allIds) {
-            if (!longSet.add(l)) {
-                System.out.println(l + " failed");
-                return true;
-            }
-        }
-        
-        return false;
-    }
-    */
-
 
 }
