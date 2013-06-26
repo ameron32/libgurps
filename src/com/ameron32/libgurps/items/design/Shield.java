@@ -34,6 +34,7 @@ public class Shield extends Armor implements DamageGenerator, DamageReducer, Dam
                 );
         this.db = (short)db;
         this.hp = (short)hp;
+        setObjectType(ObjectType.LibraryObject);
     }
     
     

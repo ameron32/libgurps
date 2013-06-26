@@ -52,7 +52,7 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
      * @param ht Health
      */
     public CharacterRecord(int st, int dx, int iq, int ht) {
-        super(0l);
+        super("random");
         this.mST = (short) st;
         this.mDX = (short) dx;
         this.mIQ = (short) iq;
@@ -104,7 +104,7 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
      * @param record Record to copy
      */
     public CharacterRecord(CharacterRecord source) {
-        super(0l);
+        super("random");
         this.mCharacterType = source.mCharacterType;
         this.mST = source.mST;
         this.mDX = source.mDX;
@@ -282,6 +282,12 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
     + mDodge + "\n mHP=" + mHP + "\n mWill=" + mWill + "\n mPer=" + mPer + "\n mFatigue="
     + mFatigue + "\n mBlock=" + mBlock + "\n mDB=" + mDB + "\n mBasicSpeed=" + mBasicSpeed
     + "\n mEncMulti=" + mEncMulti + "\n mCombatLoad=" + mCombatLoad + "\n ]";
+    }
+
+    @Override
+    public String nameString() {
+        // FIXME wrong name generated
+        return "no name stored yet";
     }
     
     

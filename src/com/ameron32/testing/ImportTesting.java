@@ -1,13 +1,20 @@
 package com.ameron32.testing;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 import com.ameron32.libcharacter.library.PersonalityTraits;
+import com.ameron32.libgurps.Note;
 import com.ameron32.libgurps.attackoptions.AttackOption;
 import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
+import com.ameron32.libgurps.frmwk.GURPSObject;
 import com.ameron32.libgurps.items.design.Armor;
 import com.ameron32.libgurps.items.design.Item;
 import com.ameron32.libgurps.items.design.Weapon;
@@ -18,6 +25,7 @@ public class ImportTesting {
 
     static final StringBuilder sb = new StringBuilder();
     public static String getSB() { return sb.toString(); }
+    public static void clearSB() { sb.delete(0, sb.length()); }
     
     static final List<Item> libraryArmor = new ArrayList<Item>();
     static final List<Item> libraryMeleeWeapon = new ArrayList<Item>();
@@ -35,18 +43,20 @@ public class ImportTesting {
         "adv155-modifications.csv" ,
         "skills155-wdefaults.csv"
     };
+
     public static String[] getAllFiles() { return allFiles.clone(); }
     
     public ImportTesting (String[] args) {
-        dirPath = args[0] + "GURPSBuilder\\";
+        dirPath = args[0] + "";
         TestingTools.setDirPath(dirPath);
     }
 
     public void main() {
-//      runImporter();
-        runRandomizer();
+      runImporter();
+//        runRandomizer();
     }
     
+    private Hashtable<Long, GURPSObject> or;
     private void runImporter() {
         Importer i = new Importer();
         i.readCSVIntoList(dirPath + "item155-armor.csv", 
@@ -72,60 +82,17 @@ public class ImportTesting {
         p(librarySkills.size() + " skills imported" + "\n");
         p("\n");
         
-        for (Item item : libraryArmor) {
-            Armor armor = (Armor) item;
-            p(armor.getClass().getSimpleName() + ": " + armor.getName()
-                    + "\n" + "    " + "[" + armor.getCoversString() + "]" + ", " + "$" + armor.getCost() + ", " + armor.getWeight() + " lb" + ", "
-                    + "id:" + armor.getId()
-                    + "\n" + "      " + "D: " + truncate(armor.getDescription(), 50)
-                    );
-            p("     id: " + armor.getObjectId() + "\n");
-        }
-
-        for (Item item : libraryMeleeWeapon) {
-            Weapon weapon = (Weapon) item;
-            
-            p(weapon.getClass().getSimpleName() + ": " + weapon.getName()
-                    + "\n" + "    $" + weapon.getCost() + ", " + weapon.getWeight() + " lb" + ", " + "id:" + weapon.getId()
-                    + "\n" + "      " + weapon.getAttackOptionsNumber()  
-                    + "\n" + weapon.getAttackOptionsString() 
-                    + "      " + weapon.getWeaponId()
-                    + "\n" + "      " + "D: " + truncate(weapon.getDescription(), 50)
-                    );
-            p("     id: " + weapon.getObjectId() + "\n");
-        }
-
-        for (AttackOption ao : libraryMeleeWeaponOption) {
-            p(ao.toString());
-        }
-
-        for (Item item : libraryShield) {
-            p(item.getClass().getSimpleName() + ": " + item.getName()
-                    + "\n" + "    $" + item.getCost() + ", " + item.getWeight() + " lb" + ", "
-                    + "id:" + item.getId()
-                    + "\n" + "      " + "D: " + truncate(item.getDescription(), 50)
-                    );
-            p("     id: " + item.getObjectId() + "\n");
+        // add randomly generated notes to objects
+        or = GURPSObject.getObjectRegistry();
+        for (Long goId : or.keySet()) {
+            GURPSObject host = GURPSObject.getObjectRegistry().get(goId);
+            int iR = new Random().nextInt(5);
+            for (int x = 0; x < iR; x++) {
+                host.addNote(new Note(host, "test", new Random().nextInt() + "x"));
+            }
         }
         
-        for (Advantage a : libraryAdvs) {
-            p(a.getClass().getSimpleName() + ": " + a.getsName()
-                    + "\n" + "    c:" + a.getiCalcCost() + ", p#" + a.getiPage() + "" + ", "
-                    + "id:" + a.getiId()
-                    + "\n" + "      " + "D: " + truncate(a.getsDescription(), 50)
-                    );
-            p("     id: " + a.getObjectId() + "\n");
-        }
-        
-        for (Skill s : librarySkills) {
-            p(s.getClass().getSimpleName() + ": " + s.getsNameString()
-                    + "\n" + "    att:" + s.getsAttribute() + ", diff:" + s.getsDifficulty() + "" + ", "
-                    + "id:" + s.getiId()
-                    + "\n" + "      " + "D: " + truncate(s.getsDescription(), 50)
-                    + "\n" + "      " + "Def: " + s.getLsDefaults()
-                    );
-            p("      id: " + s.getObjectId() + "\n");
-        }
+        displayContents();
 
 //        /* TEST FOR UNIQUE IDs */
 //        @SuppressWarnings("unchecked")
@@ -145,7 +112,78 @@ public class ImportTesting {
 //        logClose();
         
     }
+    
+    private void displayContents() {
+        for (Item item : libraryArmor) {
+            Armor armor = (Armor) item;
+            p(armor.getClass().getSimpleName() + ": " + armor.getName()
+                    + "\n" + "    " + "[" + armor.getCoversString() + "]" + ", " + "$" + armor.getCost() + ", " + armor.getWeight() + " lb" + ", "
+                    + "id:" + armor.getId()
+                    + "\n" + "      " + "D: " + truncate(armor.getDescription(), 50)
+                    );
+            p("     id: " + armor.getObjectId() + "\n");
+            displayNotes(item);
+        }
 
+        for (Item item : libraryMeleeWeapon) {
+            Weapon weapon = (Weapon) item;
+            
+            p(weapon.getClass().getSimpleName() + ": " + weapon.getName()
+                    + "\n" + "    $" + weapon.getCost() + ", " + weapon.getWeight() + " lb" + ", " + "id:" + weapon.getId()
+                    + "\n" + "      " + weapon.getAttackOptionsNumber()  
+                    + "\n" + weapon.getAttackOptionsString() 
+                    + "      " + weapon.getWeaponId()
+                    + "\n" + "      " + "D: " + truncate(weapon.getDescription(), 50)
+                    );
+            p("     id: " + weapon.getObjectId() + "\n");
+            displayNotes(item);
+        }
+
+        for (AttackOption ao : libraryMeleeWeaponOption) {
+            p(ao.toString());
+        }
+
+        for (Item item : libraryShield) {
+            p(item.getClass().getSimpleName() + ": " + item.getName()
+                    + "\n" + "    $" + item.getCost() + ", " + item.getWeight() + " lb" + ", "
+                    + "id:" + item.getId()
+                    + "\n" + "      " + "D: " + truncate(item.getDescription(), 50)
+                    );
+            p("     id: " + item.getObjectId() + "\n");
+            displayNotes(item);
+        }
+        
+        for (Advantage a : libraryAdvs) {
+            p(a.getClass().getSimpleName() + ": " + a.getsName()
+                    + "\n" + "    c:" + a.getiCalcCost() + ", p#" + a.getiPage() + "" + ", "
+                    + "id:" + a.getiId()
+                    + "\n" + "      " + "D: " + truncate(a.getsDescription(), 50)
+                    );
+            p("     id: " + a.getObjectId() + "\n");
+            displayNotes(a);
+        }
+        
+        for (Skill s : librarySkills) {
+            p(s.getClass().getSimpleName() + ": " + s.getsNameString()
+                    + "\n" + "    att:" + s.getsAttribute() + ", diff:" + s.getsDifficulty() + "" + ", "
+                    + "id:" + s.getiId()
+                    + "\n" + "      " + "D: " + truncate(s.getsDescription(), 50)
+                    + "\n" + "      " + "Def: " + s.getLsDefaults()
+                    );
+            p("      id: " + s.getObjectId() + "\n");
+            displayNotes(s);
+        }
+    }
+    
+    private void displayNotes(GURPSObject obj) {
+        for (Note n : GURPSObject.getObjectRegistry().get(obj.getObjectId()).getNotes() ) {
+            String timestamp = new SimpleDateFormat("hh:mm M/d/yyyy", Locale.ENGLISH).format(new Date(n.getTimeCreated()));
+            String noteText = n.getNoteText();
+            String hostObject = n.getHostObject().getClass().getSimpleName() + "[" + n.getHostObject().nameString() + "]";
+            p(timestamp + ": " + noteText + " on " + hostObject);
+        }
+    }
+    
     private void runRandomizer() {
         PersonalityTraits pt = new PersonalityTraits();
         int ptId = pt.genOnePersonalityTraitId();
@@ -159,7 +197,7 @@ public class ImportTesting {
     }
 
     int count = 0;
-    public void addAttackOptionsForWeapons(
+    private void addAttackOptionsForWeapons(
             List<Item> weaponsOnly, List<AttackOption> attackOptions) {
         for (Item item : weaponsOnly) {
             for (AttackOption ao : attackOptions) {
@@ -174,6 +212,8 @@ public class ImportTesting {
         }
     }
 
+    
+    /* TOOLS */
     private String truncate(String input) {
         return truncate(input, 15);
     }

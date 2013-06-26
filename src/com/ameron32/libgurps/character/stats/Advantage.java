@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 import com.ameron32.libgurps.frmwk.GURPSObject;
 
-public class Advantage extends GURPSObject implements Serializable {
+public class Advantage extends GURPSObject{
 	private static final long serialVersionUID = 2591651398215964681L;
 
 	private int importVersion = 0;
@@ -35,12 +35,37 @@ public class Advantage extends GURPSObject implements Serializable {
     private String sRefs;
     private String sDescription;
     
+    /**
+     * Importer Constructor
+     * 
+     * @param iId
+     * @param sAorD
+     * @param sName
+     * @param sAdvType
+     * @param sSuperType
+     * @param sBookCost
+     * @param iPage
+     * @param isLeveled
+     * @param isMultiCost
+     * @param isVariableCost
+     * @param iBaseCost
+     * @param sMultiCost
+     * @param iPerLevelCost
+     * @param sPerLevelMultiCost
+     * @param hasNotes
+     * @param isFakeCost
+     * @param iCalcCost
+     * @param isForbidden
+     * @param sListPMSESM
+     * @param sRefs
+     * @param sDescription
+     */
     public Advantage(int iId, String sAorD, String sName, String sAdvType, String sSuperType,
             String sBookCost, int iPage, boolean isLeveled, boolean isMultiCost,
             boolean isVariableCost, int iBaseCost, String sMultiCost, int iPerLevelCost,
             String sPerLevelMultiCost, boolean hasNotes, boolean isFakeCost, int iCalcCost,
             boolean isForbidden, String sListPMSESM, String sRefs, String sDescription) {
-        super(0l);
+        super("random");
         this.iId = iId;
         this.sAorD = sAorD;
         this.sName = sName;
@@ -62,13 +87,14 @@ public class Advantage extends GURPSObject implements Serializable {
         this.sListPMSESM = sListPMSESM;
         this.sRefs = sRefs;
         this.sDescription = sDescription;
+        setObjectType(ObjectType.LibraryObject);
     }
    
     /**
      * Copy Constructor
      */
     public Advantage(Advantage source) {
-        super(0l);
+        super("random");
         this.iId = source.iId;
         this.sAorD = source.sAorD;
         this.sName = source.sName;
@@ -90,6 +116,7 @@ public class Advantage extends GURPSObject implements Serializable {
         this.sListPMSESM = source.sListPMSESM;
         this.sRefs = source.sRefs;
         this.sDescription = source.sDescription;
+        setObjectType(ObjectType.WorldObject);
     }
     
     public void setImportVersion(int importVersion) {
@@ -187,5 +214,10 @@ public class Advantage extends GURPSObject implements Serializable {
     public String getsDescription() {
         return sDescription;
     }
-    
+
+    @Override
+    public String nameString() {
+return sName;
+    }
+
 }

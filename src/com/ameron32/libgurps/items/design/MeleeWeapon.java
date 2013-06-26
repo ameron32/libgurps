@@ -42,6 +42,7 @@ public class MeleeWeapon extends Weapon {
         this.cannotParry = cannotParry;
         this.breakage = (byte) breakage;
         this.armorDivisor = (float) armorDivisor;
+        setObjectType(ObjectType.LibraryObject);
     }
 
 

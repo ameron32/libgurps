@@ -15,7 +15,7 @@ import com.ameron32.libgurps.items.frmwk.DamageReducer;
 import com.ameron32.libgurps.items.frmwk.EquipmentUser;
 import com.ameron32.libgurps.items.frmwk.Equippable;
 
-public class Item extends GURPSObject implements Serializable, DamageGenerator, DamageReducer, Equippable, AttachmentCarrier {
+public class Item extends GURPSObject implements DamageGenerator, DamageReducer, Equippable, AttachmentCarrier {
     private static final long serialVersionUID = -4962512586546099923L;
 
     // TODO Notes: consider interfaces for Ownable, Personalizable/Customizable
@@ -42,7 +42,7 @@ public class Item extends GURPSObject implements Serializable, DamageGenerator, 
      */
     public Item(String name, int id, int cost, int tl, double weight, 
             String specialNotes, String description) {
-        super(0l);
+        super("random");
         this.name = name;
         this.id = id;
         this.cost = cost;
@@ -59,7 +59,7 @@ public class Item extends GURPSObject implements Serializable, DamageGenerator, 
      * @param source
      */
     public Item(Item source) {
-        super(0l);
+        super("random");
         this.name = source.name;
         this.id = source.id;
         this.cost = source.cost;
@@ -268,8 +268,10 @@ public class Item extends GURPSObject implements Serializable, DamageGenerator, 
                 + ", description=" + description + ", pName=" + pName + ", pDescription="
                 + pDescription + ", user=" + user + ", attachments=" + attachments + "]";
     }
-    
-    
-    
+
+    @Override
+    public String nameString() {
+return name;
+    }
 
 }

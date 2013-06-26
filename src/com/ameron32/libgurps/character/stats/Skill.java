@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.ameron32.libgurps.frmwk.GURPSObject;
 
-public class Skill extends GURPSObject implements Serializable {
+public class Skill extends GURPSObject {
 	private static final long serialVersionUID = 7662647146533261471L;
 	
     private int importVersion = 0;
@@ -22,6 +22,8 @@ public class Skill extends GURPSObject implements Serializable {
 
 	
 	/**
+	 * Importer Constructor
+	 * 
      * @param importVersion
      * @param iId
      * @param ver
@@ -36,7 +38,7 @@ public class Skill extends GURPSObject implements Serializable {
     public Skill(int importVersion, int iId, int ver, String sNameString, boolean bIsLeveled,
             String sAttribute, String sDifficulty, boolean bHasSubSkills, String lsDefaults,
             String sDescription) {
-        super(0l);
+        super("random");
         this.importVersion = importVersion;
         this.iId = iId;
         this.ver = ver;
@@ -47,6 +49,7 @@ public class Skill extends GURPSObject implements Serializable {
         this.bHasSubSkills = bHasSubSkills;
         this.lsDefaults = lsDefaults;
         this.sDescription = sDescription;
+        setObjectType(ObjectType.LibraryObject);
     }
 
 
@@ -101,5 +104,12 @@ public class Skill extends GURPSObject implements Serializable {
     public String getsDescription() {
         return sDescription;
     }
-    
+
+
+
+    @Override
+    public String nameString() {
+ return sNameString;
+    }
+
 }
