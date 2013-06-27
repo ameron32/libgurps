@@ -4,6 +4,6 @@ public interface AttachmentCarrier {
 
     public void attach(Attachable a);
     
-    public void remove(Attachable a);
+    public boolean remove(Attachable a);
     
 }

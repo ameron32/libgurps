@@ -36,12 +36,17 @@ public class ImportTesting {
     static String dirPath;
     
     static final String[] allFiles = new String[] { 
-        "item155-armor.csv",
-        "item155-meleeweapons.csv" , 
-        "item155-meleeattackoptions.csv" , 
-        "item155-shield.csv" ,
-        "adv155-modifications.csv" ,
-        "skills155-wdefaults.csv"
+        "adv156-modifications.csv" ,        
+        "item156-armor.csv" ,
+        "item156-attachments.csv" ,
+        "item156-meleeattackoptions.csv" , 
+        "item156-meleeweapons.csv" , 
+        "item156-rangedammo.csv" ,
+        "item156-rangedweapons.csv" ,
+        "item156-shield.csv" ,
+        "item156-thrownattackoptions.csv" ,
+        "item156-thrownweapons.csv" ,
+        "skills156-wdefaults.csv"
     };
 
     public static String[] getAllFiles() { return allFiles.clone(); }

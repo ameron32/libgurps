@@ -64,19 +64,6 @@ public class MeleeAttackOption extends AttackOption {
         this.attackNotes = attackNotes;
     }
     
-    enum BaseRoll {
-        thrust, swing;
-
-        public static BaseRoll getBaseRollFromAbbrev(String abbrev){
-            for (BaseRoll b : BaseRoll.values()) {
-
-                if (b.name().substring(0, 2).equalsIgnoreCase(abbrev.substring(0, 2))) {
-                    return b;
-                }
-            }
-            return null;
-        }
-    }
 
     /**
      * 

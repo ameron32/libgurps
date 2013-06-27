@@ -11,6 +11,7 @@ import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
 import com.ameron32.libgurps.items.design.Armor;
 import com.ameron32.libgurps.items.design.MeleeWeapon;
+import com.ameron32.libgurps.items.design.RangedWeapon;
 import com.ameron32.libgurps.items.design.Shield;
 
 @SuppressWarnings(value = {"rawtypes"}) 
@@ -19,7 +20,7 @@ public class Importer {
         Advantage, Skill,
         Item,
         MeleeWeapon, MeleeWeaponOption, 
-        RangedWeapon,
+        RangedWeapon, RangedWeaponAmmo, ThrownWeaponOption, // TODO change thrown weapon to throwable item
         Armor, Shield,
 
         FlowChart
@@ -70,13 +71,30 @@ public class Importer {
                             readShield(appendToThisList, ver);
                             break;
                             
+                        case RangedWeapon:
+                            readRangedWeapon(appendToThisList, ver);
+                            break;
+                            
+                        case RangedWeaponAmmo:
+                            
+                            break;
+                            
                         case MeleeWeaponOption:
                             readMeleeWeaponOption(appendToThisList, ver);
+                            break;
+                            
+                        case ThrownWeaponOption:
+                            
                             break;
 
                         case FlowChart:
                             readStep(appendToThisList, ver);
                             break;
+                        
+                        case Item:
+                        
+                            break;
+
                     }
                 }
 
@@ -255,6 +273,23 @@ public class Importer {
                 getString("sWeaponNotes")
                 );
         list.add(oneMeleeWeapon);
+    }
+    
+    private void readRangedWeapon(List list, int ver) {
+        RangedWeapon oneRangedWeapon = new RangedWeapon(
+                getString("sGroup"),
+                getString("sWeapon"),
+                getString("sDamageType"),
+                getString("sBaseDamage"),
+                getInt("iModifier"),
+                getString("sAmt"),
+                getInt("iAcc"),
+                getDouble("fHalfDmgRangeAtSTx"),
+                getDouble("fMaxDmgRangeAtSTx"),
+                getInt("iMinST"),
+                getString("sSpecialNotes")
+                ); // TODO create importer constructor
+        list.add(oneRangedWeapon);
     }
     
     private void readMeleeWeaponOption(List list, int ver) 

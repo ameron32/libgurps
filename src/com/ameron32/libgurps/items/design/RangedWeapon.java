@@ -18,5 +18,27 @@ public class RangedWeapon extends Weapon{
         
     }
 
+    /**
+     * Importer constructor
+     * 
+     * @param group
+     * @param weapon
+     * @param damageType
+     * @param baseDamage
+     * @param rollModifier
+     * @param damageAmountString
+     * @param accuracy
+     * @param halfDamageRange
+     * @param maxRange
+     * @param minST
+     * @param specialNotes
+     */
+    public RangedWeapon(String group, String weapon, String damageType, String baseDamage, int rollModifier,
+            String damageAmountString, int accuracy, double halfDamageRange, double maxRange, int minST, String specialNotes) {
+        super() // TODO finish importer constructor
+    }
+    
+
+
 
 }

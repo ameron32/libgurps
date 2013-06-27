@@ -51,6 +51,7 @@ public abstract class Weapon extends Item {
         this.weaponGroup = source.weaponGroup;
         this.minST = source.minST;
         this.quality = source.quality;
+        setObjectType(ObjectType.WorldObject);
     }
 
     /**
@@ -76,6 +77,7 @@ public abstract class Weapon extends Item {
         this.weaponGroup = group;
         this.minST = (short) minST;
         // FIXME quality?
+        setObjectType(ObjectType.LibraryObject);
     }
 
     public boolean addAttackOption(AttackOption ao) {
@@ -87,6 +89,14 @@ public abstract class Weapon extends Item {
         } else {
             return false;
         }
+    }
+    
+    public boolean addAttackOptions(List<AttackOption> aos) {
+        boolean allAdded = true;
+        for (AttackOption ao : aos) {
+            if (!addAttackOption(ao)) allAdded = false;
+        }
+        return allAdded;
     }
 
     /*

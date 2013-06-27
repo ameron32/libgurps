@@ -7,10 +7,10 @@ import com.ameron32.libgurps.frmwk.GURPSObject;
 public class Note extends GURPSObject {
     private static final long serialVersionUID = -2334734785673637653L;
 
-    private long timeCreated; // TODO better than Date?
-    private GURPSObject hostObject; // this is the object the note was added to
+    private final long timeCreated; // TODO better than Date?
+    private final GURPSObject hostObject; // this is the object the note was added to
     
-    private String noteText;
+    private final String noteText;
     
     public Note(GURPSObject obj, String owner, String note) {
         super("random");

@@ -184,9 +184,12 @@ public class Item extends GURPSObject implements DamageGenerator, DamageReducer,
     }
     
     @Override
-    public void remove(Attachable a) {
+    public boolean remove(Attachable a) {
         // TODO Auto-generated method stub
-        if (attachments.contains(a)) attachments.remove(a);
+        if (attachments.contains(a)) 
+            return attachments.remove(a);
+        else
+            return false;
     }
 
     
@@ -271,7 +274,7 @@ public class Item extends GURPSObject implements DamageGenerator, DamageReducer,
 
     @Override
     public String nameString() {
-return name;
+        return name;
     }
 
 }
