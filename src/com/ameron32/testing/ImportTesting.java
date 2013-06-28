@@ -17,16 +17,21 @@ import com.ameron32.libgurps.character.stats.Skill;
 import com.ameron32.libgurps.frmwk.GURPSObject;
 import com.ameron32.libgurps.items.design.Armor;
 import com.ameron32.libgurps.items.design.Item;
+import com.ameron32.libgurps.items.design.MeleeWeapon;
+import com.ameron32.libgurps.items.design.Shield;
 import com.ameron32.libgurps.items.design.Weapon;
 import com.ameron32.libgurps.tools.Importer;
 import com.ameron32.libgurps.tools.Importer.ImportType;
 
 public class ImportTesting {
 
+    
+    
     static final StringBuilder sb = new StringBuilder();
     public static String getSB() { return sb.toString(); }
     public static void clearSB() { sb.delete(0, sb.length()); }
     
+    static final List<GURPSObject> libraryEverything = new ArrayList<GURPSObject>();
     static final List<Item> libraryArmor = new ArrayList<Item>();
     static final List<Item> libraryMeleeWeapon = new ArrayList<Item>();
     static final List<AttackOption> libraryMeleeWeaponOption = new ArrayList<AttackOption>();
@@ -35,21 +40,43 @@ public class ImportTesting {
     static final List<Skill> librarySkills = new ArrayList<Skill>();
     static String dirPath;
     
-    static final String[] allFiles = new String[] { 
-        "adv156-modifications.csv" ,        
-        "item156-armor.csv" ,
-        "item156-attachments.csv" ,
-        "item156-meleeattackoptions.csv" , 
-        "item156-meleeweapons.csv" , 
-        "item156-rangedammo.csv" ,
-        "item156-rangedweapons.csv" ,
-        "item156-shield.csv" ,
-        "item156-thrownattackoptions.csv" ,
-        "item156-thrownweapons.csv" ,
-        "skills156-wdefaults.csv"
+    static final String[][] allFiles = new String[][] { 
+            {
+                    "adv156-modifications.csv", "Advantage"
+            },
+            {
+                    "item156-armor.csv", "Armor"
+            },
+            {
+                    "item156-attachments.csv", "Addon"
+            },
+            {
+                    "item156-meleeattackoptions.csv", "MeleeWeaponOption"
+            },
+            {
+                    "item156-meleeweapons.csv", "MeleeWeapon"
+            },
+            {
+                    "item156-rangedammo.csv", "RangedWeaponAmmo"
+            },
+            {
+                    "item156-rangedweapons.csv", "RangedWeapon"
+            },
+            {
+                    "item156-shield.csv", "Shield"
+            },
+            {
+                    "item156-thrownattackoptions.csv", "ThrownWeaponOption"
+            },
+            {
+                    "item156-thrownweapons.csv", "ThrownProjectile"
+            },
+            {
+                    "skills156-wdefaults.csv", "Skill"
+            }
     };
 
-    public static String[] getAllFiles() { return allFiles.clone(); }
+    public static String[][] getAllFiles() { return allFiles.clone(); }
     
     public ImportTesting (String[] args) {
         dirPath = args[0] + "";
@@ -63,20 +90,31 @@ public class ImportTesting {
     
     private Hashtable<Long, GURPSObject> or;
     private void runImporter() {
-        Importer i = new Importer();
-        i.readCSVIntoList(dirPath + "item155-armor.csv", 
-                libraryArmor, ImportType.Armor);
-        i.readCSVIntoList(dirPath + "item155-meleeattackoptions.csv", 
-                libraryMeleeWeaponOption, ImportType.MeleeWeaponOption);
-        i.readCSVIntoList(dirPath + "item155-meleeweapons.csv", 
-                libraryMeleeWeapon, ImportType.MeleeWeapon);
-        i.readCSVIntoList(dirPath + "item155-shield.csv", 
-                libraryShield, ImportType.Shield);
-        i.readCSVIntoList(dirPath + "adv155-modifications.csv", 
-                libraryAdvs, ImportType.Advantage);
-        i.readCSVIntoList(dirPath + "skills155-wdefaults.csv", 
-                librarySkills, ImportType.Skill);
+        p(ImportType.getImportTypeFromString("Skill").name());
+        
+        Importer imp = new Importer();
+        for (int i = 0; i < allFiles.length; i++) {
+            imp.readCSVIntoList(dirPath + allFiles[i][0], 
+                    libraryEverything, 
+                    ImportType.getImportTypeFromString(allFiles[i][1]));
+        }
+//        imp.readCSVIntoList(dirPath + "item155-armor.csv", 
+//                libraryArmor, ImportType.Armor);
+//        imp.readCSVIntoList(dirPath + "item155-meleeattackoptions.csv", 
+//                libraryMeleeWeaponOption, ImportType.MeleeWeaponOption);
+//        imp.readCSVIntoList(dirPath + "item155-meleeweapons.csv", 
+//                libraryMeleeWeapon, ImportType.MeleeWeapon);
+//        imp.readCSVIntoList(dirPath + "item155-shield.csv", 
+//                libraryShield, ImportType.Shield);
+//        imp.readCSVIntoList(dirPath + "adv155-modifications.csv", 
+//                libraryAdvs, ImportType.Advantage);
+//        imp.readCSVIntoList(dirPath + "skills155-wdefaults.csv", 
+//                librarySkills, ImportType.Skill);
 
+        p(libraryEverything.size() + " total items" + "\n");
+        
+        sort(libraryEverything);
+        
         addAttackOptionsForWeapons(libraryMeleeWeapon, libraryMeleeWeaponOption);
 
         p(libraryArmor.size() + " armors imported" + "\n");
@@ -116,6 +154,24 @@ public class ImportTesting {
 //        /* WRITE OUTPUT TO A TEXT FILE */
 //        logClose();
         
+    }
+    
+    private void sort(List<GURPSObject> libraryEverything) {
+        for (Object go : libraryEverything) {
+            if (go instanceof Shield) {
+                libraryShield.add((Item) go);
+            } else if (go instanceof Armor) {
+                libraryArmor.add((Item) go);
+            } else if (go instanceof MeleeWeapon) {
+                libraryMeleeWeapon.add((Item) go);
+            } else if (go instanceof MeleeAttackOption) {
+                libraryMeleeWeaponOption.add((AttackOption) go);
+            } else if (go instanceof Advantage) {
+                libraryAdvs.add((Advantage) go);
+            } else if (go instanceof Skill) {
+                librarySkills.add((Skill) go);
+            }
+        }
     }
     
     private void displayContents() {
@@ -197,7 +253,7 @@ public class ImportTesting {
         + pt.getOnePersonalityTraitString(ptId, PersonalityTraits.DESCRIPTION));
     }
     
-    public void p(String s) {
+    public static void p(String s) {
         sb.append("\n" + s);
     }
 

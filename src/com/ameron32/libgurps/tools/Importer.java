@@ -7,12 +7,15 @@ import java.util.List;
 
 import com.ameron32.libgurps.Step;
 import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
+import com.ameron32.libgurps.attackoptions.ThrownAttackOption;
 import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
 import com.ameron32.libgurps.items.design.Armor;
 import com.ameron32.libgurps.items.design.MeleeWeapon;
 import com.ameron32.libgurps.items.design.RangedWeapon;
 import com.ameron32.libgurps.items.design.Shield;
+import com.ameron32.libgurps.items.design.ThrowableProjectile;
+import com.ameron32.testing.ImportTesting;
 
 @SuppressWarnings(value = {"rawtypes"}) 
 public class Importer {
@@ -20,10 +23,16 @@ public class Importer {
         Advantage, Skill,
         Item,
         MeleeWeapon, MeleeWeaponOption, 
-        RangedWeapon, RangedWeaponAmmo, ThrownWeaponOption, // TODO change thrown weapon to throwable item
+        RangedWeapon, RangedWeaponAmmo, 
+        ThrownProjectile, ThrownWeaponOption, // TODO change thrown weapon to throwable item
         Armor, Shield,
+        Addon, // more
 
-        FlowChart
+        FlowChart;
+        
+        public static ImportType getImportTypeFromString(String s) {
+            return ImportType.valueOf(s);
+        }
     }
 
     private CsvReader fileReader;
@@ -40,6 +49,8 @@ public class Importer {
     public List readCSVIntoList(String path, List appendToThisList,
             ImportType type) {
 
+        ImportTesting.p(type.name());
+        
         if (appendToThisList != null) {
             try {
                 int ver = 155;
@@ -69,11 +80,11 @@ public class Importer {
                             
                         case Shield:
                             readShield(appendToThisList, ver);
-                            break;
+                           break;
                             
-                        case RangedWeapon:
-                            readRangedWeapon(appendToThisList, ver);
-                            break;
+//                        case RangedWeapon:
+//                            readRangedWeapon(appendToThisList, ver);
+//                            break;
                             
                         case RangedWeaponAmmo:
                             
@@ -82,19 +93,26 @@ public class Importer {
                         case MeleeWeaponOption:
                             readMeleeWeaponOption(appendToThisList, ver);
                             break;
+                        
+                        case ThrownProjectile:
+                            readThrowableProjectile(appendToThisList, ver);
+                            break;
                             
                         case ThrownWeaponOption:
-                            
+                            readThrownWeaponOption(appendToThisList, ver);
                             break;
 
+                        case Item:
+                            
+                            break;
+                            
                         case FlowChart:
                             readStep(appendToThisList, ver);
                             break;
                         
-                        case Item:
-                        
+                        default:
+/* LOG */                   ImportTesting.p("skipping " + type.name());
                             break;
-
                     }
                 }
 
@@ -275,9 +293,12 @@ public class Importer {
         list.add(oneMeleeWeapon);
     }
     
-    private void readRangedWeapon(List list, int ver) {
+    private void readRangedWeapon(List list, int ver) 
+            throws IOException, FileNotFoundException {
         RangedWeapon oneRangedWeapon = new RangedWeapon(
+                getString("sId"),
                 getString("sGroup"),
+                getString("sType"),
                 getString("sWeapon"),
                 getString("sDamageType"),
                 getString("sBaseDamage"),
@@ -286,10 +307,36 @@ public class Importer {
                 getInt("iAcc"),
                 getDouble("fHalfDmgRangeAtSTx"),
                 getDouble("fMaxDmgRangeAtSTx"),
+                getDouble("fWeight"),
+                getInt("iCost"),
                 getInt("iMinST"),
+                getInt("iBulk"),
                 getString("sSpecialNotes")
                 ); // TODO create importer constructor
         list.add(oneRangedWeapon);
+    }
+    
+    private void readThrowableProjectile(List list, int ver) 
+            throws IOException, FileNotFoundException {
+        ThrowableProjectile oneThrowableProjectile = new ThrowableProjectile(
+                getString("sId"),
+                getString("sGroup"),
+                getString("sType"),
+                getString("sWeapon"),
+                getString("sDamageType"),
+                getString("sBaseDamage"),
+                getInt("iModifier"),
+                getString("sAmt"),
+                getInt("iAcc"),
+                getDouble("fHalfDmgRangeAtSTx"),
+                getDouble("fMaxDmgRangeAtSTx"),
+                getDouble("fWeight"),
+                getInt("iCost"),
+                getInt("iMinST"),
+                getInt("iBulk"),
+                getString("sSpecialNotes")
+                ); // TODO create importer constructor
+        list.add(oneThrowableProjectile);
     }
     
     private void readMeleeWeaponOption(List list, int ver) 
@@ -309,6 +356,29 @@ public class Importer {
                 );
         list.add(oneMWOption);
     }
+    
+    private void readThrownWeaponOption(List list, int ver) 
+            throws IOException, FileNotFoundException {
+        ThrownAttackOption oneTWOption = new ThrownAttackOption(
+                getString("sId"), 
+                getString("sWeaponId"), 
+                getString("sGroup"),
+                getString("sWeapon"), 
+                getString("sDamageType"), 
+                getString("sBaseDamage"),
+                getInt("iModifier"), 
+                getString("sAmt"), 
+                getInt("iAcc"),
+                getDouble("fHalfDmgRangeAtSTx"), 
+                getDouble("fMaxDmgRangeAtSTx"),
+                getDouble("fWeight"), 
+                getInt("iCost"), 
+                getInt("iMinST"), 
+                getInt("iBulk"),
+                getString("sSpecialNotes")
+                );
+        list.add(oneTWOption);
+    }        
     
     private String tmp;
 

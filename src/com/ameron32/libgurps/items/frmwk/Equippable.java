@@ -10,4 +10,6 @@ public interface Equippable {
     
     public boolean isEquipped();
     
+    public boolean isEquippedBy(EquipmentUser eu);
+    
 }

@@ -21,6 +21,10 @@ public class Inventory {
         if (myBackpackItems == null) myBackpackItems = new ArrayList<Item>();
     }
 
+    // TODO: on an inventory change, RangedAttackOptions should recalculate for
+    // all ammo/projectile based weapons based on the fact that the choices will
+    // vary depending on ammo/projectiles available for a given weapon 
+    
     List<Item> equipped;
     private List<Item> getEquippedArmor() {
         if (equipped == null) 
@@ -46,7 +50,7 @@ public class Inventory {
         return equipped;
     }
     
-    private List<Item> getEquippedItems() {
+    public List<Item> getEquippedItems() {
         if (equipped == null) 
             equipped = new ArrayList<Item>();
         else 

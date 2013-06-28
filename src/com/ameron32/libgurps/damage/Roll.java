@@ -5,11 +5,25 @@ import java.util.Arrays;
 public class Roll {
     public static final int DIE = 0;
     public static final int MODIFIER = 1;
-    short[] roll = new short[2];
+    public static final int NUM_OF_DIE_SIDES = 2;
+    short[] roll = new short[3];
     
+    /**
+     * Standard d6 constructor. Generates a standard RPG roll for X dice + Y bonus.
+     * (e.g. 3d6+6 would be:  new Roll(3,6)
+     * 
+     * @param die
+     * @param bonus
+     */
     public Roll (int die, int bonus) {
-        roll[0] = (short) die;
-        roll[1] = (short) bonus;
+        changeRoll(die, bonus);
+    }
+    
+    /**
+     * Empty roll, 0d+0
+     */
+    public Roll () {
+        changeRoll(0,0);
     }
     
     public short[] getRoll () {
@@ -17,16 +31,25 @@ public class Roll {
     }
     
     public short getDie () {
-        return roll[0];
+        return roll[DIE];
     }
     
     public short getBonus () {
-        return roll[1];
+        return roll[MODIFIER];
+    }
+    
+    public short getNumberOfDieSides() {
+        return roll[NUM_OF_DIE_SIDES];
     }
     
     public void changeRoll (int die, int bonus) {
-        roll[0] = (short) die;
-        roll[1] = (short) bonus;
+        changeRoll(die, 6, bonus);
+    }
+    
+    public void changeRoll (int die, int numberOfDieSides, int bonus) {
+        roll[DIE] = (short) die;
+        roll[MODIFIER] = (short) bonus;
+        roll[NUM_OF_DIE_SIDES] = (short) numberOfDieSides;
     }
 
     @Override
@@ -36,6 +59,10 @@ public class Roll {
                 + ((roll[MODIFIER] > 0) ? "+" : "")                 // ex: +1 or -1
                 + ((roll[MODIFIER] == 0) ? "" : roll[MODIFIER]));    // removes +0
         return sb.toString();
+    }
+    
+    public Roll(int die, int numberOfDieSides, int bonus) {
+        changeRoll(die, numberOfDieSides, bonus);
     }
     
     

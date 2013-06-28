@@ -26,7 +26,7 @@ public class MeleeAttackOption extends AttackOption {
     
     
 
-    public MeleeAttackOption(DamageType damageType, Roll damage, short[] reach) {
+    public MeleeAttackOption(String damageType, Roll damage, short[] reach) {
         super(damageType, damage);
         this.reach = reach;
     }
@@ -50,7 +50,7 @@ public class MeleeAttackOption extends AttackOption {
     public MeleeAttackOption(String weaponId, String group, int attackNumber, String weaponName, 
             String damageType, String baseRoll, int modifier, String damageDescription, String loReachChoices,
             int minST, String attackNotes) {
-        super(Damage.getDamageTypeByString(damageType), null);
+        super(damageType, null); // FIXME fix null roll
         this.weaponId = weaponId;
         this.group = group;
         this.attackNumber = (short) attackNumber;

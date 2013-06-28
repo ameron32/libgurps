@@ -2,6 +2,8 @@
 package com.ameron32.libgurps.character;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.ameron32.libgurps.DataSet;
 import com.ameron32.libgurps.character.stats.Inventory;
@@ -201,49 +203,53 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
         PC, NPC
     };
 
+   
     // TODO not final place
-    private class MeleeAttack {
-        /*
-         * INPUTS
-         */
-        // String attackName; // convert to weapon + attackType
-        String attackWeapon; // convert to item(weapon)
-        short skill, damageBonus_Die;
-        String weaponQuality; // replace into attackWeapon item(weapon)
-
-        /*
-         * CALCULATABLES
-         */
-        short parry;
-        Roll damage;
-        String damageType;
-
-    }
+//    private class MeleeAttack {
+//        /*
+//         * INPUTS
+//         */
+//        // String attackName; // convert to weapon + attackType
+//        String attackWeapon; // convert to item(weapon)
+//        short skill, damageBonus_Die;
+//        String weaponQuality; // replace into attackWeapon item(weapon)
+//
+//        /*
+//         * CALCULATABLES
+//         */
+//        short parry;
+//        Roll damage;
+//        String damageType;
+//
+//    }
 
     // TODO not final place
-    private class RangedAttack {
-        /*
-         * INPUTS
-         */
-        // String attackName; // convert to weapon + attackType
-        String attackWeapon; // convert to item(weapon)
-        short skill, damageBonus_Die;
-        String weaponQuality; // replace into attackWeapon item(weapon)
+//    private class RangedAttack {
+//        /*
+//         * INPUTS
+//         */
+//        // String attackName; // convert to weapon + attackType
+//        String attackWeapon; // convert to item(weapon)
+//        short skill, damageBonus_Die;
+//        String weaponQuality; // replace into attackWeapon item(weapon)
+//
+//        /*
+//         * CALCULATABLES
+//         */
+//        Roll damage;
+//        String damageType;
+//        short accuracy;
+//
+//    }
 
-        /*
-         * CALCULATABLES
-         */
-        Roll damage;
-        String damageType;
-        short accuracy;
-
-    }
 
     public static final int MOVE_ENHANCED = 0;
     public static final int DODGE_ENHANCED = 1;
     public static final int PARRY_ENHANCED = 2;
     public static final int BLOCK_ENHANCED = 3;
 
+    
+    
     /*
      * RESPOND TO INCOMING EVENTS
      */
@@ -267,27 +273,50 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
         else 
             return false;
     }
+    
+    @Override
+    public boolean unequip(Equippable e) {
+        if (e instanceof Item && ((Item) e).isEquippedBy(this))
+            return ((Item) e).unequip();
+        else 
+            return false;
+    }
 
     @Override
     public String toString() {
-        return "CharacterRecord " + "\n" 
-    + "["+ "\n" + "mCharacterType=" + mCharacterType + "\n mST=" + mST + "\n mDX="
-    + mDX + "\n mIQ=" + mIQ + "\n mHT=" + mHT + "\n mEnhancedMove=" + mEnhancedMove
-    + "\n mEnhancedDodge=" + mEnhancedDodge + "\n mEnhancedParry=" + mEnhancedParry
-    + "\n mEnhancedBlock=" + mEnhancedBlock + "\n mStrikingST=" + mStrikingST
-    + "\n mLiftingST=" + mLiftingST + "\n mShieldSkill=" + mShieldSkill + "\n mSM=" + mSM
-    + "\n mCombatReflexes=" + mCombatReflexes + "\n mInventory="
-    + mInventory + "\n mThrust=" + mThrust + "\n mSwing=" + mSwing + "\n mBasicLift="
-    + mBasicLift + "\n mBasicMove=" + mBasicMove + "\n mMove=" + mMove + "\n mDodge="
-    + mDodge + "\n mHP=" + mHP + "\n mWill=" + mWill + "\n mPer=" + mPer + "\n mFatigue="
-    + mFatigue + "\n mBlock=" + mBlock + "\n mDB=" + mDB + "\n mBasicSpeed=" + mBasicSpeed
-    + "\n mEncMulti=" + mEncMulti + "\n mCombatLoad=" + mCombatLoad + "\n ]";
+        return "CharacterRecord " + "\n"
+                + "[" + "\n" + "mCharacterType=" + mCharacterType + "\n mST=" + mST + "\n mDX="
+                + mDX + "\n mIQ=" + mIQ + "\n mHT=" + mHT + "\n mEnhancedMove=" + mEnhancedMove
+                + "\n mEnhancedDodge=" + mEnhancedDodge + "\n mEnhancedParry=" + mEnhancedParry
+                + "\n mEnhancedBlock=" + mEnhancedBlock + "\n mStrikingST=" + mStrikingST
+                + "\n mLiftingST=" + mLiftingST + "\n mShieldSkill=" + mShieldSkill + "\n mSM="
+                + mSM
+                + "\n mCombatReflexes=" + mCombatReflexes + "\n mInventory="
+                + mInventory + "\n mThrust=" + mThrust + "\n mSwing=" + mSwing + "\n mBasicLift="
+                + mBasicLift + "\n mBasicMove=" + mBasicMove + "\n mMove=" + mMove + "\n mDodge="
+                + mDodge + "\n mHP=" + mHP + "\n mWill=" + mWill + "\n mPer=" + mPer
+                + "\n mFatigue="
+                + mFatigue + "\n mBlock=" + mBlock + "\n mDB=" + mDB + "\n mBasicSpeed="
+                + mBasicSpeed
+                + "\n mEncMulti=" + mEncMulti + "\n mCombatLoad=" + mCombatLoad + "\n ]";
     }
 
     @Override
     public String nameString() {
         // FIXME wrong name generated
         return "no name stored yet";
+    }
+
+    
+    @Override
+    public List<Item> getAllEquipped(Class<?> c) {
+        List<Item> listOfResults = new ArrayList<Item>();
+        for (Item i : mInventory.getEquippedItems()) {
+            if (i.getClass().isInstance(c)) {
+                listOfResults.add(i);
+            }
+        }
+        return listOfResults;
     }
     
     

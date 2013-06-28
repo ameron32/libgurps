@@ -5,6 +5,7 @@ import com.ameron32.libgurps.damage.Damage.DamageType;
 public class ProjectileBucket extends Item {
     private static final long serialVersionUID = 5179889091910045221L;
 
+    String name;
     DamageType damageType;
     short damageBoost;
     
@@ -12,12 +13,19 @@ public class ProjectileBucket extends Item {
         super(source);
         this.damageType = source.damageType;
         this.damageBoost = source.damageBoost;
-        this.quantityOnHand = source.quantityOnHand;
+        this.setQuantityOnHand(source.getQuantityOnHand());
     }
+
+
 
     /*
      * OWNED
      */
-    short quantityOnHand;
-    
+    private short quantityOnHand;
+    public short getQuantityOnHand() {
+        return quantityOnHand;
+    }
+    public void setQuantityOnHand(short quantityOnHand) {
+        this.quantityOnHand = quantityOnHand;
+    }
 }

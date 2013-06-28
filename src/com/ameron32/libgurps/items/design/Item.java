@@ -1,21 +1,15 @@
 
 package com.ameron32.libgurps.items.design;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ameron32.libgurps.*;
 import com.ameron32.libgurps.damage.Damage;
-import com.ameron32.libgurps.frmwk.GURPSObject;
-import com.ameron32.libgurps.items.frmwk.Attachable;
-import com.ameron32.libgurps.items.frmwk.AttachmentCarrier;
-import com.ameron32.libgurps.items.frmwk.DamageGenerator;
-import com.ameron32.libgurps.items.frmwk.DamageReceiver;
-import com.ameron32.libgurps.items.frmwk.DamageReducer;
-import com.ameron32.libgurps.items.frmwk.EquipmentUser;
-import com.ameron32.libgurps.items.frmwk.Equippable;
+import com.ameron32.libgurps.frmwk.*;
+import com.ameron32.libgurps.items.frmwk.*;
 
-public class Item extends GURPSObject implements DamageGenerator, DamageReducer, Equippable, AttachmentCarrier {
+public class Item extends GURPSObject implements DamageGenerator, DamageReducer, Equippable, AttachmentCarrier, ThrowableItem {
     private static final long serialVersionUID = -4962512586546099923L;
 
     // TODO Notes: consider interfaces for Ownable, Personalizable/Customizable
@@ -164,7 +158,12 @@ public class Item extends GURPSObject implements DamageGenerator, DamageReducer,
     
     @Override
     public boolean isEquipped() {
-        return !(user == null);
+        return (user != null);
+    }
+    
+    @Override
+    public boolean isEquippedBy(EquipmentUser eu) {
+        return (user == eu);
     }
 
     @Override
@@ -266,15 +265,22 @@ public class Item extends GURPSObject implements DamageGenerator, DamageReducer,
 
     @Override
     public String toString() {
-        return "Item [name=" + name + ", id=" + id + ", cost=" + cost + ", tl=" + tl + ", weight="
+        return "Item:" + this.getClass().getSimpleName() + " [name=" + name + ", id=" + id + ", cost=" + cost + ", tl=" + tl + ", weight="
                 + weight + ", itemType=" + itemType + ", specialNotes=" + specialNotes
-                + ", description=" + description + ", pName=" + pName + ", pDescription="
-                + pDescription + ", user=" + user + ", attachments=" + attachments + "]";
+                + ", description=" + description  
+//                + ", pName=" + pName + ", pDescription=" + pDescription 
+                + ", user=" + user + ", attachments=" + attachments + "]";
     }
 
     @Override
     public String nameString() {
         return name;
+    }
+
+    @Override
+    public void throwItem(Throwable throwable) {
+        // TODO Calculate generic thrown damage for all objects/items
+        
     }
 
 }
