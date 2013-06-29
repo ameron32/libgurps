@@ -82,13 +82,13 @@ public class Importer {
                             readShield(appendToThisList, ver);
                            break;
                             
-//                        case RangedWeapon:
-//                            readRangedWeapon(appendToThisList, ver);
-//                            break;
-                            
-                        case RangedWeaponAmmo:
-                            
+                        case RangedWeapon:
+                            readRangedWeapon(appendToThisList, ver);
                             break;
+                            
+//                        case RangedWeaponAmmo:
+//                            
+//                            break;
                             
                         case MeleeWeaponOption:
                             readMeleeWeaponOption(appendToThisList, ver);
@@ -102,9 +102,9 @@ public class Importer {
                             readThrownWeaponOption(appendToThisList, ver);
                             break;
 
-                        case Item:
-                            
-                            break;
+//                        case Item:
+//                            
+//                           break;
                             
                         case FlowChart:
                             readStep(appendToThisList, ver);
@@ -242,7 +242,10 @@ public class Importer {
     
     private void readArmor(List list, int ver)
             throws IOException, FileNotFoundException {
-        
+    
+        /*
+         * Import version 156
+         */
         Armor oneArmor = new Armor(
                 getInt("iId"),
                 getString("sName"),
@@ -276,7 +279,11 @@ public class Importer {
 
     private void readMeleeWeapon(List list, int ver) 
             throws IOException, FileNotFoundException {
-        MeleeWeapon oneMeleeWeapon = new MeleeWeapon(
+        
+        /*
+         * Import version 156
+         */
+    	MeleeWeapon oneMeleeWeapon = new MeleeWeapon(
                 getString("sId"),
                 getString("sGroup"),
                 getString("sName"),
@@ -295,7 +302,11 @@ public class Importer {
     
     private void readRangedWeapon(List list, int ver) 
             throws IOException, FileNotFoundException {
-        RangedWeapon oneRangedWeapon = new RangedWeapon(
+        
+        /*
+         * Import version 156
+         */
+    	RangedWeapon oneRangedWeapon = new RangedWeapon(
                 getString("sId"),
                 getString("sGroup"),
                 getString("sType"),
@@ -305,9 +316,9 @@ public class Importer {
                 getInt("iModifier"),
                 getString("sAmt"),
                 getInt("iAcc"),
-                getDouble("fHalfDmgRangeAtSTx"),
-                getDouble("fMaxDmgRangeAtSTx"),
-                getDouble("fWeight"),
+                getDouble("dHalfDmgRangeAtSTx"),
+                getDouble("dMaxDmgRangeAtSTx"),
+                getDouble("dWeight"),
                 getInt("iCost"),
                 getInt("iMinST"),
                 getInt("iBulk"),
@@ -318,7 +329,11 @@ public class Importer {
     
     private void readThrowableProjectile(List list, int ver) 
             throws IOException, FileNotFoundException {
-        ThrowableProjectile oneThrowableProjectile = new ThrowableProjectile(
+        
+        /*
+         * Import version 156
+         */
+    	ThrowableProjectile oneThrowableProjectile = new ThrowableProjectile(
                 getString("sId"),
                 getString("sGroup"),
                 getString("sType"),
@@ -341,7 +356,11 @@ public class Importer {
     
     private void readMeleeWeaponOption(List list, int ver) 
             throws IOException, FileNotFoundException {
-        MeleeAttackOption oneMWOption = new MeleeAttackOption(
+        
+        /*
+         * Import version 156
+         */
+    	MeleeAttackOption oneMWOption = new MeleeAttackOption(
                 getString("sWeaponId"),
                 getString("sGroup"),
                 getInt("iAttack"),
@@ -359,7 +378,11 @@ public class Importer {
     
     private void readThrownWeaponOption(List list, int ver) 
             throws IOException, FileNotFoundException {
-        ThrownAttackOption oneTWOption = new ThrownAttackOption(
+        
+        /*
+         * Import version 156
+         */
+    	ThrownAttackOption oneTWOption = new ThrownAttackOption(
                 getString("sId"), 
                 getString("sWeaponId"), 
                 getString("sGroup"),

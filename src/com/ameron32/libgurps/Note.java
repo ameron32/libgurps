@@ -1,6 +1,8 @@
 package com.ameron32.libgurps;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import com.ameron32.libgurps.frmwk.GURPSObject;
 
@@ -35,5 +37,17 @@ public class Note extends GURPSObject {
     public String nameString() {
         return "Note";
     }
+
+	@Override
+	public String detailString() {
+		return "Note:"
+				+ this.getClass().getSimpleName()
+				+ " created at ["
+				+ new SimpleDateFormat("hh:mm MM/dd/yyyy", Locale.ENGLISH)
+						.format(timeCreated) + "], attached to "
+				+ hostObject.nameString() + " of class "
+				+ hostObject.getClass().getSimpleName() + "\n"
+				+ "The note reads: [" + noteText + "]";
+	}
 
 }

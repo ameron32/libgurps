@@ -131,4 +131,14 @@ public abstract class Weapon extends Item {
     public static final byte QUALITY_NORMAL = 0;
     public static final byte QUALITY_FINE = 1;
     public static final byte QUALITY_VERY_FINE = 2;
+
+	@Override
+	public String detailString() {
+		setSubDetail("\n" + "      " + this.getAttackOptionsNumber()  
+        + "\n" + this.getAttackOptionsString() 
+        + "      " + this.getWeaponId());
+		return super.detailString();
+	}
+    
+    
 }

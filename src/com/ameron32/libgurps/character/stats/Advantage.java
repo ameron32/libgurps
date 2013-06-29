@@ -7,6 +7,7 @@ package com.ameron32.libgurps.character.stats;
 import java.io.Serializable;
 
 import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.tools.StringTools;
 
 public class Advantage extends GURPSObject{
 	private static final long serialVersionUID = 2591651398215964681L;
@@ -217,7 +218,16 @@ public class Advantage extends GURPSObject{
 
     @Override
     public String nameString() {
-return sName;
+    	return sName;
     }
+
+	@Override
+	public String detailString() {
+		return (this.getClass().getSimpleName() + ": " + this.getsName() + "\n"
+				+ "    c:" + this.getiCalcCost() + ", p#" + this.getiPage()
+				+ "" + ", " + "id:" + this.getiId() + "\n" + "      " + "D: "
+				+ StringTools.truncate(this.getsDescription(), 50)
+				+ "     id: " + this.getObjectId() + "\n");
+	}
 
 }

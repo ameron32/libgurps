@@ -55,4 +55,17 @@ public class StringTools {
         }
         return aShort;
     }
+
+	private static String truncate(String input) {
+	    return truncate(input, 15);
+	}
+
+	public static String truncate(String input, int max) {
+	    int len = input.length();
+	    boolean useLen = len < max + 1;
+	    if (useLen)
+	        return input;
+	    else
+	        return input.substring(0, max) + "~";
+	}
 }

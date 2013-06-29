@@ -128,4 +128,6 @@ public abstract class GURPSObject implements Serializable {
     
     public abstract String nameString();
     
+    public abstract String detailString();
+    
 }

@@ -37,6 +37,10 @@ public abstract class AttackOption implements CharacterAmplifiedDamage {
         }
     }
     
+    public String detailString() {
+    	return this.toString();
+    }
+    
     
     
     

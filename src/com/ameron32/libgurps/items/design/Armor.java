@@ -161,6 +161,13 @@ public class Armor extends Item {
                 + ", givesBadGrip=" + givesBadGrip + ", givesStealth=" + givesStealth
                 + ", removesSnowStealthModifier=" + removesSnowStealthModifier + "]";
     }
+
+
+	@Override
+	public String detailString() {
+		setSubDetail("Armor--- \n" + "    " + "[" + this.getCoversString() + "]" + ", \n");
+		return super.detailString();
+	}
     
     
     

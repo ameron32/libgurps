@@ -3,6 +3,7 @@ package com.ameron32.libgurps.character.stats;
 import java.io.Serializable;
 
 import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.tools.StringTools;
 
 public class Skill extends GURPSObject {
 	private static final long serialVersionUID = 7662647146533261471L;
@@ -109,7 +110,19 @@ public class Skill extends GURPSObject {
 
     @Override
     public String nameString() {
- return sNameString;
+    	return sNameString;
     }
+    
+    
+	@Override
+	public String detailString() {
+		return (this.getClass().getSimpleName() + ": " + this.getsNameString()
+				+ "\n" + "    att:" + this.getsAttribute() + ", diff:"
+				+ this.getsDifficulty() + "" + ", " + "id:" + this.getiId()
+				+ "\n" + "      " + "D: "
+				+ StringTools.truncate(this.getsDescription(), 50) + "\n"
+				+ "      " + "Def: " + this.getLsDefaults() + "      id: "
+				+ this.getObjectId() + "\n");
+	}
 
 }

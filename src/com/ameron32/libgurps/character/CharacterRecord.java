@@ -318,6 +318,12 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
         }
         return listOfResults;
     }
+
+	@Override
+	public String detailString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     
     

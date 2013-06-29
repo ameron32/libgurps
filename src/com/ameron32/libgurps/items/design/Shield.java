@@ -95,6 +95,16 @@ public class Shield extends Armor implements DamageGenerator, DamageReducer, Dam
     public String toString() {
         return "Shield [db=" + db + ", hp=" + hp + "]";
     }
+
+
+
+
+	@Override
+	public String detailString() {
+		setSubDetail("Shield---"
+				+ "\n" + "DB:" + db + " HP:" + hp + "\n"); // TODO customize
+		return super.detailString();
+	}
     
     
     

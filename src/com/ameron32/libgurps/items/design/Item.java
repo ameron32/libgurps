@@ -8,6 +8,7 @@ import com.ameron32.libgurps.*;
 import com.ameron32.libgurps.damage.Damage;
 import com.ameron32.libgurps.frmwk.*;
 import com.ameron32.libgurps.items.frmwk.*;
+import com.ameron32.libgurps.tools.StringTools;
 
 public class Item extends GURPSObject implements DamageGenerator, DamageReducer, Equippable, AttachmentCarrier, ThrowableItem {
     private static final long serialVersionUID = -4962512586546099923L;
@@ -282,5 +283,18 @@ public class Item extends GURPSObject implements DamageGenerator, DamageReducer,
         // TODO Calculate generic thrown damage for all objects/items
         
     }
+
+    private String subDetail = "";
+	@Override
+	public String detailString() {
+		return this.getClass().getSimpleName() + ": " + this.getName()
+        + "\n" + "    $" + this.getCost() + ", " + this.getWeight() + " lb" + ", " + "id:" + this.getId() + "\n"
+        + subDetail
+        + "      " + "D: " + StringTools.truncate(this.getDescription(), 50)
+        + "     id: " + this.getObjectId() + "\n";
+	}
+	protected void setSubDetail(String detail) {
+		subDetail = detail + subDetail;
+	}
 
 }
