@@ -388,7 +388,8 @@ public class Importer {
          * Import version 156
          */
     	MeleeAttackOption oneMWOption = new MeleeAttackOption(
-                getString("sWeaponId"),
+                getString("sId"),
+    			getString("sWeaponId"),
                 getString("sGroup"),
                 getInt("iAttack"),
                 getString("sWeapon"), 

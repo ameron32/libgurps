@@ -1,16 +1,21 @@
 package com.ameron32.libgurps.attackoptions;
 
+import java.util.Arrays;
+
 import com.ameron32.libgurps.damage.Roll;
 import com.ameron32.libgurps.items.design.Item;
 
 public class ThrownAttackOption extends AttackOption {
 
-    float halfDamageRange, maxRange;
+	// TODO OMG, clean up this mess!
+	
+    double halfDamageRange, maxRange;
     short minST;
     Item throwsItem;
     
     public ThrownAttackOption(String damageType, Roll damage) {
-        super(damageType, damage);
+        super(damageType, damage,
+        		"x0", "x0", "x0");
         // TODO Auto-generated constructor stub
     }
     
@@ -38,18 +43,39 @@ public class ThrownAttackOption extends AttackOption {
             String damageType, String sBaseDamage, int iModifier, String sAmt, int iAcc,
             Double fHalfDmgRangeAtSTx, Double fMaxDmgRangeAtSTx, Double fWeight, int iCost,
             int iMinST, int iBulk, String sSpecialNotes) {
-        // TODO Auto-generated constructor stub
-        super(damageType, null); // FIXME null roll
-        // TODO FINISH THROWNATTACKOPTION
+        super(damageType, null,
+        		sId, sWeaponId, sGroup); // FIXME null roll
+        weaponName = sWeapon;
+        baseRoll = BaseRoll.getBaseRollFromAbbrev(sBaseDamage);
+        modifier = iModifier;
+        // TODO sAmt
+        this.iAcc = iAcc;
+        this.halfDamageRange = fHalfDmgRangeAtSTx;
+        this.maxRange = fMaxDmgRangeAtSTx;
+        this.minST = (short) minST;
+        this.attackNotes = sSpecialNotes;
     }
 
     // COPIED FROM MAO
     BaseRoll baseRoll; int modifier;
-    int id;
-    String weaponId, group;
-    String weaponName, damageDescription, attackNotes;
-    String loReachChoices; //tmp
-    short attackNumber;
+    private String weaponId, group;
+    private String weaponName, damageDescription, attackNotes;
+    private String loReachChoices; //tmp
+    private short attackNumber;
+    
+    //
+    private int iAcc;
+    
+    @Override
+    public String toString() {
+        return super.toString() + "TAO: " + weaponName + ": range(half/max)= (" + halfDamageRange + "/" + maxRange + "), baseRoll=" + baseRoll
+                + ", modifier=" + modifier + ", id=" + sId + ", weaponId=" + weaponId + ", group="
+                + group + ", " 
+                + "\n" + "      " + "weaponName=" + weaponName + ", damageDescription=[" + damageDescription
+                + "], attackNotes=" + attackNotes + ", " 
+                + "\n" + "      " + "loReachChoices=[" + loReachChoices
+                + "], attackNumber=" + attackNumber + ", minST=" + minST + "";
+    }
     
     
 }

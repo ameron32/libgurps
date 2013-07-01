@@ -159,7 +159,23 @@ public class ImportTesting {
         return 1;
     }
     
-    public byte display2() {
+    private void addAttackOptionsForWeapons() {
+	    	for (Object o : libraryEverything) {
+	    		if (o instanceof Weapon) {
+	    			Weapon w = (Weapon) o;
+	    			for (Object o2 : libraryEverything) {
+	    				if (o2 instanceof AttackOption) {
+	    					AttackOption ao = (AttackOption) o2;
+	    					if (w.getWeaponId().equalsIgnoreCase(ao.getWeaponId())) {
+	    						w.addAttackOption(ao);
+	    					}
+	    				}
+	    			}
+	    		}
+	    	}
+	    }
+    
+	public byte display2() {
 //        displayContents(); // replace with loop
         for (Object go : libraryEverything) {
         	if (go instanceof GURPSObject) 
@@ -301,34 +317,6 @@ public class ImportTesting {
     	if (displayLogging) p(s);
     }
 
-    private void addAttackOptionsForWeapons() {
-    	for (Object o : libraryEverything) {
-    		if (o instanceof Weapon) {
-    			Weapon w = (Weapon) o;
-    			for (Object o2 : libraryEverything) {
-    				if (o2 instanceof MeleeAttackOption) {
-    					MeleeAttackOption mao = (MeleeAttackOption) o2;
-    					if (w.getWeaponId().equalsIgnoreCase(mao.getWeaponId())) {
-    						w.addAttackOption(mao);
-    					}
-    				}
-    			}
-    		}
-    	}
-    	
-//      for (Item item : libraryEverything) {
-//          for (AttackOption ao : attackOptions) {
-//              Weapon w = (Weapon) item;
-//              MeleeAttackOption mao = (MeleeAttackOption) ao;
-//
-//              if (mao.getWeaponId().equalsIgnoreCase(w.getWeaponId())) {
-//                    w.addAttackOption(mao);
-//                    count++;
-//              }
-//          }
-//      }
-    }
-    
     private void addRandomNotes() {
         // add randomly generated notes to objects
         or = GURPSObject.getObjectRegistry();

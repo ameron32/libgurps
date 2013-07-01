@@ -9,13 +9,19 @@ public abstract class AttackOption implements CharacterAmplifiedDamage {
 
     DamageType damageType;
     Roll damage;
-    String group;
+    String damageDescription;
     Weapon attackOptionFor;
     
-    public AttackOption(String damageType, Roll damage) {
+    public AttackOption(String damageType, Roll damage, String sId, String weaponId, String group) {
         this.damageType = Damage.getDamageTypeByString(damageType);
         this.damage = damage;
+        this.sId = sId;
+        this.weaponId = weaponId;
+        this.group = group;
     }
+    
+    String sId;
+    String weaponId, group;
     
     public void setDamage(Roll baseDamage) {
         this.damage = baseDamage;
@@ -54,10 +60,8 @@ public abstract class AttackOption implements CharacterAmplifiedDamage {
     	return this.toString();
     }
     
-    
-    
-    
-    
-    
+    public String getWeaponId() {
+        return weaponId;
+    }
     
 }

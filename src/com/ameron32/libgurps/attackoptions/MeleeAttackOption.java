@@ -17,17 +17,14 @@ public class MeleeAttackOption extends AttackOption {
      * Importer stats
      */
     BaseRoll baseRoll; int modifier;
-    String sId;
-    String weaponId, group;
     String weaponName, damageDescription, attackNotes;
     String loReachChoices; //tmp
     short attackNumber, minST;
     
-    
-    
 
     public MeleeAttackOption(String damageType, Roll damage, short[] reach) {
-        super(damageType, damage);
+        super(damageType, damage, 
+        		"x0", "x0", "x0"); // FIXME not accurate
         this.reach = reach;
     }
     
@@ -47,10 +44,10 @@ public class MeleeAttackOption extends AttackOption {
      * @param minST
      * @param attackNotes
      */
-    public MeleeAttackOption(String weaponId, String group, int attackNumber, String weaponName, 
+    public MeleeAttackOption(String sId, String weaponId, String group, int attackNumber, String weaponName, 
             String damageType, String baseRoll, int modifier, String damageDescription, String loReachChoices,
             int minST, String attackNotes) {
-        super(damageType, null); // FIXME fix null roll
+        super(damageType, new Roll(), sId, weaponId, group); // FIXME fix null roll
         this.weaponId = weaponId;
         this.group = group;
         this.attackNumber = (short) attackNumber;
@@ -80,9 +77,6 @@ public class MeleeAttackOption extends AttackOption {
     /*
      * GETTERS AND SETTERS
      */
-    public String getWeaponId() {
-        return weaponId;
-    }
 
     @Override
     public String toString() {
@@ -94,9 +88,5 @@ public class MeleeAttackOption extends AttackOption {
                 + "\n" + "      " + "loReachChoices=[" + loReachChoices
                 + "], attackNumber=" + attackNumber + ", minST=" + minST + "";
     }
-    
-    
-    
-    
     
 }
