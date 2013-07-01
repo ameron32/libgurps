@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ameron32.libgurps.attackoptions.AttackOption;
+import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 
 public abstract class Weapon extends Item {
     private static final long serialVersionUID = 4585651326671906498L;
@@ -82,6 +83,7 @@ public abstract class Weapon extends Item {
             attackOptions = new ArrayList<AttackOption>();
         if (!attackOptions.contains(ao)) {
             attackOptions.add(ao);
+            ao.setGoverningWeapon(this);
             return true;
         } else {
             return false;
@@ -131,9 +133,8 @@ public abstract class Weapon extends Item {
 
 	@Override
 	public String detailString() {
-		setSubDetail("\n" + "      " + this.getAttackOptionsNumber()  
-        + "\n" + this.getAttackOptionsString() 
-        + "      " + this.getWeaponId());
+		setSubDetail("\n" + "      " + this.getAttackOptionsNumber() 
+				+ "\n" + this.getAttackOptionsString() + "      " + this.getWeaponId());
 		return super.detailString();
 	}
     

@@ -1,8 +1,10 @@
 package com.ameron32.libgurps.frmwk;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Set;
 
 import com.ameron32.libgurps.Note;
@@ -109,6 +111,16 @@ public abstract class GURPSObject implements Serializable {
     
     public static boolean isRegistered(GURPSObject obj) {
         return objectRegistry.containsValue(obj);
+    }
+    
+    public static List<Object> getAll(Class<?> c, List<Object> list) {
+    	List<Object> matchingObjects = new ArrayList<Object>();
+    	for (Object o : list) {
+    		if (o.getClass().isInstance(c)) {
+    			matchingObjects.add(o);
+    		}
+    	}
+    	return matchingObjects;
     }
     
     /* NOTES */

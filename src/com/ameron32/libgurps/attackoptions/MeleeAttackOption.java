@@ -17,7 +17,7 @@ public class MeleeAttackOption extends AttackOption {
      * Importer stats
      */
     BaseRoll baseRoll; int modifier;
-    int id;
+    String sId;
     String weaponId, group;
     String weaponName, damageDescription, attackNotes;
     String loReachChoices; //tmp
@@ -86,8 +86,8 @@ public class MeleeAttackOption extends AttackOption {
 
     @Override
     public String toString() {
-        return "MAO: " + weaponName + ": reach=" + Arrays.toString(reach) + ", baseRoll=" + baseRoll
-                + ", modifier=" + modifier + ", id=" + id + ", weaponId=" + weaponId + ", group="
+        return super.toString() + "MAO: " + weaponName + ": reach=" + Arrays.toString(reach) + ", baseRoll=" + baseRoll
+                + ", modifier=" + modifier + ", id=" + sId + ", weaponId=" + weaponId + ", group="
                 + group + ", " 
                 + "\n" + "      " + "weaponName=" + weaponName + ", damageDescription=[" + damageDescription
                 + "], attackNotes=" + attackNotes + ", " 

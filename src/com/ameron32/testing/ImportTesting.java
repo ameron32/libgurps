@@ -2,11 +2,14 @@ package com.ameron32.testing;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
+import android.R.array;
 
 import com.ameron32.libcharacter.library.PersonalityTraits;
 import com.ameron32.libgurps.Note;
@@ -38,12 +41,6 @@ public class ImportTesting {
     public static void clearSB() { sb.delete(0, sb.length()); }
     
     static final List<GURPSObject> libraryEverything = new ArrayList<GURPSObject>();
-//    static final List<Item> libraryArmor = new ArrayList<Item>();
-//    static final List<Item> libraryMeleeWeapon = new ArrayList<Item>();
-//    static final List<AttackOption> libraryMeleeWeaponOption = new ArrayList<AttackOption>();
-//    static final List<Item> libraryShield = new ArrayList<Item>();
-//    static final List<Advantage> libraryAdvs = new ArrayList<Advantage>();
-//    static final List<Skill> librarySkills = new ArrayList<Skill>();
     static String dirPath;
     private static final boolean displayLogging = true;
     
@@ -83,38 +80,45 @@ public class ImportTesting {
             }
     };
 
-    public static String[][] getAllFiles() { return allFiles.clone(); }
+    public static String[] getAllFilenames() { 
+    	List<String> fileNames = new ArrayList<String>();
+    	for (String[] aS : allFiles.clone()) {
+    		fileNames.add(aS[0]);
+    	}
+    	return fileNames.toArray(new String[0]);
+    }
     
     public ImportTesting (String[] args) {
         dirPath = args[0] + "";
         TestingTools.setDirPath(dirPath);
     }
 
-    public void main() {
-      runImporter();
+    public byte main() {
+    	/**
+    	 * IMPORTTESTANDROID runs these actions individually. Don't forget to update there.
+    	 */
+    	byte stage = 0;
+      stage += importer(); // stage 0
+      stage += display1(); // stage 1
+      stage += attackOptionLoading(); // stage 2
+      stage += display2(); // stage 3
 //        runRandomizer();
+      return stage;
     }
     
     private Hashtable<Long, GURPSObject> or;
-    private void runImporter() {
+    public byte importer() {
         Importer imp = new Importer();
         for (int i = 0; i < allFiles.length; i++) {
             imp.readCSVIntoList(dirPath + allFiles[i][0], 
                     libraryEverything, 
                     ImportType.getImportTypeFromString(allFiles[i][1]));
         }
-//        imp.readCSVIntoList(dirPath + "item155-armor.csv", 
-//                libraryArmor, ImportType.Armor);
-//        imp.readCSVIntoList(dirPath + "item155-meleeattackoptions.csv", 
-//                libraryMeleeWeaponOption, ImportType.MeleeWeaponOption);
-//        imp.readCSVIntoList(dirPath + "item155-meleeweapons.csv", 
-//                libraryMeleeWeapon, ImportType.MeleeWeapon);
-//        imp.readCSVIntoList(dirPath + "item155-shield.csv", 
-//                libraryShield, ImportType.Shield);
-//        imp.readCSVIntoList(dirPath + "adv155-modifications.csv", 
-//                libraryAdvs, ImportType.Advantage);
-//        imp.readCSVIntoList(dirPath + "skills155-wdefaults.csv", 
-//                librarySkills, ImportType.Skill);
+        
+        return 1;
+    }
+    
+    public byte display1() {
 
         log("\n" + libraryEverything.size() + " total items");
         log(numOf(Advantage.class) + " advantages");
@@ -130,11 +134,16 @@ public class ImportTesting {
         log(numOf(Skill.class) + " skills");
         log("\n");
         
+        return 1;
+    }
+    
+    public byte attackOptionLoading() {
         /*
         sort(libraryEverything);
+        */
+        addAttackOptionsForWeapons();
         
-        addAttackOptionsForWeapons(libraryMeleeWeapon, libraryMeleeWeaponOption);
-
+        /*
         p(libraryArmor.size() + " armors imported" + "\n");
         p(libraryMeleeWeaponOption.size() + " mwOptions imported" + "\n");
         p(count + " mwOptions applied to " + libraryMeleeWeapon.size() + " mweapons imported" + "\n");
@@ -146,12 +155,16 @@ public class ImportTesting {
         
 //        addRandomNotes();
         
+        return 1;
+    }
+    
+    public byte display2() {
 //        displayContents(); // replace with loop
         for (Object go : libraryEverything) {
         	if (go instanceof GURPSObject) 
-        		p("******************** \n" + ((GURPSObject)go).detailString() + "***");
+        		log("******************** \n" + ((GURPSObject)go).detailString() + "***");
         	else if (go instanceof AttackOption)
-        		p("******************** \n" + ((AttackOption)go).detailString() + "***");
+        		log("******************** \n" + ((AttackOption)go).detailString() + "***");
         }
 
 //        /* TEST FOR UNIQUE IDs */
@@ -171,6 +184,7 @@ public class ImportTesting {
 //        /* WRITE OUTPUT TO A TEXT FILE */
 //        logClose();
         
+        return 1;
     }
     
 /*
@@ -266,7 +280,7 @@ public class ImportTesting {
             String timestamp = new SimpleDateFormat("hh:mm M/d/yyyy", Locale.ENGLISH).format(new Date(n.getTimeCreated()));
             String noteText = n.getNoteText();
             String hostObject = n.getHostObject().getClass().getSimpleName() + "[" + n.getHostObject().nameString() + "]";
-            p(timestamp + ": " + noteText + " on " + hostObject);
+            log(timestamp + ": " + noteText + " on " + hostObject);
         }
     }
     
@@ -286,20 +300,32 @@ public class ImportTesting {
     	if (displayLogging) p(s);
     }
 
-    int count = 0;
-    private void addAttackOptionsForWeapons(
-            List<Item> weaponsOnly, List<AttackOption> attackOptions) {
-        for (Item item : weaponsOnly) {
-            for (AttackOption ao : attackOptions) {
-                Weapon w = (Weapon) item;
-                MeleeAttackOption mao = (MeleeAttackOption) ao;
-
-                if (mao.getWeaponId().equalsIgnoreCase(w.getWeaponId())) {
-                    w.addAttackOption(mao);
-                    count++;
-                }
-            }
-        }
+    private void addAttackOptionsForWeapons() {
+    	for (Object o : libraryEverything) {
+    		if (o instanceof Weapon) {
+    			Weapon w = (Weapon) o;
+    			for (Object o2 : libraryEverything) {
+    				if (o2 instanceof MeleeAttackOption) {
+    					MeleeAttackOption mao = (MeleeAttackOption) o2;
+    					if (w.getWeaponId().equalsIgnoreCase(mao.getWeaponId())) {
+    						w.addAttackOption(mao);
+    					}
+    				}
+    			}
+    		}
+    	}
+    	
+//      for (Item item : libraryEverything) {
+//          for (AttackOption ao : attackOptions) {
+//              Weapon w = (Weapon) item;
+//              MeleeAttackOption mao = (MeleeAttackOption) ao;
+//
+//              if (mao.getWeaponId().equalsIgnoreCase(w.getWeaponId())) {
+//                    w.addAttackOption(mao);
+//                    count++;
+//              }
+//          }
+//      }
     }
     
     private void addRandomNotes() {

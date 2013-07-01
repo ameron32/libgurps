@@ -1,5 +1,8 @@
 package com.ameron32.libgurps.items.design;
 
+import com.ameron32.libgurps.attackoptions.AttackOption;
+import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
+
 public class MeleeWeapon extends Weapon {
     private static final long serialVersionUID = 5732058216003189081L;
  
@@ -58,9 +61,14 @@ public class MeleeWeapon extends Weapon {
     
     @Override
     public String toString() {
+    	String maoString = "";
+    	for (AttackOption ao : attackOptions) {
+    		if (ao.getClass().isInstance(MeleeAttackOption.class))
+    			maoString = ((MeleeAttackOption)ao).toString() + "\n";
+    	}
         return "MeleeWeapon [maxReach=" + maxReach + ", parry=" + parry + ", throwable="
                 + throwable + ", cannotParry=" + cannotParry + ", breakage=" + breakage
-                + ", armorDivisor=" + armorDivisor + "]";
+                + ", armorDivisor=" + armorDivisor + "]" + "\n" + maoString;
     }
 
 

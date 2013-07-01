@@ -56,7 +56,7 @@ public class TestingTools {
         dirPath = dPath;
     }
     
-    public static void log(String s) {
+    public static void writeToLog(String s) {
         if (out == null) {
             try {
                 String outPath = dirPath + "completeList155.txt";

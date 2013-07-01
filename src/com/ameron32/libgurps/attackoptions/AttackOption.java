@@ -1,13 +1,16 @@
 package com.ameron32.libgurps.attackoptions;
 
 import com.ameron32.libgurps.damage.Damage;
-import com.ameron32.libgurps.damage.Roll;
 import com.ameron32.libgurps.damage.Damage.DamageType;
+import com.ameron32.libgurps.damage.Roll;
+import com.ameron32.libgurps.items.design.Weapon;
 
 public abstract class AttackOption implements CharacterAmplifiedDamage {
 
     DamageType damageType;
     Roll damage;
+    String group;
+    Weapon attackOptionFor;
     
     public AttackOption(String damageType, Roll damage) {
         this.damageType = Damage.getDamageTypeByString(damageType);
@@ -20,7 +23,13 @@ public abstract class AttackOption implements CharacterAmplifiedDamage {
 
     @Override
     public String toString() {
-        return "AttackOption:" + this.getClass().getSimpleName() + " [damageType=" + damageType + ", damage=" + damage + "]";
+    	String linkedTo = "";
+    	if (attackOptionFor != null) 
+    		linkedTo = attackOptionFor.getClass().getSimpleName() + ":" + attackOptionFor.getName();
+    	else
+    		linkedTo = "Currently not linked";
+        return "AttackOption:" + this.getClass().getSimpleName() + " [damageType=" + damageType + ", damage=" + damage + "]"
+				+ "\n" + "Linked to:" + linkedTo + "\n";
     }
     
     protected enum BaseRoll {
@@ -35,6 +44,10 @@ public abstract class AttackOption implements CharacterAmplifiedDamage {
             }
             return null;
         }
+    }
+    
+    public void setGoverningWeapon(Weapon governingWeapon) {
+    	attackOptionFor = governingWeapon;
     }
     
     public String detailString() {
