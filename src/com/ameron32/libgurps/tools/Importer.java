@@ -10,9 +10,12 @@ import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 import com.ameron32.libgurps.attackoptions.ThrownAttackOption;
 import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
+import com.ameron32.libgurps.items.design.Addon;
 import com.ameron32.libgurps.items.design.Armor;
+import com.ameron32.libgurps.items.design.Item;
 import com.ameron32.libgurps.items.design.MeleeWeapon;
 import com.ameron32.libgurps.items.design.RangedWeapon;
+import com.ameron32.libgurps.items.design.RangedWeaponAmmunition;
 import com.ameron32.libgurps.items.design.Shield;
 import com.ameron32.libgurps.items.design.ThrowableProjectile;
 import com.ameron32.testing.ImportTesting;
@@ -49,7 +52,7 @@ public class Importer {
     public List readCSVIntoList(String path, List appendToThisList,
             ImportType type) {
 
-        ImportTesting.p(type.name());
+        ImportTesting.log(type.name());
         
         if (appendToThisList != null) {
             try {
@@ -86,9 +89,9 @@ public class Importer {
                             readRangedWeapon(appendToThisList, ver);
                             break;
                             
-//                        case RangedWeaponAmmo:
-//                            
-//                            break;
+                        case RangedWeaponAmmo:
+                            readRangedWeaponAmmo(appendToThisList, ver);
+                            break;
                             
                         case MeleeWeaponOption:
                             readMeleeWeaponOption(appendToThisList, ver);
@@ -106,12 +109,16 @@ public class Importer {
 //                            
 //                           break;
                             
+                        case Addon:
+                        	readAttachment(appendToThisList, ver);
+                        	break;
+                            
                         case FlowChart:
                             readStep(appendToThisList, ver);
                             break;
                         
                         default:
-/* LOG */                   ImportTesting.p("skipping " + type.name());
+/* LOG */                   ImportTesting.p("  + skipping " + type.name());
                             break;
                     }
                 }
@@ -226,7 +233,7 @@ public class Importer {
          * Import version 155
          */
         Shield oneShield = new Shield(
-                getInt("iId"),
+                getString("sId"),
                 getString("sType"),
                 getString("sMaterial"),
                 getString("sDescription"),
@@ -247,7 +254,7 @@ public class Importer {
          * Import version 156
          */
         Armor oneArmor = new Armor(
-                getInt("iId"),
+                getString("sId"),
                 getString("sName"),
                 getString("sMaterial"),
                 getString("sCovers"),
@@ -323,8 +330,28 @@ public class Importer {
                 getInt("iMinST"),
                 getInt("iBulk"),
                 getString("sSpecialNotes")
-                ); // TODO create importer constructor
+                );
         list.add(oneRangedWeapon);
+    }
+    
+    private void readRangedWeaponAmmo(List list, int ver) 
+            throws IOException, FileNotFoundException {
+        
+        /*
+         * Import version 156
+         */
+    	RangedWeaponAmmunition oneRangedWeaponAmmunition = new RangedWeaponAmmunition(
+                getString("sId"),
+                getString("sGroup"),
+                getString("sType"),
+                getString("sWeapon"),
+                getString("sDamageType"),
+                getDouble("fModifier"),
+                getDouble("fWeight"),
+                getInt("iCost"),
+                getString("sSpecialNotes")
+                );
+        list.add(oneRangedWeaponAmmunition);
     }
     
     private void readThrowableProjectile(List list, int ver) 
@@ -375,6 +402,26 @@ public class Importer {
                 );
         list.add(oneMWOption);
     }
+    
+	private void readAttachment(List list, int ver) 
+			throws IOException, FileNotFoundException {
+
+		/*
+		 * Import version 156
+		 */
+		Addon addon = new Addon(
+				getString("sId"),
+				getString("sType"),
+				getString("sAttachTo"),
+				getString("sDescription"),
+				getString("sMaterial"),
+				getDouble("fWeight"),
+				getInt("iCost"),
+				getInt("iMinST"),
+				getString("sNotes")
+				);
+		list.add(addon);
+	}
     
     private void readThrownWeaponOption(List list, int ver) 
             throws IOException, FileNotFoundException {

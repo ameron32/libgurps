@@ -14,7 +14,7 @@ public class Shield extends Armor implements DamageGenerator, DamageReducer, Dam
     /**
      * Importer constructor
      * 
-     * @param id
+     * @param sId
      * @param type
      * @param material
      * @param description
@@ -25,9 +25,9 @@ public class Shield extends Armor implements DamageGenerator, DamageReducer, Dam
      * @param cost
      * @param notes
      */
-    public Shield(int id, String type, String material, String description, int db, int dr, int hp, 
+    public Shield(String sId, String type, String material, String description, int db, int dr, int hp, 
             double weight, int cost, String notes) {
-        super(description, id, cost, 0, weight, notes, material + ", " + type, material, 
+        super(description, sId, cost, 0, weight, notes, material + ", " + type, material, 
                 new String[] { }, // FIXME should have cover but doesn't for testing
                 dr, 
                 0, 0 // FIXME should have don and holdout, if only 0, from data source

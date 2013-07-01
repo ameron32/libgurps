@@ -17,7 +17,7 @@ public class Armor extends Item {
      * Standard Constructor
      * 
      * @param name
-     * @param id
+     * @param sId
      * @param cost
      * @param tl
      * @param weight
@@ -29,9 +29,9 @@ public class Armor extends Item {
      * @param don
      * @param holdout
      */
-    public Armor(String name, int id, int cost, int tl, double weight, String specialNotes,
+    public Armor(String name, String sId, int cost, int tl, double weight, String specialNotes,
             String description, String material, String[] covers, int dr, int don, int holdout) {
-        super(name, id, cost, tl, weight, specialNotes, description);
+        super(name, sId, cost, tl, weight, specialNotes, description);
         this.material = material;
         this.covers = covers;
         this.dr = (short)dr;
@@ -57,7 +57,7 @@ public class Armor extends Item {
     /**
      * Importer constructor
      * 
-     * @param id
+     * @param sId
      * @param name
      * @param material
      * @param covers
@@ -68,9 +68,9 @@ public class Armor extends Item {
      * @param don
      * @param holdout
      */
-    public Armor(int id, String name, String material, String covers, int tl, int dr,
+    public Armor(String sId, String name, String material, String covers, int tl, int dr,
             int cost, double weight, int don, int holdout) {
-        super(name, id, cost, tl, weight, 
+        super(name, sId, cost, tl, weight, 
                 "", ""); // FIXME shouldn't be blank
         this.covers = StringTools.genList(covers).toArray(new String[0]);
         this.material = material;

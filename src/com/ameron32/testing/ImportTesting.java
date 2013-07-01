@@ -12,13 +12,18 @@ import com.ameron32.libcharacter.library.PersonalityTraits;
 import com.ameron32.libgurps.Note;
 import com.ameron32.libgurps.attackoptions.AttackOption;
 import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
+import com.ameron32.libgurps.attackoptions.ThrownAttackOption;
 import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
 import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.items.design.Addon;
 import com.ameron32.libgurps.items.design.Armor;
 import com.ameron32.libgurps.items.design.Item;
 import com.ameron32.libgurps.items.design.MeleeWeapon;
+import com.ameron32.libgurps.items.design.RangedWeapon;
+import com.ameron32.libgurps.items.design.RangedWeaponAmmunition;
 import com.ameron32.libgurps.items.design.Shield;
+import com.ameron32.libgurps.items.design.ThrowableProjectile;
 import com.ameron32.libgurps.items.design.Weapon;
 import com.ameron32.libgurps.tools.Importer;
 import com.ameron32.libgurps.tools.Importer.ImportType;
@@ -33,13 +38,14 @@ public class ImportTesting {
     public static void clearSB() { sb.delete(0, sb.length()); }
     
     static final List<GURPSObject> libraryEverything = new ArrayList<GURPSObject>();
-    static final List<Item> libraryArmor = new ArrayList<Item>();
-    static final List<Item> libraryMeleeWeapon = new ArrayList<Item>();
-    static final List<AttackOption> libraryMeleeWeaponOption = new ArrayList<AttackOption>();
-    static final List<Item> libraryShield = new ArrayList<Item>();
-    static final List<Advantage> libraryAdvs = new ArrayList<Advantage>();
-    static final List<Skill> librarySkills = new ArrayList<Skill>();
+//    static final List<Item> libraryArmor = new ArrayList<Item>();
+//    static final List<Item> libraryMeleeWeapon = new ArrayList<Item>();
+//    static final List<AttackOption> libraryMeleeWeaponOption = new ArrayList<AttackOption>();
+//    static final List<Item> libraryShield = new ArrayList<Item>();
+//    static final List<Advantage> libraryAdvs = new ArrayList<Advantage>();
+//    static final List<Skill> librarySkills = new ArrayList<Skill>();
     static String dirPath;
+    private static final boolean displayLogging = true;
     
     static final String[][] allFiles = new String[][] { 
             {
@@ -91,8 +97,6 @@ public class ImportTesting {
     
     private Hashtable<Long, GURPSObject> or;
     private void runImporter() {
-        p(ImportType.getImportTypeFromString("Skill").name());
-        
         Importer imp = new Importer();
         for (int i = 0; i < allFiles.length; i++) {
             imp.readCSVIntoList(dirPath + allFiles[i][0], 
@@ -112,8 +116,21 @@ public class ImportTesting {
 //        imp.readCSVIntoList(dirPath + "skills155-wdefaults.csv", 
 //                librarySkills, ImportType.Skill);
 
-        p(libraryEverything.size() + " total items" + "\n");
+        log("\n" + libraryEverything.size() + " total items");
+        log(numOf(Advantage.class) + " advantages");
+        log(numOf(Armor.class) + " armors");
+        log(numOf(Addon.class) + " addons");
+        log(numOf(MeleeAttackOption.class) + " meleeattackoptions");
+        log(numOf(MeleeWeapon.class) + " meleeweapons");
+        log(numOf(RangedWeaponAmmunition.class) + " rangedweaponammo");
+        log(numOf(RangedWeapon.class) + " rangedweapons");
+        log(numOf(Shield.class) + " shields");
+        log(numOf(ThrownAttackOption.class) + " thrownattackoptions");
+        log(numOf(ThrowableProjectile.class) + " throwableprojectiles");
+        log(numOf(Skill.class) + " skills");
+        log("\n");
         
+        /*
         sort(libraryEverything);
         
         addAttackOptionsForWeapons(libraryMeleeWeapon, libraryMeleeWeaponOption);
@@ -125,6 +142,7 @@ public class ImportTesting {
         p(libraryAdvs.size() + " advs imported" + "\n");
         p(librarySkills.size() + " skills imported" + "\n");
         p("\n");
+        */
         
 //        addRandomNotes();
         
@@ -155,6 +173,7 @@ public class ImportTesting {
         
     }
     
+/*
     private void sort(List<GURPSObject> libraryEverything) {
         for (Object go : libraryEverything) {
             if (go instanceof Shield) {
@@ -179,7 +198,7 @@ public class ImportTesting {
             Armor armor = (Armor) item;
             p(armor.getClass().getSimpleName() + ": " + armor.getName()
                     + "\n" + "    " + "[" + armor.getCoversString() + "]" + ", " + "$" + armor.getCost() + ", " + armor.getWeight() + " lb" + ", "
-                    + "id:" + armor.getId()
+                    + "id:" + armor.getSId()
                     + "\n" + "      " + "D: " + StringTools.truncate(armor.getDescription(), 50)
                     );
             p("     id: " + armor.getObjectId() + "\n");
@@ -191,7 +210,7 @@ public class ImportTesting {
             Weapon weapon = (Weapon) item;
             
             p(weapon.getClass().getSimpleName() + ": " + weapon.getName()
-                    + "\n" + "    $" + weapon.getCost() + ", " + weapon.getWeight() + " lb" + ", " + "id:" + weapon.getId()
+                    + "\n" + "    $" + weapon.getCost() + ", " + weapon.getWeight() + " lb" + ", " + "id:" + weapon.getSId()
                     + "\n" + "      " + weapon.getAttackOptionsNumber()  
                     + "\n" + weapon.getAttackOptionsString() 
                     + "      " + weapon.getWeaponId()
@@ -210,7 +229,7 @@ public class ImportTesting {
         for (Item item : libraryShield) {
             p(item.getClass().getSimpleName() + ": " + item.getName()
                     + "\n" + "    $" + item.getCost() + ", " + item.getWeight() + " lb" + ", "
-                    + "id:" + item.getId()
+                    + "id:" + item.getSId()
                     + "\n" + "      " + "D: " + StringTools.truncate(item.getDescription(), 50)
                     );
             p("     id: " + item.getObjectId() + "\n");
@@ -240,6 +259,7 @@ public class ImportTesting {
             displayNotes(s);
         }
     }
+*/
     
     private void displayNotes(GURPSObject obj) {
         for (Note n : GURPSObject.getObjectRegistry().get(obj.getObjectId()).getNotes() ) {
@@ -260,6 +280,10 @@ public class ImportTesting {
     
     public static void p(String s) {
         sb.append("\n" + s);
+    }
+    
+    public static void log(String s) {
+    	if (displayLogging) p(s);
     }
 
     int count = 0;
@@ -289,5 +313,14 @@ public class ImportTesting {
             }
         }
     }
+    
+	private <T> int numOf(Class<T> c) {
+		int count = 0;
+		for (Object o : libraryEverything) {
+			if (c.isInstance(o))
+				count++;
+		}
+		return count;
+	}
 
 }

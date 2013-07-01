@@ -2,11 +2,9 @@ package com.ameron32.libgurps.items.design;
 
 public class ThrowableProjectile extends Item {
 
-    String sId;
-    
-    public ThrowableProjectile(String name, int id, int cost, int tl, double weight,
+    public ThrowableProjectile(String name, String sId, int cost, int tl, double weight,
             String specialNotes, String description) {
-        super(name, id, cost, tl, weight, specialNotes, description);
+        super(name, sId, cost, tl, weight, specialNotes, description);
         // TODO Auto-generated constructor stub
     }
 
@@ -33,10 +31,7 @@ public class ThrowableProjectile extends Item {
     public ThrowableProjectile(String sId, String group, String type, String name,
             String damageType, String baseDamage, int modifier, String damageAmountString, int accuracy, double halfDamageRange,
             double maxRange, double weight, int cost, int minST, int bulk, String specialNotes) {
-        super(name,
-                0, // FIXME no ID
-                cost,
-                0, // FIXME no TL
+        super(name, sId, cost, 0, // FIXME no TL
                 weight, specialNotes,
                 ""); // FIXME no specialNotes?
     }

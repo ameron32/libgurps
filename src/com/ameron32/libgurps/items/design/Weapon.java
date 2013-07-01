@@ -30,10 +30,10 @@ public abstract class Weapon extends Item {
      * @param description
      * @param quality
      */
-    public Weapon(String name, int id, String weaponId, int cost, short tl, float weight,
+    public Weapon(String name, String sId, String weaponId, int cost, short tl, float weight,
             String specialNotes,
             String description, String weaponGroup, int minST, int quality) {
-        super(name, id, cost, tl, weight, specialNotes, description);
+        super(name, sId, cost, tl, weight, specialNotes, description);
         this.weaponId = weaponId;
         this.weaponGroup = weaponGroup;
         this.minST = (short) minST;
@@ -67,10 +67,7 @@ public abstract class Weapon extends Item {
      */
     public Weapon(String weaponId, String group, String name, int numberOfAttacks,
             int cost, double weight, int minST, String weaponNotes) {
-        super(name,
-                0, // FIXME no ID
-                cost,
-                0, // FIXME no TL
+        super(name, weaponId, cost, 0, // FIXME no TL
                 weight, weaponNotes,
                 ""); // FIXME no specialNotes?
         this.weaponId = weaponId;

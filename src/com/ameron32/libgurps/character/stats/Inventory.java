@@ -113,7 +113,7 @@ public class Inventory {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Item item : myBackpackItems) {
-            sb.append("\n" + item.getName() + ":" + item.getId());
+            sb.append("\n" + item.getName() + ":" + item.getSId());
         }
         return "Inventory [myBackpackItems=" + sb.toString() + "]";
     }

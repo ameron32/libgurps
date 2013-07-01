@@ -16,8 +16,8 @@ public class Item extends GURPSObject implements DamageGenerator, DamageReducer,
     // TODO Notes: consider interfaces for Ownable, Personalizable/Customizable
     
     
-    String name;
-    int id, cost;
+    String name, sId;
+    int cost;
     short tl;
     float weight;
     ItemType itemType;
@@ -35,11 +35,11 @@ public class Item extends GURPSObject implements DamageGenerator, DamageReducer,
      * @param specialNotes
      * @param description
      */
-    public Item(String name, int id, int cost, int tl, double weight, 
+    public Item(String name, String sId, int cost, int tl, double weight, 
             String specialNotes, String description) {
         super("random");
         this.name = name;
-        this.id = id;
+        this.sId = sId;
         this.cost = cost;
         this.tl = (short)tl;
         this.weight = (float)weight;
@@ -56,7 +56,7 @@ public class Item extends GURPSObject implements DamageGenerator, DamageReducer,
     public Item(Item source) {
         super("random");
         this.name = source.name;
-        this.id = source.id;
+        this.sId = source.sId;
         this.cost = source.cost;
         this.tl = source.tl;
         this.weight = source.weight;
@@ -236,8 +236,8 @@ public class Item extends GURPSObject implements DamageGenerator, DamageReducer,
         return name;
     }
 
-    public int getId() {
-        return id;
+    public String getSId() {
+        return sId;
     }
 
     public int getCost() {
@@ -266,7 +266,7 @@ public class Item extends GURPSObject implements DamageGenerator, DamageReducer,
 
     @Override
     public String toString() {
-        return "Item:" + this.getClass().getSimpleName() + " [name=" + name + ", id=" + id + ", cost=" + cost + ", tl=" + tl + ", weight="
+        return "Item:" + this.getClass().getSimpleName() + " [name=" + name + ", id=" + sId + ", cost=" + cost + ", tl=" + tl + ", weight="
                 + weight + ", itemType=" + itemType + ", specialNotes=" + specialNotes
                 + ", description=" + description  
 //                + ", pName=" + pName + ", pDescription=" + pDescription 
@@ -288,7 +288,7 @@ public class Item extends GURPSObject implements DamageGenerator, DamageReducer,
 	@Override
 	public String detailString() {
 		return this.getClass().getSimpleName() + ": " + this.getName()
-        + "\n" + "    $" + this.getCost() + ", " + this.getWeight() + " lb" + ", " + "id:" + this.getId() + "\n"
+        + "\n" + "    $" + this.getCost() + ", " + this.getWeight() + " lb" + ", " + "id:" + this.getSId() + "\n"
         + subDetail
         + "      " + "D: " + StringTools.truncate(this.getDescription(), 50)
         + "     id: " + this.getObjectId() + "\n";
