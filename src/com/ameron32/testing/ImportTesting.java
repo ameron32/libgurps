@@ -93,18 +93,19 @@ public class ImportTesting {
         TestingTools.setDirPath(dirPath);
     }
 
-    public byte main() {
-    	/**
-    	 * IMPORTTESTANDROID runs these actions individually. Don't forget to update there.
-    	 */
-    	byte stage = 0;
-      stage += importer(); // stage 0
-      stage += display1(); // stage 1
-      stage += attackOptionLoading(); // stage 2
-      stage += display2(); // stage 3
-//        runRandomizer();
-      return stage;
-    }
+	public byte main() {
+		/**
+		 * IMPORTTESTANDROID runs these actions individually. Don't forget to
+		 * update there.
+		 */
+		byte stage = 0;
+		stage += importer(); // stage 0
+		stage += display1(); // stage 1
+		stage += attackOptionLoading(); // stage 2
+		stage += display2(); // stage 3
+		// runRandomizer();
+		return stage;
+	}
     
     private Hashtable<Long, GURPSObject> or;
     public byte importer() {
