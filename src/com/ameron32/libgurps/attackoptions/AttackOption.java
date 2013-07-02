@@ -3,14 +3,14 @@ package com.ameron32.libgurps.attackoptions;
 import com.ameron32.libgurps.damage.Damage;
 import com.ameron32.libgurps.damage.Damage.DamageType;
 import com.ameron32.libgurps.damage.Roll;
-import com.ameron32.libgurps.items.design.Weapon;
+import com.ameron32.libgurps.items.library.LibraryWeapon;
 
-public abstract class AttackOption implements CharacterAmplifiedDamage {
+public abstract class AttackOption implements CharacterAmplifiedAttackOption {
 
     DamageType damageType;
     Roll damage;
     String damageDescription;
-    Weapon attackOptionFor;
+    LibraryWeapon attackOptionFor;
     
     public AttackOption(String damageType, Roll damage, String sId, String weaponId, String group) {
         this.damageType = Damage.getDamageTypeByString(damageType);
@@ -43,7 +43,6 @@ public abstract class AttackOption implements CharacterAmplifiedDamage {
 
         public static BaseRoll getBaseRollFromAbbrev(String abbrev){
             for (BaseRoll b : BaseRoll.values()) {
-
                 if (b.name().substring(0, 2).equalsIgnoreCase(abbrev.substring(0, 2))) {
                     return b;
                 }
@@ -52,7 +51,7 @@ public abstract class AttackOption implements CharacterAmplifiedDamage {
         }
     }
     
-    public void setGoverningWeapon(Weapon governingWeapon) {
+    public void setGoverningWeapon(LibraryWeapon governingWeapon) {
     	attackOptionFor = governingWeapon;
     }
     

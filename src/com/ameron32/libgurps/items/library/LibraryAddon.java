@@ -1,15 +1,10 @@
-package com.ameron32.libgurps.items.design;
+package com.ameron32.libgurps.items.library;
 
-public class Addon extends Item {
+public class LibraryAddon extends LibraryItem {
     private static final long serialVersionUID = 8995766780255219350L;
 	
     private String material, attachTo, type;
 
-    public Addon(Item source) {
-        super(source);
-        // TODO Auto-generated constructor stub
-    }
-    
     /**
      * Importer constructor
      * 
@@ -23,7 +18,7 @@ public class Addon extends Item {
      * @param minST
      * @param notes
      */
-    public Addon(String sId, String type, String attachTo, String name, String material, double weight, int cost, int minST, String notes) {
+    public LibraryAddon(String sId, String type, String attachTo, String name, String material, double weight, int cost, int minST, String notes) {
     	super(name, sId, cost, 0, // needs TL
     			weight, notes, "");
     	this.type = type;

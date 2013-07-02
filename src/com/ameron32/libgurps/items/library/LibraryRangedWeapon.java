@@ -1,11 +1,11 @@
-package com.ameron32.libgurps.items.design;
+package com.ameron32.libgurps.items.library;
 
 import com.ameron32.libgurps.attackoptions.RangedAttackOption;
 import com.ameron32.libgurps.damage.Damage.DamageType;
 import com.ameron32.libgurps.damage.Roll;
 import com.ameron32.libgurps.items.frmwk.EquipmentUser;
 
-public class RangedWeapon extends Weapon{
+public class LibraryRangedWeapon extends LibraryWeapon{
     private static final long serialVersionUID = 2944636000386485087L;
 
     float maxRange, halfDmgRange;
@@ -18,12 +18,7 @@ public class RangedWeapon extends Weapon{
     
 //  RangedAttackOptions[] attackOptions;    
 //  RangedAddons[] addons;
-    
-    public RangedWeapon(RangedWeapon source) {
-        super(source);
-        // TODO Auto-generated constructor stub
-        
-    }
+
 
     /**
      * Importer constructor
@@ -45,7 +40,7 @@ public class RangedWeapon extends Weapon{
      * @param minST 
      * @param specialNotes
      */
-    public RangedWeapon(String sId, String group, String type, String weapon, String damageType,
+    public LibraryRangedWeapon(String sId, String group, String type, String weapon, String damageType,
             String baseDamage, int rollModifier,
             String damageAmountString, int accuracy, double halfDamageRange, double maxRange,
             double weight, int cost, int minST, int bulk, String specialNotes) {       
@@ -63,23 +58,7 @@ public class RangedWeapon extends Weapon{
         
     }
     
-    /**
-     * Readies the ammo on this weapon.
-     * 
-     * @param The EquipmentUser performing the ready action.
-     * @param The ammo to be equipped during the ready action.
-     * 
-     * @return Weapon was readied with ammo successfully.
-     */
-    public boolean readyWeapon(EquipmentUser eu, ProjectileBucket pb) {
-        if (pb.getQuantityOnHand() > 0) {
-            addAttackOption(new RangedAttackOption("special", new Roll(), pb));
-            eu.equip(pb);
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 
     @Override
     public String toString() {

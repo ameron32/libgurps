@@ -19,28 +19,26 @@ import com.ameron32.libgurps.attackoptions.ThrownAttackOption;
 import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
 import com.ameron32.libgurps.frmwk.GURPSObject;
-import com.ameron32.libgurps.items.design.Addon;
-import com.ameron32.libgurps.items.design.Armor;
-import com.ameron32.libgurps.items.design.Item;
-import com.ameron32.libgurps.items.design.MeleeWeapon;
-import com.ameron32.libgurps.items.design.RangedWeapon;
-import com.ameron32.libgurps.items.design.RangedWeaponAmmunition;
-import com.ameron32.libgurps.items.design.Shield;
-import com.ameron32.libgurps.items.design.ThrowableProjectile;
-import com.ameron32.libgurps.items.design.Weapon;
+import com.ameron32.libgurps.items.library.LibraryAddon;
+import com.ameron32.libgurps.items.library.LibraryArmor;
+import com.ameron32.libgurps.items.library.LibraryItem;
+import com.ameron32.libgurps.items.library.LibraryMeleeWeapon;
+import com.ameron32.libgurps.items.library.LibraryRangedWeapon;
+import com.ameron32.libgurps.items.library.LibraryRangedWeaponAmmunition;
+import com.ameron32.libgurps.items.library.LibraryShield;
+import com.ameron32.libgurps.items.library.LibraryThrowableProjectile;
+import com.ameron32.libgurps.items.library.LibraryWeapon;
 import com.ameron32.libgurps.tools.Importer;
 import com.ameron32.libgurps.tools.Importer.ImportType;
 import com.ameron32.libgurps.tools.StringTools;
 
 public class ImportTesting {
-
-    
     
     static final StringBuilder sb = new StringBuilder();
     public static String getSB() { return sb.toString(); }
     public static void clearSB() { sb.delete(0, sb.length()); }
     
-    static final List<GURPSObject> libraryEverything = new ArrayList<GURPSObject>();
+    static final List<Object> libraryEverything = new ArrayList<Object>();
     static String dirPath;
     private static final boolean displayLogging = true;
     
@@ -95,15 +93,17 @@ public class ImportTesting {
 
 	public byte main() {
 		/**
-		 * IMPORTTESTANDROID runs these actions individually. Don't forget to
-		 * update there.
+		 * IMPORTTESTANDROID runs these actions individually. 
+		 * Don't forget to update there.
 		 */
 		byte stage = 0;
 		stage += importer(); // stage 0
 		stage += display1(); // stage 1
 		stage += attackOptionLoading(); // stage 2
 		stage += display2(); // stage 3
+		
 		// runRandomizer();
+		
 		return stage;
 	}
     
@@ -123,15 +123,15 @@ public class ImportTesting {
 
         log("\n" + libraryEverything.size() + " total items");
         log(numOf(Advantage.class) + " advantages");
-        log(numOf(Armor.class) + " armors");
-        log(numOf(Addon.class) + " addons");
+        log(numOf(LibraryArmor.class) + " armors");
+        log(numOf(LibraryAddon.class) + " addons");
         log(numOf(MeleeAttackOption.class) + " meleeattackoptions");
-        log(numOf(MeleeWeapon.class) + " meleeweapons");
-        log(numOf(RangedWeaponAmmunition.class) + " rangedweaponammo");
-        log(numOf(RangedWeapon.class) + " rangedweapons");
-        log(numOf(Shield.class) + " shields");
+        log(numOf(LibraryMeleeWeapon.class) + " meleeweapons");
+        log(numOf(LibraryRangedWeaponAmmunition.class) + " rangedweaponammo");
+        log(numOf(LibraryRangedWeapon.class) + " rangedweapons");
+        log(numOf(LibraryShield.class) + " shields");
         log(numOf(ThrownAttackOption.class) + " thrownattackoptions");
-        log(numOf(ThrowableProjectile.class) + " throwableprojectiles");
+        log(numOf(LibraryThrowableProjectile.class) + " throwableprojectiles");
         log(numOf(Skill.class) + " skills");
         log("\n");
         
@@ -160,9 +160,10 @@ public class ImportTesting {
     }
     
     private void addAttackOptionsForWeapons() {
+    	
 	    	for (Object o : libraryEverything) {
-	    		if (o instanceof Weapon) {
-	    			Weapon w = (Weapon) o;
+	    		if (o instanceof LibraryWeapon) {
+	    			LibraryWeapon w = (LibraryWeapon) o;
 	    			for (Object o2 : libraryEverything) {
 	    				if (o2 instanceof AttackOption) {
 	    					AttackOption ao = (AttackOption) o2;
@@ -174,14 +175,40 @@ public class ImportTesting {
 	    		}
 	    	}
 	    }
+	    
     
+    Class<?>[] exclude = { 
+    		Advantage.class, 
+//    		LibraryAddon.class, 
+//    		LibraryArmor.class, MeleeAttackOption.class, LibraryMeleeWeapon.class, 
+//    		LibraryRangedWeaponAmmunition.class, LibraryRangedWeapon.class, LibraryShield.class,
+//   		ThrownAttackOption.class, LibraryThrowableProjectile.class,
+    		Skill.class 
+    		};
 	public byte display2() {
-//        displayContents(); // replace with loop
         for (Object go : libraryEverything) {
-        	if (go instanceof GURPSObject) 
-        		log("******************** \n" + ((GURPSObject)go).detailString() + "***");
-        	else if (go instanceof AttackOption)
-        		log("******************** \n" + ((AttackOption)go).detailString() + "***");
+			if (go instanceof GURPSObject) {
+        		boolean mustExclude = false;
+        		for (Class<?> c : exclude) {
+        			if (c.isInstance(go)) {
+        				mustExclude = true;
+        			}
+        		}
+    			if (!mustExclude) {
+    				log("******************** \n" + ((GURPSObject)go).detailString() + "***");
+    			}
+        	} else if (go instanceof AttackOption) {
+				boolean mustExclude = false;
+				for (Class<?> c : exclude) {
+					if (c.isInstance(go)) {
+						mustExclude = true;
+					}
+				}
+				if (!mustExclude) {
+					log("******************** \n"
+							+ ((AttackOption) go).detailString() + "***");
+				}
+        	}
         }
 
 //        /* TEST FOR UNIQUE IDs */

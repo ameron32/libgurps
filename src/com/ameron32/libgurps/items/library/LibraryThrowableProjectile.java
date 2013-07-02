@@ -1,14 +1,9 @@
-package com.ameron32.libgurps.items.design;
+package com.ameron32.libgurps.items.library;
 
-public class ThrowableProjectile extends Item {
+public class LibraryThrowableProjectile extends LibraryItem {
+	private static final long serialVersionUID = -1668412041430923108L;
 
-    public ThrowableProjectile(String name, String sId, int cost, int tl, double weight,
-            String specialNotes, String description) {
-        super(name, sId, cost, tl, weight, specialNotes, description);
-        // TODO Auto-generated constructor stub
-    }
-
-    /**
+	/**
      * Importer constructor
      * 
      * @param sId
@@ -28,7 +23,7 @@ public class ThrowableProjectile extends Item {
      * @param bulk
      * @param specialNotes
      */
-    public ThrowableProjectile(String sId, String group, String type, String name,
+    public LibraryThrowableProjectile(String sId, String group, String type, String name,
             String damageType, String baseDamage, int modifier, String damageAmountString, int accuracy, double halfDamageRange,
             double maxRange, double weight, int cost, int minST, int bulk, String specialNotes) {
         super(name, sId, cost, 0, // FIXME no TL
@@ -36,11 +31,7 @@ public class ThrowableProjectile extends Item {
                 ""); // FIXME no specialNotes?
     }
 
-    @Override
-    public void throwItem(Throwable throwable) {
-//        super.throwItem(throwable);
-        // TODO deal damage based on ThrowableProjectile information
-    }
+
 
     
     

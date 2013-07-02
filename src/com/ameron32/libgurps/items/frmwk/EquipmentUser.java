@@ -2,7 +2,7 @@ package com.ameron32.libgurps.items.frmwk;
 
 import java.util.List;
 
-import com.ameron32.libgurps.items.design.Item;
+import com.ameron32.libgurps.items.world.WorldItem;
 
 public interface EquipmentUser {
 
@@ -10,6 +10,6 @@ public interface EquipmentUser {
     
     public boolean unequip(Equippable e);
     
-    public List<Item> getAllEquipped(Class<?> c);
+    public List<WorldItem> getAllEquipped(Class<?> c);
     
 }

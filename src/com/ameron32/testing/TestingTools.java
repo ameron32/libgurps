@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import com.ameron32.libgurps.frmwk.GURPSObject;
-import com.ameron32.libgurps.items.design.Item;
+import com.ameron32.libgurps.items.library.LibraryItem;
 
 public class TestingTools {
     

@@ -10,11 +10,12 @@ import com.ameron32.libgurps.character.stats.Inventory;
 import com.ameron32.libgurps.damage.Damage;
 import com.ameron32.libgurps.damage.Roll;
 import com.ameron32.libgurps.frmwk.GURPSObject;
-import com.ameron32.libgurps.items.design.Item;
 import com.ameron32.libgurps.items.frmwk.DamageReceiver;
 import com.ameron32.libgurps.items.frmwk.DamageReducer;
 import com.ameron32.libgurps.items.frmwk.EquipmentUser;
 import com.ameron32.libgurps.items.frmwk.Equippable;
+import com.ameron32.libgurps.items.library.LibraryItem;
+import com.ameron32.libgurps.items.world.WorldItem;
 
 /**
  * How to use CharacterRecord | Creating a CharacterRecord: So, you create a
@@ -268,16 +269,16 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
 
     @Override
     public boolean equip(Equippable e) {
-        if (e instanceof Item)
-            return ((Item) e).equipTo(this);
+        if (e instanceof LibraryItem)
+            return ((WorldItem) e).equipTo(this);
         else 
             return false;
     }
     
     @Override
     public boolean unequip(Equippable e) {
-        if (e instanceof Item && ((Item) e).isEquippedBy(this))
-            return ((Item) e).unequip();
+        if (e instanceof WorldItem && ((WorldItem) e).isEquippedBy(this))
+            return ((WorldItem) e).unequip();
         else 
             return false;
     }
@@ -309,11 +310,11 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
 
     
     @Override
-    public List<Item> getAllEquipped(Class<?> c) {
-        List<Item> listOfResults = new ArrayList<Item>();
-        for (Item i : mInventory.getEquippedItems()) {
-            if (i.getClass().isInstance(c)) {
-                listOfResults.add(i);
+    public List<WorldItem> getAllEquipped(Class<?> c) {
+        List<WorldItem> listOfResults = new ArrayList<WorldItem>();
+        for (WorldItem item : mInventory.getEquippedItems()) {
+            if (item.getClass().isInstance(c)) {
+                listOfResults.add(item);
             }
         }
         return listOfResults;

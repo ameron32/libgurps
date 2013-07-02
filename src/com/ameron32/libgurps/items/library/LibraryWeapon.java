@@ -1,5 +1,5 @@
 
-package com.ameron32.libgurps.items.design;
+package com.ameron32.libgurps.items.library;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.List;
 import com.ameron32.libgurps.attackoptions.AttackOption;
 import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 
-public abstract class Weapon extends Item {
+public abstract class LibraryWeapon extends LibraryItem {
     private static final long serialVersionUID = 4585651326671906498L;
 
     String weaponId;
@@ -19,41 +19,27 @@ public abstract class Weapon extends Item {
     // EquipLocation[] equipLocation;
     // IdleLocation[] idleLocation;
 
-    /**
-     * Standard Constructor
-     * 
-     * @param name
-     * @param id
-     * @param cost
-     * @param tl
-     * @param weight
-     * @param specialNotes
-     * @param description
-     * @param quality
-     */
-    public Weapon(String name, String sId, String weaponId, int cost, short tl, float weight,
-            String specialNotes,
-            String description, String weaponGroup, int minST, int quality) {
-        super(name, sId, cost, tl, weight, specialNotes, description);
-        this.weaponId = weaponId;
-        this.weaponGroup = weaponGroup;
-        this.minST = (short) minST;
-        this.quality = (byte) quality;
-    }
-
-    /**
-     * Duplicate an existing weapon
-     * 
-     * @param source
-     */
-    public Weapon(Weapon source) {
-        super(source);
-        this.weaponId = source.weaponId;
-        this.weaponGroup = source.weaponGroup;
-        this.minST = source.minST;
-        this.quality = source.quality;
-        setObjectType(ObjectType.WorldObject);
-    }
+//    /**
+//     * Standard Constructor
+//     * 
+//     * @param name
+//     * @param id
+//     * @param cost
+//     * @param tl
+//     * @param weight
+//     * @param specialNotes
+//     * @param description
+//     * @param quality
+//     */
+//    public LibraryWeapon(String name, String sId, String weaponId, int cost, short tl, float weight,
+//            String specialNotes,
+//            String description, String weaponGroup, int minST, int quality) {
+//        super(name, sId, cost, tl, weight, specialNotes, description);
+//        this.weaponId = weaponId;
+//        this.weaponGroup = weaponGroup;
+//        this.minST = (short) minST;
+//        this.quality = (byte) quality;
+//    }
 
     /**
      * Importer Constructor
@@ -66,7 +52,7 @@ public abstract class Weapon extends Item {
      * @param weight
      * @param minST
      */
-    public Weapon(String weaponId, String group, String name, int numberOfAttacks,
+    public LibraryWeapon(String weaponId, String group, String name, int numberOfAttacks,
             int cost, double weight, int minST, String weaponNotes) {
         super(name, weaponId, cost, 0, // FIXME no TL
                 weight, weaponNotes,
@@ -98,30 +84,7 @@ public abstract class Weapon extends Item {
         return allAdded;
     }
 
-    /*
-     * GETTERS AND SETTERS
-     */
-    public String getWeaponId() {
-        return weaponId;
-    }
 
-    
-    public int getAttackOptionsNumber() {
-        if (attackOptions != null)
-            return attackOptions.size();
-        else
-            return 0;
-    }
-    
-    public String getAttackOptionsString() {
-        StringBuilder sb = new StringBuilder();
-        if (attackOptions != null) {
-            for (AttackOption ao : attackOptions) {
-                sb.append("         " + ao.toString() + "\n");
-            }
-        }
-        return sb.toString();
-    }
 
     /*
      * REFERENCES
@@ -133,9 +96,14 @@ public abstract class Weapon extends Item {
 
 	@Override
 	public String detailString() {
-		setSubDetail("\n" + "      " + this.getAttackOptionsNumber() 
-				+ "\n" + this.getAttackOptionsString() + "      " + this.getWeaponId());
+		// TODO update detailString()
+//		setSubDetail("\n" + "      " + this.getAttackOptionsNumber() 
+//				+ "\n" + this.getAttackOptionsString() + "      " + this.getWeaponId());
 		return super.detailString();
+	}
+	
+	public String getWeaponId() {
+		return weaponId;
 	}
     
     

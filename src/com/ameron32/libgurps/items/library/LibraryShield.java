@@ -1,11 +1,11 @@
-package com.ameron32.libgurps.items.design;
+package com.ameron32.libgurps.items.library;
 
 import com.ameron32.libgurps.damage.Damage;
 import com.ameron32.libgurps.items.frmwk.DamageGenerator;
 import com.ameron32.libgurps.items.frmwk.DamageReceiver;
 import com.ameron32.libgurps.items.frmwk.DamageReducer;
 
-public class Shield extends Armor implements DamageGenerator, DamageReducer, DamageReceiver {
+public class LibraryShield extends LibraryArmor  {
     private static final long serialVersionUID = 8287792029935856404L;
 
     short db;
@@ -25,13 +25,18 @@ public class Shield extends Armor implements DamageGenerator, DamageReducer, Dam
      * @param cost
      * @param notes
      */
-    public Shield(String sId, String type, String material, String description, int db, int dr, int hp, 
+    public LibraryShield(String sId, String type, String material, String description, int db, int dr, int hp, 
             double weight, int cost, String notes) {
-        super(description, sId, cost, 0, weight, notes, material + ", " + type, material, 
-                new String[] { }, // FIXME should have cover but doesn't for testing
-                dr, 
-                0, 0 // FIXME should have don and holdout, if only 0, from data source
-                );
+    	// TODO review shield information below
+//        super(description, sId, cost, 0, weight, notes, material + ", " + type, material, 
+//                new String[] { }, // FIXME should have cover but doesn't for testing
+//                dr, 
+//                0, 0 // FIXME should have don and holdout, if only 0, from data source
+//                );
+        super(sId, description, material, "", 0, // needs TL and covers!
+        		dr, cost, weight, 
+        		0, 0 // needs don, holdout
+        		);
         this.db = (short)db;
         this.hp = (short)hp;
         setObjectType(ObjectType.LibraryObject);
@@ -40,28 +45,20 @@ public class Shield extends Armor implements DamageGenerator, DamageReducer, Dam
     
     
     
-    /**
-     * Duplicate an existing shield
-     * 
-     * @param source
-     */
-    public Shield(Shield source) {
-        super(source);
-        // TODO Auto-generated constructor stub
-    }
+//    /**
+//     * Duplicate an existing shield
+//     * 
+//     * @param source
+//     */
+//    public LibraryShield(LibraryShield source) {
+//        super(source);
+//        // TODO Auto-generated constructor stub
+//    }
     
     
     
     
-    /*
-     * RESPOND TO INCOMING EVENTS
-     */
 
-    @Override
-    public void takeDamage(Damage d) {
-        // TODO Auto-generated method stub
-        
-    }
     
     
     
@@ -105,6 +102,11 @@ public class Shield extends Armor implements DamageGenerator, DamageReducer, Dam
 				+ "\n" + "DB:" + db + " HP:" + hp + "\n"); // TODO customize
 		return super.detailString();
 	}
+
+
+
+
+
     
     
     

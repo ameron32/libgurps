@@ -1,9 +1,9 @@
-package com.ameron32.libgurps.items.design;
+package com.ameron32.libgurps.items.library;
 
 import com.ameron32.libgurps.attackoptions.AttackOption;
 import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 
-public class MeleeWeapon extends Weapon {
+public class LibraryMeleeWeapon extends LibraryWeapon {
     private static final long serialVersionUID = 5732058216003189081L;
  
     short maxReach;         // FIXME does this exist for defense? if attacked, do you need reach? I do not know.
@@ -15,12 +15,6 @@ public class MeleeWeapon extends Weapon {
     
 //  MeleeAttackOptions[] attackOptions;    
 //  MeleeAddons[] addons;
-
-    public MeleeWeapon(MeleeWeapon source) {
-        super(source);
-        // TODO auto-method. replace with accurate method
-        
-    }
 
     /**
      * Importer Constructor
@@ -38,7 +32,7 @@ public class MeleeWeapon extends Weapon {
      * @param armorDivisor
      * @param weaponNotes
      */
-    public MeleeWeapon(String weaponId, String group, String name, int numberOfAttacks, int cost, double weight, int minST,
+    public LibraryMeleeWeapon(String weaponId, String group, String name, int numberOfAttacks, int cost, double weight, int minST,
             boolean throwable, boolean cannotParry, int breakage, double armorDivisor, String weaponNotes) {
         super(weaponId, group, name, numberOfAttacks, cost, weight, minST, weaponNotes);
         this.throwable = throwable;

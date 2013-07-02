@@ -10,14 +10,14 @@ import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 import com.ameron32.libgurps.attackoptions.ThrownAttackOption;
 import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
-import com.ameron32.libgurps.items.design.Addon;
-import com.ameron32.libgurps.items.design.Armor;
-import com.ameron32.libgurps.items.design.Item;
-import com.ameron32.libgurps.items.design.MeleeWeapon;
-import com.ameron32.libgurps.items.design.RangedWeapon;
-import com.ameron32.libgurps.items.design.RangedWeaponAmmunition;
-import com.ameron32.libgurps.items.design.Shield;
-import com.ameron32.libgurps.items.design.ThrowableProjectile;
+import com.ameron32.libgurps.items.library.LibraryAddon;
+import com.ameron32.libgurps.items.library.LibraryArmor;
+import com.ameron32.libgurps.items.library.LibraryItem;
+import com.ameron32.libgurps.items.library.LibraryMeleeWeapon;
+import com.ameron32.libgurps.items.library.LibraryRangedWeapon;
+import com.ameron32.libgurps.items.library.LibraryRangedWeaponAmmunition;
+import com.ameron32.libgurps.items.library.LibraryShield;
+import com.ameron32.libgurps.items.library.LibraryThrowableProjectile;
 import com.ameron32.testing.ImportTesting;
 
 @SuppressWarnings(value = {"rawtypes"}) 
@@ -232,7 +232,7 @@ public class Importer {
         /*
          * Import version 155
          */
-        Shield oneShield = new Shield(
+        LibraryShield oneShield = new LibraryShield(
                 getString("sId"),
                 getString("sType"),
                 getString("sMaterial"),
@@ -253,7 +253,7 @@ public class Importer {
         /*
          * Import version 156
          */
-        Armor oneArmor = new Armor(
+        LibraryArmor oneArmor = new LibraryArmor(
                 getString("sId"),
                 getString("sName"),
                 getString("sMaterial"),
@@ -290,7 +290,7 @@ public class Importer {
         /*
          * Import version 156
          */
-    	MeleeWeapon oneMeleeWeapon = new MeleeWeapon(
+    	LibraryMeleeWeapon oneMeleeWeapon = new LibraryMeleeWeapon(
                 getString("sId"),
                 getString("sGroup"),
                 getString("sName"),
@@ -313,7 +313,7 @@ public class Importer {
         /*
          * Import version 156
          */
-    	RangedWeapon oneRangedWeapon = new RangedWeapon(
+    	LibraryRangedWeapon oneRangedWeapon = new LibraryRangedWeapon(
                 getString("sId"),
                 getString("sGroup"),
                 getString("sType"),
@@ -340,7 +340,7 @@ public class Importer {
         /*
          * Import version 156
          */
-    	RangedWeaponAmmunition oneRangedWeaponAmmunition = new RangedWeaponAmmunition(
+    	LibraryRangedWeaponAmmunition oneRangedWeaponAmmunition = new LibraryRangedWeaponAmmunition(
                 getString("sId"),
                 getString("sGroup"),
                 getString("sType"),
@@ -360,7 +360,7 @@ public class Importer {
         /*
          * Import version 156
          */
-    	ThrowableProjectile oneThrowableProjectile = new ThrowableProjectile(
+    	LibraryThrowableProjectile oneThrowableProjectile = new LibraryThrowableProjectile(
                 getString("sId"),
                 getString("sGroup"),
                 getString("sType"),
@@ -410,7 +410,7 @@ public class Importer {
 		/*
 		 * Import version 156
 		 */
-		Addon addon = new Addon(
+		LibraryAddon addon = new LibraryAddon(
 				getString("sId"),
 				getString("sType"),
 				getString("sAttachTo"),
@@ -442,10 +442,10 @@ public class Importer {
                 getInt("iAcc"),
                 getDouble("fHalfDmgRangeAtSTx"), 
                 getDouble("fMaxDmgRangeAtSTx"),
-                getDouble("fWeight"), 
-                getInt("iCost"), 
+//                getDouble("fWeight"), 
+//                getInt("iCost"), 
                 getInt("iMinST"), 
-                getInt("iBulk"),
+//                getInt("iBulk"),
                 getString("sSpecialNotes")
                 );
         list.add(oneTWOption);

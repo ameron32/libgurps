@@ -3,7 +3,7 @@ package com.ameron32.libgurps.attackoptions;
 import java.util.Arrays;
 
 import com.ameron32.libgurps.damage.Roll;
-import com.ameron32.libgurps.items.design.Item;
+import com.ameron32.libgurps.items.library.LibraryItem;
 
 public class ThrownAttackOption extends AttackOption {
 
@@ -11,7 +11,7 @@ public class ThrownAttackOption extends AttackOption {
 	
     double halfDamageRange, maxRange;
     short minST;
-    Item throwsItem;
+    LibraryItem throwsItem;
     
     public ThrownAttackOption(String damageType, Roll damage) {
         super(damageType, damage,
@@ -41,8 +41,11 @@ public class ThrownAttackOption extends AttackOption {
      */
     public ThrownAttackOption(String sId, String sWeaponId, String sGroup, String sWeapon,
             String damageType, String sBaseDamage, int iModifier, String sAmt, int iAcc,
-            Double fHalfDmgRangeAtSTx, Double fMaxDmgRangeAtSTx, Double fWeight, int iCost,
-            int iMinST, int iBulk, String sSpecialNotes) {
+            Double fHalfDmgRangeAtSTx, Double fMaxDmgRangeAtSTx, 
+          //  Double fWeight, int iCost, 
+            int iMinST, 
+          //  int iBulk, 
+            String sSpecialNotes) {
         super(damageType, null,
         		sId, sWeaponId, sGroup); // FIXME null roll
         weaponName = sWeapon;

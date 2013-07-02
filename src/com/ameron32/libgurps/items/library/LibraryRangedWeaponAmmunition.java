@@ -1,15 +1,10 @@
-package com.ameron32.libgurps.items.design;
+package com.ameron32.libgurps.items.library;
 
-public class RangedWeaponAmmunition extends ProjectileBucket {
+public class LibraryRangedWeaponAmmunition extends LibraryProjectile {
 	private static final long serialVersionUID = 1141713730336352548L;
 
 	private String group, type;
 	
-	public RangedWeaponAmmunition(RangedWeaponAmmunition source) {
-		super(source);
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * Importer constructor
 	 * 
@@ -23,7 +18,7 @@ public class RangedWeaponAmmunition extends ProjectileBucket {
 	 * @param cost
 	 * @param specialNotes
 	 */
-	public RangedWeaponAmmunition(String sId, String group,
+	public LibraryRangedWeaponAmmunition(String sId, String group,
 			String type, String name, String damageType, double modifier,
 			double weight, int cost, String specialNotes) {
 		super(sId, name, damageType, modifier, weight, cost, specialNotes);
@@ -31,6 +26,17 @@ public class RangedWeaponAmmunition extends ProjectileBucket {
 		this.setType(type);
 	}
 
+	@Override
+	public String detailString() {
+//		return super.detailString() 
+//				+ "\n" + "Group:" + getGroup() + " Type:" + getType();
+//		setSubDetail("\n" + "Group:" + getGroup() + " Type:" + getType());
+		return super.detailString();
+	}
+	
+	
+	
+	
 	public String getGroup() {
 		return group;
 	}
@@ -45,14 +51,6 @@ public class RangedWeaponAmmunition extends ProjectileBucket {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	@Override
-	public String detailString() {
-//		return super.detailString() 
-//				+ "\n" + "Group:" + getGroup() + " Type:" + getType();
-		setSubDetail("\n" + "Group:" + getGroup() + " Type:" + getType());
-		return super.detailString();
 	}
 
 	

@@ -1,58 +1,59 @@
 
-package com.ameron32.libgurps.items.design;
+package com.ameron32.libgurps.items.library;
 
 import java.util.Arrays;
 
 import com.ameron32.libgurps.tools.StringTools;
 
-public class Armor extends Item {
+public class LibraryArmor extends LibraryItem {
     private static final long serialVersionUID = 3592351610507935292L;
     
     String material;
     String[] covers;
     short dr, don, holdout;
     // Addon[] addons;
-    
-    /**
-     * Standard Constructor
-     * 
-     * @param name
-     * @param sId
-     * @param cost
-     * @param tl
-     * @param weight
-     * @param specialNotes
-     * @param description
-     * @param material
-     * @param covers
-     * @param dr
-     * @param don
-     * @param holdout
-     */
-    public Armor(String name, String sId, int cost, int tl, double weight, String specialNotes,
-            String description, String material, String[] covers, int dr, int don, int holdout) {
-        super(name, sId, cost, tl, weight, specialNotes, description);
-        this.material = material;
-        this.covers = covers;
-        this.dr = (short)dr;
-        this.don = (short)don;
-        this.holdout = (short)holdout;
-    }
 
-
-    /**
-     * Duplicate an existing armor
-     * 
-     * @param name
-     */
-    public Armor(Armor source) {
-        super(source);
-        this.material = source.material;
-        this.covers = source.covers;
-        this.dr = source.dr;
-        this.don = source.don;
-        this.holdout = source.holdout;
-    }
+//Consider rewriting
+//    /**
+//     * Standard Constructor
+//     * 
+//     * @param name
+//     * @param sId
+//     * @param cost
+//     * @param tl
+//     * @param weight
+//     * @param specialNotes
+//     * @param description
+//     * @param material
+//     * @param covers
+//     * @param dr
+//     * @param don
+//     * @param holdout
+//     */
+//    public LibraryArmor(String name, String sId, int cost, int tl, double weight, String specialNotes,
+//            String description, String material, String[] covers, int dr, int don, int holdout) {
+//        super(name, sId, cost, tl, weight, specialNotes, description);
+//        this.material = material;
+//        this.covers = covers;
+//        this.dr = (short)dr;
+//        this.don = (short)don;
+//        this.holdout = (short)holdout;
+//    }
+//
+//
+//    /**
+//     * Duplicate an existing armor
+//     * 
+//     * @param name
+//     */
+//    public LibraryArmor(LibraryArmor source) {
+//        super(source);
+//        this.material = source.material;
+//        this.covers = source.covers;
+//        this.dr = source.dr;
+//        this.don = source.don;
+//        this.holdout = source.holdout;
+//    }
     
     /**
      * Importer constructor
@@ -68,7 +69,7 @@ public class Armor extends Item {
      * @param don
      * @param holdout
      */
-    public Armor(String sId, String name, String material, String covers, int tl, int dr,
+    public LibraryArmor(String sId, String name, String material, String covers, int tl, int dr,
             int cost, double weight, int don, int holdout) {
         super(name, sId, cost, tl, weight, 
                 "", ""); // FIXME shouldn't be blank
@@ -128,25 +129,7 @@ public class Armor extends Item {
 
     
     
-    /*
-     * GETTERS AND SETTERS
-     */
-
-    public short getDr() {
-        return dr;
-    }
     
-    public String[] getCovers() {
-        return covers;
-    }
-    
-    public String getCoversString() {
-        StringBuilder sb = new StringBuilder();
-        for (String s : getCovers()) {
-            sb.append(s + ";");
-        }
-        return sb.toString();
-    }
 
 
     @Override
@@ -165,7 +148,7 @@ public class Armor extends Item {
 
 	@Override
 	public String detailString() {
-		setSubDetail("Armor--- \n" + "    " + "[" + this.getCoversString() + "]" + ", \n");
+//		setSubDetail("Armor--- \n" + "    " + "[" + this.getCoversString() + "]" + ", \n");
 		return super.detailString();
 	}
     

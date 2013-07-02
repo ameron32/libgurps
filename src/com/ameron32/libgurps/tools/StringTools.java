@@ -61,11 +61,15 @@ public class StringTools {
 	}
 
 	public static String truncate(String input, int max) {
-	    int len = input.length();
-	    boolean useLen = len < max + 1;
-	    if (useLen)
-	        return input;
-	    else
-	        return input.substring(0, max) + "~";
+		if (input != null) {
+			int len = input.length();
+			boolean useLen = len < max + 1;
+			if (useLen)
+				return input;
+			else
+				return input.substring(0, max) + "~";
+		} else {
+			return "";
+		}
 	}
 }
