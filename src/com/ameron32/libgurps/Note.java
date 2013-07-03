@@ -4,9 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import com.ameron32.libgurps.frmwk.GURPSInterfaceObject;
 import com.ameron32.libgurps.frmwk.GURPSObject;
 
-public class Note extends GURPSObject {
+public class Note extends GURPSInterfaceObject {
     private static final long serialVersionUID = -2334734785673637653L;
 
     private final long timeCreated; // TODO better than Date?

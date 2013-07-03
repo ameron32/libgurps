@@ -54,14 +54,10 @@ public abstract class GURPSObject implements Serializable {
     }
     
     protected void setObjectType(ObjectType objType) {
-        if (objType != null) {
-            objectType = objType;
-        } else {
-            if (this instanceof Note) {
-                objectType = ObjectType.NoteObject;
-            }
-        }
-    }
+		if (objType != null) {
+			objectType = objType;
+		}
+	}
     
     private void setRandomLongId() {
         objectId = GenTools.genLongId(); // generate random long id

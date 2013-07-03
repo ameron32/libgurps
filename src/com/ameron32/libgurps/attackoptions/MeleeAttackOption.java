@@ -47,7 +47,7 @@ public class MeleeAttackOption extends AttackOption {
     public MeleeAttackOption(String sId, String weaponId, String group, int attackNumber, String weaponName, 
             String damageType, String baseRoll, int modifier, String damageDescription, String loReachChoices,
             int minST, String attackNotes) {
-        super(damageType, new Roll(), sId, weaponId, group); // FIXME fix null roll
+        super(damageType, new Roll(), sId, weaponId, group);
         this.weaponId = weaponId;
         this.group = group;
         this.attackNumber = (short) attackNumber;

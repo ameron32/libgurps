@@ -84,6 +84,25 @@ public abstract class LibraryWeapon extends LibraryItem {
         return allAdded;
     }
 
+    
+    
+    
+    public int getAttackOptionsNumber() {
+        if (attackOptions != null)
+            return attackOptions.size();
+        else
+            return 0;
+    }
+    
+    public String getAttackOptionsString() {
+        StringBuilder sb = new StringBuilder();
+        if (attackOptions != null) {
+            for (AttackOption ao : attackOptions) {
+                sb.append("         " + ao.toString() + "\n");
+            }
+        }
+        return sb.toString();
+    }
 
 
     /*
@@ -99,7 +118,8 @@ public abstract class LibraryWeapon extends LibraryItem {
 		// TODO update detailString()
 //		setSubDetail("\n" + "      " + this.getAttackOptionsNumber() 
 //				+ "\n" + this.getAttackOptionsString() + "      " + this.getWeaponId());
-		return super.detailString();
+		return super.detailString() + "\n" + "      " + this.getAttackOptionsNumber() 
+				+ "\n" + this.getAttackOptionsString() + "      " + this.getWeaponId();
 	}
 	
 	public String getWeaponId() {

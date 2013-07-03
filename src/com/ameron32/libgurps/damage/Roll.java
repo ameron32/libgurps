@@ -26,6 +26,17 @@ public class Roll {
         changeRoll(0,0);
     }
     
+    /**
+     * Empty roll
+     * 
+     * @param die
+     * @param numberOfDieSides
+     * @param bonus
+     */
+    public Roll(int die, int numberOfDieSides, int bonus) {
+        changeRoll(die, numberOfDieSides, bonus);
+    }
+    
     public short[] getRoll () {
         return roll;
     }
@@ -61,8 +72,8 @@ public class Roll {
         return sb.toString();
     }
     
-    public Roll(int die, int numberOfDieSides, int bonus) {
-        changeRoll(die, numberOfDieSides, bonus);
+    public static void roll(Roll r) {
+    	
     }
     
     

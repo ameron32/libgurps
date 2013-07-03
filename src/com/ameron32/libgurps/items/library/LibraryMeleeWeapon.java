@@ -55,14 +55,14 @@ public class LibraryMeleeWeapon extends LibraryWeapon {
     
     @Override
     public String toString() {
-    	String maoString = "";
+    	String aoString = "";
     	for (AttackOption ao : attackOptions) {
-    		if (ao.getClass().isInstance(MeleeAttackOption.class))
-    			maoString = ((MeleeAttackOption)ao).toString() + "\n";
+    		if (ao instanceof AttackOption)
+    			aoString = ((AttackOption)ao).toString() + "\n";
     	}
         return "MeleeWeapon [maxReach=" + maxReach + ", parry=" + parry + ", throwable="
                 + throwable + ", cannotParry=" + cannotParry + ", breakage=" + breakage
-                + ", armorDivisor=" + armorDivisor + "]" + "\n" + maoString;
+                + ", armorDivisor=" + armorDivisor + "]" + "\n" + aoString;
     }
 
 

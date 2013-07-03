@@ -2,7 +2,7 @@ package com.ameron32.libgurps.damage;
 
 public class RangedAttack extends Damage {
 
-    // SHOULD INCLUDE THROWING ANYTHING!
+    // TODO SHOULD INCLUDE THROWING ANYTHING!
     
     /*
     public RangedAttack(RangedWeapon rw, ProjectileBucket pb, DamageReceiver dr) {

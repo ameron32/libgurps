@@ -5,6 +5,7 @@ public abstract class GURPSLibraryObject extends GURPSObject {
 
 	protected GURPSLibraryObject(long id) {
 		super(id);
+		setObjectType(ObjectType.LibraryObject);
 	}
 	
 	protected GURPSLibraryObject(String id) {
