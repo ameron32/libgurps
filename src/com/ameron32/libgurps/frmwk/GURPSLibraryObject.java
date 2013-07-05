@@ -13,13 +13,13 @@ public abstract class GURPSLibraryObject extends GURPSObject {
 	}
 
 	@Override
-	public String nameString() {
+	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String detailString() {
+	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
 	}

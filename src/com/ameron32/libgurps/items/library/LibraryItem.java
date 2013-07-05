@@ -136,6 +136,7 @@ public class LibraryItem extends GURPSLibraryObject {
         this.specialNotes = specialNotes;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -166,6 +167,15 @@ public class LibraryItem extends GURPSLibraryObject {
 
 
 
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + ": " + this.getName()
+        + "\n" + "    $" + this.getCost() + ", " + this.getWeight() + " lb" + ", " + "id:" + this.getSId() + "\n"
+        + "      " + "D: " + StringTools.truncate(this.getDescription(), 50)
+        + "     id: " + this.getObjectId() + "\n";
+	}
+	
+	/* HARVEST for toString()
     @Override
     public String toString() {
         return "Item:" + this.getClass().getSimpleName() + " [name=" + name + ", id=" + sId + ", cost=" + cost + ", tl=" + tl + ", weight="
@@ -175,25 +185,6 @@ public class LibraryItem extends GURPSLibraryObject {
 //                + ", user=" + user + ", attachments=" + attachments + "]"
                 ;
     }
-
-    @Override
-    public String nameString() {
-        return name;
-    }
-
-
-
-    private String subDetail = "";
-	@Override
-	public String detailString() {
-		return this.getClass().getSimpleName() + ": " + this.getName()
-        + "\n" + "    $" + this.getCost() + ", " + this.getWeight() + " lb" + ", " + "id:" + this.getSId() + "\n"
-        + subDetail
-        + "      " + "D: " + StringTools.truncate(this.getDescription(), 50)
-        + "     id: " + this.getObjectId() + "\n";
-	}
-	protected void setSubDetail(String detail) {
-		subDetail = detail + subDetail;
-	}
+    */
 
 }

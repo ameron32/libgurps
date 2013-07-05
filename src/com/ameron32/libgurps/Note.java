@@ -35,18 +35,18 @@ public class Note extends GURPSInterfaceObject {
     }
 
     @Override
-    public String nameString() {
+    public String getName() {
         return "Note";
     }
 
 	@Override
-	public String detailString() {
+	public String toString() {
 		return "Note:"
 				+ this.getClass().getSimpleName()
 				+ " created at ["
 				+ new SimpleDateFormat("hh:mm MM/dd/yyyy", Locale.ENGLISH)
 						.format(timeCreated) + "], attached to "
-				+ hostObject.nameString() + " of class "
+				+ hostObject.getName() + " of class "
 				+ hostObject.getClass().getSimpleName() + "\n"
 				+ "The note reads: [" + noteText + "]";
 	}

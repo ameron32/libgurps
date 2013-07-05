@@ -132,8 +132,7 @@ public class LibraryArmor extends LibraryItem {
     
 
 
-    @Override
-    public String toString() {
+    public String oldToString() {
         return "Armor [material=" + material + ", covers=" + Arrays.toString(covers) + ", dr=" + dr
                 + ", don=" + don + ", holdout=" + holdout + ", modCr=" + modCr + ", modImp="
                 + modImp + ", modCut=" + modCut + ", isFlexArmor=" + isFlexArmor
@@ -147,9 +146,23 @@ public class LibraryArmor extends LibraryItem {
 
 
 	@Override
-	public String detailString() {
+	public String toString() {
 //		setSubDetail("Armor--- \n" + "    " + "[" + this.getCoversString() + "]" + ", \n");
-		return super.detailString();
+		return super.toString()
+				+ "Armor--- \n" + "    " + "[" + getCoversAsString() + "]" + ", \n";
+	}
+	
+	public String getCoversAsString() {
+		String returnString = "";
+		int count = 0;
+		if (covers != null) {
+			for (String s : covers) {
+				returnString = returnString 
+						+ ((count > 0) ? ", " : "") 
+						+ s;
+			}
+		}
+		return returnString;
 	}
     
     

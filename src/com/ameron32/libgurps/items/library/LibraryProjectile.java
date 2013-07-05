@@ -34,11 +34,12 @@ public class LibraryProjectile extends LibraryItem {
 	}
 
 	@Override
-	public String detailString() {
+	public String toString() {
 //		return super.detailString() 
 //				+ "\n" + "id:" + sId + " damageType:" + damageType + " damageBoost:" + damageBoost;
-		setSubDetail("\n" + "id:" + sId + " damageType:" + damageType + " damageBoost:" + damageBoost);
-		return super.detailString();
+		
+		return super.toString() 
+				+ "\n" + "id:" + sId + " damageType:" + damageType + " damageBoost:" + damageBoost;
 	}
     
     

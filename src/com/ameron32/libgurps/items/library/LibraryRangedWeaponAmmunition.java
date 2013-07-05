@@ -27,11 +27,9 @@ public class LibraryRangedWeaponAmmunition extends LibraryProjectile {
 	}
 
 	@Override
-	public String detailString() {
-//		return super.detailString() 
-//				+ "\n" + "Group:" + getGroup() + " Type:" + getType();
-//		setSubDetail("\n" + "Group:" + getGroup() + " Type:" + getType());
-		return super.detailString();
+	public String toString() {
+		return super.toString() 
+				+ "\n" + "Group:" + getGroup() + " Type:" + getType();
 	}
 	
 	

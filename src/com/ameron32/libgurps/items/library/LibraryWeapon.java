@@ -114,11 +114,11 @@ public abstract class LibraryWeapon extends LibraryItem {
     public static final byte QUALITY_VERY_FINE = 2;
 
 	@Override
-	public String detailString() {
+	public String toString() {
 		// TODO update detailString()
 //		setSubDetail("\n" + "      " + this.getAttackOptionsNumber() 
 //				+ "\n" + this.getAttackOptionsString() + "      " + this.getWeaponId());
-		return super.detailString() + "\n" + "      " + this.getAttackOptionsNumber() 
+		return super.toString() + "\n" + "      " + this.getAttackOptionsNumber() 
 				+ "\n" + this.getAttackOptionsString() + "      " + this.getWeaponId();
 	}
 	

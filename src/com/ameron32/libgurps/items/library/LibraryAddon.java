@@ -27,9 +27,9 @@ public class LibraryAddon extends LibraryItem {
     }
 
 	@Override
-	public String detailString() {
-		setSubDetail("\n" + " type:" + type + " material:" + material + " attachTo:" + attachTo + "\n");
-		return super.detailString();
+	public String toString() {
+		return super.toString() 
+				+ "\n" + " type:" + type + " material:" + material + " attachTo:" + attachTo + "\n";
 	}
     
     

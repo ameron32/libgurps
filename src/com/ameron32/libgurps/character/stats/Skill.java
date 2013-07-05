@@ -65,16 +65,6 @@ public class Skill extends GURPSObject {
 
 
 
-    @Override
-    public String toString() {
-        return "Skill [importVersion=" + importVersion + ", iId=" + iId + ", ver=" + ver
-                + ", sNameString=" + sNameString + ", bIsLeveled=" + bIsLeveled + ", sAttribute="
-                + sAttribute + ", sDifficulty=" + sDifficulty + ", bHasSubSkills=" + bHasSubSkills
-                + ", lsDefaults=" + lsDefaults + ", sDescription=" + convertBars(sDescription) + "]";
-    }
-
-
-
     public int getImportVersion() {
         return importVersion;
     }
@@ -109,13 +99,13 @@ public class Skill extends GURPSObject {
 
 
     @Override
-    public String nameString() {
+    public String getName() {
     	return sNameString;
     }
     
     
 	@Override
-	public String detailString() {
+	public String toString() {
 		return (this.getClass().getSimpleName() + ": " + this.getsNameString()
 				+ "\n" + "    att:" + this.getsAttribute() + ", diff:"
 				+ this.getsDifficulty() + "" + ", " + "id:" + this.getiId()
@@ -125,4 +115,14 @@ public class Skill extends GURPSObject {
 				+ this.getObjectId() + "\n");
 	}
 
+	/* HARVEST for new toString()
+    @Override
+    public String toString() {
+        return "Skill [importVersion=" + importVersion + ", iId=" + iId + ", ver=" + ver
+                + ", sNameString=" + sNameString + ", bIsLeveled=" + bIsLeveled + ", sAttribute="
+                + sAttribute + ", sDifficulty=" + sDifficulty + ", bHasSubSkills=" + bHasSubSkills
+                + ", lsDefaults=" + lsDefaults + ", sDescription=" + convertBars(sDescription) + "]";
+    }
+    */
+	
 }

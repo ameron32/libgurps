@@ -134,8 +134,11 @@ public abstract class GURPSObject implements Serializable {
         return myNotes;
     }
     
-    public abstract String nameString();
     
-    public abstract String detailString();
+    
+    @Override
+    public abstract String toString();
+    
+    public abstract String getName();
     
 }

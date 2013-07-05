@@ -155,7 +155,7 @@ public class ImportTesting {
         			}
         		}
     			if (!mustExclude) {
-    				log("******************** \n" + ((GURPSObject)go).detailString() + "***");
+    				log("******************** \n" + ((GURPSObject)go).toString() + "***");
     			}
         	} else if (go instanceof AttackOption) {
 				boolean mustExclude = false;
@@ -263,7 +263,7 @@ public class ImportTesting {
 						Locale.ENGLISH).format(new Date(n.getTimeCreated()));
 				String noteText = n.getNoteText();
 				String hostObject = n.getHostObject().getClass().getSimpleName()
-						+ "[" + n.getHostObject().nameString() + "]";
+						+ "[" + n.getHostObject().getName() + "]";
 				log(timestamp + ": " + noteText + " on " + hostObject);
 			}
 		}

@@ -88,19 +88,12 @@ public class LibraryShield extends LibraryArmor  {
 
 
 
-    @Override
-    public String toString() {
-        return "Shield [db=" + db + ", hp=" + hp + "]";
-    }
-
-
-
 
 	@Override
-	public String detailString() {
-		setSubDetail("Shield---"
-				+ "\n" + "DB:" + db + " HP:" + hp + "\n"); // TODO customize
-		return super.detailString();
+	public String toString() {
+		return super.toString() 
+				+ "Shield---"
+						+ "\n" + "DB:" + db + " HP:" + hp + "\n";
 	}
 
 

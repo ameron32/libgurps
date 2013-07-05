@@ -217,12 +217,12 @@ public class Advantage extends GURPSObject{
     }
 
     @Override
-    public String nameString() {
+    public String getName() {
     	return sName;
     }
 
 	@Override
-	public String detailString() {
+	public String toString() {
 		return (this.getClass().getSimpleName() + ": " + this.getsName() + "\n"
 				+ "    c:" + this.getiCalcCost() + ", p#" + this.getiPage()
 				+ "" + ", " + "id:" + this.getiId() + "\n" + "      " + "D: "

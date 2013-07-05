@@ -9,13 +9,13 @@ public class WorldShield extends WorldArmor implements DamageGenerator, DamageRe
 	private static final long serialVersionUID = 5266127013720563455L;
 
 	@Override
-	public String nameString() {
+	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String detailString() {
+	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
 	}

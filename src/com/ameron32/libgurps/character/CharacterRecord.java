@@ -303,7 +303,7 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
     }
 
     @Override
-    public String nameString() {
+    public String getName() {
         // FIXME wrong name generated
         return "no name stored yet";
     }
@@ -320,13 +320,7 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
         return listOfResults;
     }
 
-	@Override
-	public String detailString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-    
-    
+   
     
 
 }
