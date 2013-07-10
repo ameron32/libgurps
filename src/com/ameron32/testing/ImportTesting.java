@@ -2,6 +2,7 @@ package com.ameron32.testing;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
@@ -35,7 +36,10 @@ public class ImportTesting {
     public static String getSB() { return sb.toString(); }
     public static void clearSB() { sb.delete(0, sb.length()); }
     
-    private static final List<Object> libraryEverything = new ArrayList<Object>();
+    private static final List<GURPSObject> libraryEverything = new ArrayList<GURPSObject>();
+    public List<GURPSObject> getEverything() {
+    	return libraryEverything;
+    }
     private static String dirPath;
     private static final boolean displayLogging = true;
     
@@ -71,6 +75,7 @@ public class ImportTesting {
 		 * IMPORTTESTANDROID runs these actions individually. 
 		 * Don't forget to update there.
 		 */
+		
 		byte stage = 0;
 		stage += importer(); 			// stage 0
 		stage += display1(); 			// stage 1
@@ -95,7 +100,8 @@ public class ImportTesting {
     }
     
     public byte display1() {
-        log("\n" + libraryEverything.size() + " total items");
+
+    	log("\n" + libraryEverything.size() + " total items");
         log(numOf(Advantage.class) + " advantages");
         log(numOf(LibraryArmor.class) + " armors");
         log(numOf(LibraryAddon.class) + " addons");
@@ -145,9 +151,10 @@ public class ImportTesting {
 //   		ThrownAttackOption.class, LibraryThrowableProjectile.class,
     		Skill.class 
     		};
+
 	public byte display2() {
-        for (Object go : libraryEverything) {
-			if (go instanceof GURPSObject) {
+        for (GURPSObject go : libraryEverything) {
+//			if (go instanceof GURPSObject) {
         		boolean mustExclude = false;
         		for (Class<?> c : exclude) {
         			if (c.isInstance(go)) {
@@ -157,18 +164,18 @@ public class ImportTesting {
     			if (!mustExclude) {
     				log("******************** \n" + ((GURPSObject)go).toString() + "***");
     			}
-        	} else if (go instanceof AttackOption) {
-				boolean mustExclude = false;
-				for (Class<?> c : exclude) {
-					if (c.isInstance(go)) {
-						mustExclude = true;
-					}
-				}
-				if (!mustExclude) {
-					log("******************** \n"
-							+ ((AttackOption) go).detailString() + "***");
-				}
-        	}
+//        	} else if (go instanceof AttackOption) {
+//				boolean mustExclude = false;
+//				for (Class<?> c : exclude) {
+//					if (c.isInstance(go)) {
+//						mustExclude = true;
+//					}
+//				}
+//				if (!mustExclude) {
+//					log("******************** \n"
+//							+ ((AttackOption) go).detailString() + "***");
+//				}
+//        	}
         }
 
     

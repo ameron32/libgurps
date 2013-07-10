@@ -1,13 +1,17 @@
 
 package com.ameron32.libgurps.damage;
 
-public class Damage {
+import com.ameron32.libgurps.frmwk.GURPSObject;
 
-    Roll damage;
+public class Damage extends GURPSObject {
+	private static final long serialVersionUID = 1799231718961368501L;
+
+	Roll damage;
     DamageType damageType;
     
     public Damage (Roll damage, DamageType damageType) {
-        this.damage = damage;
+        super("random");
+    	this.damage = damage;
         this.damageType = damageType;
     }
     
@@ -18,6 +22,7 @@ public class Damage {
      * @param source
      */
     public Damage (Damage source) {
+        super("random");
         this.damage = source.damage;
         this.damageType = source.damageType;
     }
@@ -65,4 +70,16 @@ public class Damage {
     public void setDamageRoll(Roll damage) {
         this.damage = damage;
     }
+
+
+	@Override
+	public String toString() {
+		return damage.toString() + " " + damageType.name();
+	}
+
+
+	@Override
+	public String getName() {
+		return "Generic Damage";
+	}
 }

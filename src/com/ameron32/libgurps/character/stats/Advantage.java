@@ -9,7 +9,7 @@ import java.io.Serializable;
 import com.ameron32.libgurps.frmwk.GURPSObject;
 import com.ameron32.libgurps.tools.StringTools;
 
-public class Advantage extends GURPSObject{
+public class Advantage extends GURPSObject {
 	private static final long serialVersionUID = 2591651398215964681L;
 
 	private int importVersion = 0;

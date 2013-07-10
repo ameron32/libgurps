@@ -3,17 +3,20 @@ package com.ameron32.libgurps.attackoptions;
 import com.ameron32.libgurps.damage.Damage;
 import com.ameron32.libgurps.damage.Damage.DamageType;
 import com.ameron32.libgurps.damage.Roll;
+import com.ameron32.libgurps.frmwk.GURPSObject;
 import com.ameron32.libgurps.items.library.LibraryWeapon;
 
-public abstract class AttackOption implements CharacterAmplifiedAttackOption {
+public abstract class AttackOption extends GURPSObject implements CharacterAmplifiedAttackOption {
+	private static final long serialVersionUID = 1L;
 
-    DamageType damageType;
+	DamageType damageType;
     Roll damage;
     String damageDescription;
     LibraryWeapon attackOptionFor;
     
     public AttackOption(String damageType, Roll damage, String sId, String weaponId, String group) {
-        this.damageType = Damage.getDamageTypeByString(damageType);
+        super("random");
+    	this.damageType = Damage.getDamageTypeByString(damageType);
         this.damage = damage;
         this.sId = sId;
         this.weaponId = weaponId;
@@ -61,6 +64,11 @@ public abstract class AttackOption implements CharacterAmplifiedAttackOption {
     
     public String getWeaponId() {
         return weaponId;
+    }
+    
+    @Override
+    public String getName() {
+    	return damageDescription;
     }
     
 }

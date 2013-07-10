@@ -4,6 +4,8 @@ import java.lang.ref.Reference;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.items.frmwk.ItemOwner;
 import com.ameron32.libgurps.items.library.LibraryArmor;
 import com.ameron32.libgurps.items.library.LibraryItem;
 import com.ameron32.libgurps.items.library.LibraryShield;
@@ -13,15 +15,19 @@ import com.ameron32.libgurps.items.world.WorldItem;
 import com.ameron32.libgurps.items.world.WorldShield;
 import com.ameron32.libgurps.items.world.WorldWeapon;
 
-public class Inventory {
+public class Inventory extends GURPSObject {
 
+	ItemOwner itemOwner;
+	
     // the INTEGER should store the unique identifier of "my item" generated
     // at the point of item purchase or generation (cloning from the library
     // item template). the BOOLEAN should store if this item is considered
     // "equipped" on the character, rather than a separate list.
     private List<WorldItem> myBackpackItems;
     // TODO will I need to store the new instances of the cloned items here somewhere?
-    public Inventory () {
+    public Inventory (ItemOwner io) {
+    	super("random");
+    	this.itemOwner = itemOwner;
         if (myBackpackItems == null) myBackpackItems = new ArrayList<WorldItem>();
     }
 
@@ -121,6 +127,11 @@ public class Inventory {
         }
         return "Inventory [myBackpackItems=" + sb.toString() + "]";
     }
+
+	@Override
+	public String getName() {
+		return itemOwner.getName() + "'s Inventory: " + this.toString();
+	}
     
     
     

@@ -194,7 +194,7 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
     }
     
     private void createEmptyInventory() {
-        mInventory = new Inventory();
+        mInventory = new Inventory(this);
     }
 
     /*
@@ -319,6 +319,11 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
         }
         return listOfResults;
     }
+
+	@Override
+	public Inventory getInventory() {
+		return mInventory;
+	}
 
    
     

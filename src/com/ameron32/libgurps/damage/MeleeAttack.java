@@ -3,8 +3,9 @@ package com.ameron32.libgurps.damage;
 import com.ameron32.libgurps.tools.StringTools;
 
 public class MeleeAttack extends Damage {
+	private static final long serialVersionUID = -2548310287029703200L;
 
-    String group, weaponName, writtenAmount;
+	String group, weaponName, writtenAmount;
     short[] reach;
     short minST;
     byte attackNumber;

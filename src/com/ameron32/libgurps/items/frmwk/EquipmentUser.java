@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ameron32.libgurps.items.world.WorldItem;
 
-public interface EquipmentUser {
+public interface EquipmentUser extends ItemOwner {
 
     public boolean equip(Equippable e);
     

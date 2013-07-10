@@ -78,6 +78,9 @@ public abstract class GURPSObject implements Serializable {
     public long getObjectId() {
         return objectId;
     }
+    public static GURPSObject findGURPSObjectById(long id) {
+    	return objectRegistry.get(id);
+    }
     
     public void overwriteObjectId(long objectId) {
         this.objectId = objectId; 
@@ -140,5 +143,7 @@ public abstract class GURPSObject implements Serializable {
     public abstract String toString();
     
     public abstract String getName();
+    
+// TODO    public abstract String getDescription();
     
 }

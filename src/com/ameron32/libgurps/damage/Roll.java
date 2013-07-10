@@ -2,8 +2,12 @@ package com.ameron32.libgurps.damage;
 
 import java.util.Arrays;
 
-public class Roll {
-    public static final int DIE = 0;
+import com.ameron32.libgurps.frmwk.GURPSObject;
+
+public class Roll extends GURPSObject {
+	private static final long serialVersionUID = -1683266310735807734L;
+	
+	public static final int DIE = 0;
     public static final int MODIFIER = 1;
     public static final int NUM_OF_DIE_SIDES = 2;
     short[] roll = new short[3];
@@ -16,6 +20,7 @@ public class Roll {
      * @param bonus
      */
     public Roll (int die, int bonus) {
+        super("random");
         changeRoll(die, bonus);
     }
     
@@ -23,6 +28,7 @@ public class Roll {
      * Empty roll, 0d+0
      */
     public Roll () {
+        super("random");
         changeRoll(0,0);
     }
     
@@ -34,6 +40,7 @@ public class Roll {
      * @param bonus
      */
     public Roll(int die, int numberOfDieSides, int bonus) {
+        super("random");
         changeRoll(die, numberOfDieSides, bonus);
     }
     
@@ -75,6 +82,11 @@ public class Roll {
     public static void roll(Roll r) {
     	
     }
+
+	@Override
+	public String getName() {
+		return "Roll: " + toString();
+	}
     
     
     
