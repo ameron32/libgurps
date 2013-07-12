@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ameron32.libgurps.impl.GURPSObject;
 import com.ameron32.libgurps.tools.StringTools;
 
-public class Step implements Serializable {
+public class Step extends GURPSObject implements Serializable {
 	private static final long serialVersionUID = 2748197057979662966L;
 
 	String stepName;
@@ -20,6 +21,7 @@ public class Step implements Serializable {
 
 	public Step(String stepName, int ver, String goToOpts, String splitToOpts,
 			String refs, String table, String description) {
+		super("random");
 		this.stepName = stepName;
 		this.ver = ver;
 		this.goToOpts = StringTools.genList(goToOpts);

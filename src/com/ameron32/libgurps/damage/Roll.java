@@ -2,7 +2,7 @@ package com.ameron32.libgurps.damage;
 
 import java.util.Arrays;
 
-import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.impl.GURPSObject;
 
 public class Roll extends GURPSObject {
 	private static final long serialVersionUID = -1683266310735807734L;

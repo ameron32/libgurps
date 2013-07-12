@@ -1,20 +1,19 @@
 
 package com.ameron32.libgurps.items.library;
 
-import com.ameron32.libgurps.frmwk.*;
+import com.ameron32.libgurps.frmwk.Importable;
+import com.ameron32.libgurps.impl.*;
 import com.ameron32.libgurps.tools.StringTools;
 
-public class LibraryItem extends GURPSLibraryObject {
+public class LibraryItem extends GURPSLibraryObject implements Importable {
     private static final long serialVersionUID = -4962512586546099923L;
 
-    
-    String name, sId;
     int cost;
     short tl;
     float weight;
     ItemType itemType;
 
-    String specialNotes, description;
+    String specialNotes; // TODO move description to GURPSObject
 
 //Consider rewrite    
 //    /**
@@ -74,14 +73,15 @@ public class LibraryItem extends GURPSLibraryObject {
     public LibraryItem(String name, String sId, int cost, int tl,
 			double weight, String notes, String description) {
       super("random");
-      this.name = name;
-      this.sId = sId;
+      setName(name);
+      setDescription(description);
+      setSID(sId);
       this.cost = cost;
       this.tl = (short)tl;
       this.weight = (float)weight;
       this.itemType = determineItemType(this);
 //      this.specialNotes = specialNotes;
-      this.description = description;
+
 	}
 
     
@@ -136,15 +136,6 @@ public class LibraryItem extends GURPSLibraryObject {
         this.specialNotes = specialNotes;
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    public String getSId() {
-        return sId;
-    }
-
     public int getCost() {
         return cost;
     }
@@ -161,18 +152,19 @@ public class LibraryItem extends GURPSLibraryObject {
         return itemType;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-
+	@Override
+	public void setSID(String sId) {
+		this.setSID(sId);
+	}
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + ": " + this.getName()
-        + "\n" + "    $" + this.getCost() + ", " + this.getWeight() + " lb" + ", " + "id:" + this.getSId() + "\n"
-        + "      " + "D: " + StringTools.truncate(this.getDescription(), 50)
-        + "     id: " + this.getObjectId() + "\n";
+		return super.toString() 
+				+ "\n" + "    $" + this.getCost() + ", "
+				+ this.getWeight() + " lb" + ", " + "id:" + this.getSID()
+				+ "\n" + "      " + "D: "
+				+ StringTools.truncate(this.getDescription(), 50) + "     id: "
+				+ this.getObjectId() + "\n";
 	}
 	
 	/* HARVEST for toString()

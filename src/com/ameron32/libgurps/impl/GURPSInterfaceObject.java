@@ -1,4 +1,4 @@
-package com.ameron32.libgurps.frmwk;
+package com.ameron32.libgurps.impl;
 
 import com.ameron32.libgurps.Note;
 

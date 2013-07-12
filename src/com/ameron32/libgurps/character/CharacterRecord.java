@@ -9,7 +9,7 @@ import com.ameron32.libgurps.DataSet;
 import com.ameron32.libgurps.character.stats.Inventory;
 import com.ameron32.libgurps.damage.Damage;
 import com.ameron32.libgurps.damage.Roll;
-import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.impl.GURPSObject;
 import com.ameron32.libgurps.items.frmwk.DamageReceiver;
 import com.ameron32.libgurps.items.frmwk.DamageReducer;
 import com.ameron32.libgurps.items.frmwk.EquipmentUser;

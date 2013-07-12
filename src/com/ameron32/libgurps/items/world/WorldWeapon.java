@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ameron32.libgurps.attackoptions.AttackOption;
-import com.ameron32.libgurps.frmwk.GURPSWorldObject;
+import com.ameron32.libgurps.impl.GURPSWorldObject;
 import com.ameron32.libgurps.items.library.LibraryWeapon;
 
 public class WorldWeapon extends WorldItem {

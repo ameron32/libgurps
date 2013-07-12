@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import com.ameron32.libgurps.frmwk.GURPSInterfaceObject;
-import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.impl.GURPSInterfaceObject;
+import com.ameron32.libgurps.impl.GURPSObject;
 
 public class Note extends GURPSInterfaceObject {
     private static final long serialVersionUID = -2334734785673637653L;

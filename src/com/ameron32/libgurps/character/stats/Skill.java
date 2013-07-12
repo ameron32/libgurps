@@ -2,7 +2,7 @@ package com.ameron32.libgurps.character.stats;
 
 import java.io.Serializable;
 
-import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.impl.GURPSObject;
 import com.ameron32.libgurps.tools.StringTools;
 
 public class Skill extends GURPSObject {
@@ -40,6 +40,8 @@ public class Skill extends GURPSObject {
             String sAttribute, String sDifficulty, boolean bHasSubSkills, String lsDefaults,
             String sDescription) {
         super("random");
+        setName(sNameString);
+        
         this.importVersion = importVersion;
         this.iId = iId;
         this.ver = ver;
@@ -106,7 +108,8 @@ public class Skill extends GURPSObject {
     
 	@Override
 	public String toString() {
-		return (this.getClass().getSimpleName() + ": " + this.getsNameString()
+		return super.toString()
+				+ (this.getClass().getSimpleName() + ": " + this.getsNameString()
 				+ "\n" + "    att:" + this.getsAttribute() + ", diff:"
 				+ this.getsDifficulty() + "" + ", " + "id:" + this.getiId()
 				+ "\n" + "      " + "D: "

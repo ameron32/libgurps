@@ -1,4 +1,4 @@
-package com.ameron32.libgurps.frmwk;
+package com.ameron32.libgurps.impl;
 
 public abstract class GURPSLibraryObject extends GURPSObject {
 	private static final long serialVersionUID = -97784405855476206L;
@@ -10,18 +10,12 @@ public abstract class GURPSLibraryObject extends GURPSObject {
 	
 	protected GURPSLibraryObject(String id) {
 		super(id);
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		setObjectType(ObjectType.LibraryObject);
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return super.toString() + "\n" + super.getName() + "[" + objectType.name() + "]";
 	}
 
 }

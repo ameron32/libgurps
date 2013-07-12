@@ -10,6 +10,7 @@ import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 import com.ameron32.libgurps.attackoptions.ThrownAttackOption;
 import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
+import com.ameron32.libgurps.impl.GURPSObject;
 import com.ameron32.libgurps.items.library.LibraryAddon;
 import com.ameron32.libgurps.items.library.LibraryArmor;
 import com.ameron32.libgurps.items.library.LibraryItem;
@@ -20,7 +21,6 @@ import com.ameron32.libgurps.items.library.LibraryShield;
 import com.ameron32.libgurps.items.library.LibraryThrowableProjectile;
 import com.ameron32.testing.ImportTesting;
 
-@SuppressWarnings(value = {"rawtypes"}) 
 public class Importer {
     public enum ImportType {
         Advantage, Skill,
@@ -49,7 +49,7 @@ public class Importer {
      * @param type
      * @return
      */
-    public List readCSVIntoList(String path, List appendToThisList,
+    public List<GURPSObject> readCSVIntoList(String path, List<GURPSObject> appendToThisList,
             ImportType type) {
 
         ImportTesting.log(type.name());
@@ -139,7 +139,7 @@ public class Importer {
         return appendToThisList;
     }
 
-    private void readStep(List list, int ver)
+    private void readStep(List<GURPSObject> list, int ver)
             throws IOException, FileNotFoundException {
         Step oneStep = new Step(
                 getString("step"),
@@ -153,7 +153,7 @@ public class Importer {
         list.add(oneStep);
     }
 
-    private void readAdv(List list, int ver)
+    private void readAdv(List<GURPSObject> list, int ver)
             throws IOException, FileNotFoundException {
 
         /*
@@ -206,7 +206,7 @@ public class Importer {
         list.add(oneAdvantage);
     }
 
-    private void readSkill(List list, int ver)
+    private void readSkill(List<GURPSObject> list, int ver)
             throws IOException, FileNotFoundException {
 
         /*
@@ -226,11 +226,11 @@ public class Importer {
         list.add(oneSkill);
     }
     
-    private void readShield(List list, int ver)
+    private void readShield(List<GURPSObject> list, int ver)
             throws IOException, FileNotFoundException {
 
         /*
-         * Import version 155
+         * Import version 157    // 155
          */
         LibraryShield oneShield = new LibraryShield(
                 getString("sId"),
@@ -240,14 +240,14 @@ public class Importer {
                 getInt("iDB"),
                 getInt("iDR"),
                 getInt("iHits"),
-                getDouble("iWeight"),
+                getDouble("fWeight"),     // getDouble("iWeight"),
                 getInt("iCost"),
                 getString("sNotes")
                 );
         list.add(oneShield);
     }
     
-    private void readArmor(List list, int ver)
+    private void readArmor(List<GURPSObject> list, int ver)
             throws IOException, FileNotFoundException {
     
         /*
@@ -284,7 +284,7 @@ public class Importer {
     
     }
 
-    private void readMeleeWeapon(List list, int ver) 
+    private void readMeleeWeapon(List<GURPSObject> list, int ver) 
             throws IOException, FileNotFoundException {
         
         /*
@@ -307,7 +307,7 @@ public class Importer {
         list.add(oneMeleeWeapon);
     }
     
-    private void readRangedWeapon(List list, int ver) 
+    private void readRangedWeapon(List<GURPSObject> list, int ver) 
             throws IOException, FileNotFoundException {
         
         /*
@@ -334,11 +334,11 @@ public class Importer {
         list.add(oneRangedWeapon);
     }
     
-    private void readRangedWeaponAmmo(List list, int ver) 
+    private void readRangedWeaponAmmo(List<GURPSObject> list, int ver) 
             throws IOException, FileNotFoundException {
         
         /*
-         * Import version 156
+         * Import version 157
          */
     	LibraryRangedWeaponAmmunition oneRangedWeaponAmmunition = new LibraryRangedWeaponAmmunition(
                 getString("sId"),
@@ -354,7 +354,7 @@ public class Importer {
         list.add(oneRangedWeaponAmmunition);
     }
     
-    private void readThrowableProjectile(List list, int ver) 
+    private void readThrowableProjectile(List<GURPSObject> list, int ver) 
             throws IOException, FileNotFoundException {
         
         /*
@@ -381,7 +381,7 @@ public class Importer {
         list.add(oneThrowableProjectile);
     }
     
-    private void readMeleeWeaponOption(List list, int ver) 
+    private void readMeleeWeaponOption(List<GURPSObject> list, int ver) 
             throws IOException, FileNotFoundException {
         
         /*
@@ -404,7 +404,7 @@ public class Importer {
         list.add(oneMWOption);
     }
     
-	private void readAttachment(List list, int ver) 
+	private void readAttachment(List<GURPSObject> list, int ver) 
 			throws IOException, FileNotFoundException {
 
 		/*
@@ -424,7 +424,7 @@ public class Importer {
 		list.add(addon);
 	}
     
-    private void readThrownWeaponOption(List list, int ver) 
+    private void readThrownWeaponOption(List<GURPSObject> list, int ver) 
             throws IOException, FileNotFoundException {
         
         /*

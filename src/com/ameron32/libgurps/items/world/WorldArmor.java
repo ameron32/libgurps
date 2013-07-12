@@ -1,6 +1,6 @@
 package com.ameron32.libgurps.items.world;
 
-import com.ameron32.libgurps.frmwk.GURPSWorldObject;
+import com.ameron32.libgurps.impl.GURPSWorldObject;
 
 public class WorldArmor extends WorldItem {
 	protected WorldArmor() {

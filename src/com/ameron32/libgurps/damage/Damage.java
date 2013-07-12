@@ -1,7 +1,7 @@
 
 package com.ameron32.libgurps.damage;
 
-import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.impl.GURPSObject;
 
 public class Damage extends GURPSObject {
 	private static final long serialVersionUID = 1799231718961368501L;

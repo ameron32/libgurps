@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.ameron32.qrbg.QRBG;
-import com.ameron32.qrbg.ServiceDeniedException;
+import com.ameron32.libdice.random.qrbg.QRBG;
+import com.ameron32.libdice.random.qrbg.ServiceDeniedException;
 
 public class DieRollManager {
 	private static final String USERNAME = "ameron32";

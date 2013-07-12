@@ -72,4 +72,17 @@ public class StringTools {
 			return "";
 		}
 	}
+	
+	public static String encase(String input, int boxContentsSize) {
+		int length = input.length();
+		String encasedString = "[ * ]";
+		if (length > boxContentsSize) {
+			input = truncate(input, boxContentsSize - 1);
+		} else if (length < boxContentsSize) {
+			for (int x = 0; x < boxContentsSize - length; x++) {
+				input = input + " ";
+			}
+		}
+		return encasedString.replace("*", input);
+	}
 }

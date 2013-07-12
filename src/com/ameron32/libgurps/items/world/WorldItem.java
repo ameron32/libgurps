@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ameron32.libgurps.damage.Damage;
-import com.ameron32.libgurps.frmwk.GURPSLibraryObject;
-import com.ameron32.libgurps.frmwk.GURPSWorldObject;
+import com.ameron32.libgurps.impl.GURPSLibraryObject;
+import com.ameron32.libgurps.impl.GURPSWorldObject;
+import com.ameron32.libgurps.impl.User;
 import com.ameron32.libgurps.items.frmwk.Attachable;
 import com.ameron32.libgurps.items.frmwk.AttachmentCarrier;
 import com.ameron32.libgurps.items.frmwk.DamageGenerator;
@@ -28,7 +29,8 @@ public class WorldItem extends GURPSWorldObject implements DamageGenerator, Dama
 	}
 	private GURPSLibraryObject source;
 	
-	
+    // OWNERSHIP
+    private User owner;
 	
     /**
      * PERSONALIZE

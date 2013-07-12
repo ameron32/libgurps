@@ -26,7 +26,7 @@ public class LibraryProjectile extends LibraryItem {
 			double weight, int cost, String specialNotes) {
 		super(name, sId, cost, 0, // needs TL
 				weight, specialNotes, "");
-		this.sId = sId;
+		setSID(sId);
 		this.damageBoost = (float) damageBoost; // TODO double check the math on this
 		this.damageType = DamageType.valueOf(damageType);
 //		this.quantityOnHand = 0;
@@ -39,7 +39,7 @@ public class LibraryProjectile extends LibraryItem {
 //				+ "\n" + "id:" + sId + " damageType:" + damageType + " damageBoost:" + damageBoost;
 		
 		return super.toString() 
-				+ "\n" + "id:" + sId + " damageType:" + damageType + " damageBoost:" + damageBoost;
+				+ "\n" + "id:" + this.getSID() + " damageType:" + damageType + " damageBoost:" + damageBoost;
 	}
     
     

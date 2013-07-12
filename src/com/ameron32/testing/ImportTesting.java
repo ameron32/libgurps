@@ -16,7 +16,8 @@ import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 import com.ameron32.libgurps.attackoptions.ThrownAttackOption;
 import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
-import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.impl.GURPSLibraryObject;
+import com.ameron32.libgurps.impl.GURPSObject;
 import com.ameron32.libgurps.items.library.LibraryAddon;
 import com.ameron32.libgurps.items.library.LibraryArmor;
 import com.ameron32.libgurps.items.library.LibraryItem;
@@ -32,17 +33,20 @@ import com.ameron32.libgurps.tools.StringTools;
 
 public class ImportTesting {
     
+	// SB to get the final text output
     private static final StringBuilder sb = new StringBuilder();
     public static String getSB() { return sb.toString(); }
     public static void clearSB() { sb.delete(0, sb.length()); }
     
+    // libraryEverything to store all imported elements
     private static final List<GURPSObject> libraryEverything = new ArrayList<GURPSObject>();
-    public List<GURPSObject> getEverything() {
-    	return libraryEverything;
-    }
+    public List<GURPSObject> getEverything() { return libraryEverything; }
+    
+    // settings, including the directory to find the downloaded/saved files
     private static String dirPath;
     private static final boolean displayLogging = true;
     
+    // list of files to import
     private static final String[][] allFiles = new String[][] { 
             { "adv156-modifications.csv", "Advantage" },
             { "item156-armor.csv", "Armor" },
@@ -56,7 +60,6 @@ public class ImportTesting {
             { "item156-thrownweapons.csv", "ThrownProjectile" },
             { "skills156-wdefaults.csv", "Skill" }
     };
-
     public static String[] getAllFilenames() { 
     	List<String> fileNames = new ArrayList<String>();
     	for (String[] aS : allFiles.clone()) {
@@ -65,8 +68,18 @@ public class ImportTesting {
     	return fileNames.toArray(new String[0]);
     }
     
+    
+    
+    
+    /**
+     * 
+     * @param Array of Strings, of which only String[0] is used.
+     * String 0 is the directoryPath of where the downloaded/saved files are stored.
+     */
     public ImportTesting (String[] args) {
         dirPath = args[0] + "";
+        
+        // for text output
         TestingTools.setDirPath(dirPath);
     }
 
@@ -102,17 +115,17 @@ public class ImportTesting {
     public byte display1() {
 
     	log("\n" + libraryEverything.size() + " total items");
-        log(numOf(Advantage.class) + " advantages");
-        log(numOf(LibraryArmor.class) + " armors");
-        log(numOf(LibraryAddon.class) + " addons");
-        log(numOf(MeleeAttackOption.class) + " meleeattackoptions");
-        log(numOf(LibraryMeleeWeapon.class) + " meleeweapons");
-        log(numOf(LibraryRangedWeaponAmmunition.class) + " rangedweaponammo");
-        log(numOf(LibraryRangedWeapon.class) + " rangedweapons");
-        log(numOf(LibraryShield.class) + " shields");
-        log(numOf(ThrownAttackOption.class) + " thrownattackoptions");
-        log(numOf(LibraryThrowableProjectile.class) + " throwableprojectiles");
-        log(numOf(Skill.class) + " skills");
+        log(numOf(Advantage.class) + " advantages [" + numOf(GURPSObject.getAll(Advantage.class)) + "]");
+        log(numOf(LibraryArmor.class) + " armors [" + numOf(GURPSObject.getAll(LibraryArmor.class)) + "]");
+        log(numOf(LibraryAddon.class) + " addons [" + numOf(GURPSObject.getAll(LibraryAddon.class)) + "]");
+        log(numOf(MeleeAttackOption.class) + " meleeattackoptions [" + numOf(GURPSObject.getAll(MeleeAttackOption.class)) + "]");
+        log(numOf(LibraryMeleeWeapon.class) + " meleeweapons [" + numOf(GURPSObject.getAll(LibraryMeleeWeapon.class)) + "]");
+        log(numOf(LibraryRangedWeaponAmmunition.class) + " rangedweaponammo [" + numOf(GURPSObject.getAll(LibraryRangedWeaponAmmunition.class)) + "]");
+        log(numOf(LibraryRangedWeapon.class) + " rangedweapons [" + numOf(GURPSObject.getAll(LibraryRangedWeapon.class)) + "]");
+        log(numOf(LibraryShield.class) + " shields [" + numOf(GURPSObject.getAll(LibraryShield.class)) + "]");
+        log(numOf(ThrownAttackOption.class) + " thrownattackoptions [" + numOf(GURPSObject.getAll(ThrownAttackOption.class)) + "]");
+        log(numOf(LibraryThrowableProjectile.class) + " throwableprojectiles [" + numOf(GURPSObject.getAll(LibraryThrowableProjectile.class)) + "]");
+        log(numOf(Skill.class) + " skills [" + numOf(GURPSObject.getAll(Skill.class)) + "]");
         log("\n");
         
         return 1;
@@ -144,12 +157,12 @@ public class ImportTesting {
 	    
     
     Class<?>[] exclude = { 
-    		Advantage.class, 
+//    		Advantage.class,     		
 //    		LibraryAddon.class, 
 //    		LibraryArmor.class, MeleeAttackOption.class, LibraryMeleeWeapon.class, 
 //    		LibraryRangedWeaponAmmunition.class, LibraryRangedWeapon.class, LibraryShield.class,
-//   		ThrownAttackOption.class, LibraryThrowableProjectile.class,
-    		Skill.class 
+//    		ThrownAttackOption.class, LibraryThrowableProjectile.class,
+//    		Skill.class 
     		};
 
 	public byte display2() {
@@ -162,7 +175,7 @@ public class ImportTesting {
         			}
         		}
     			if (!mustExclude) {
-    				log("******************** \n" + ((GURPSObject)go).toString() + "***");
+    				log("************************************************************** \n\n" + ((GURPSObject)go).toString() + "\n**************************************************************");
     			}
 //        	} else if (go instanceof AttackOption) {
 //				boolean mustExclude = false;
@@ -177,6 +190,7 @@ public class ImportTesting {
 //				}
 //        	}
         }
+//      showDifference(GURPSObject.getAll(GURPSObject.class), libraryEverything);
 
     
 //      /* WRITE OUTPUT TO A TEXT FILE */
@@ -184,108 +198,49 @@ public class ImportTesting {
         
         return 1;
     }
-    
-/*
-    private void displayContents() {
-        //done
-    	for (Item item : libraryArmor) {
-            Armor armor = (Armor) item;
-            p(armor.getClass().getSimpleName() + ": " + armor.getName()
-                    + "\n" + "    " + "[" + armor.getCoversString() + "]" + ", " + "$" + armor.getCost() + ", " + armor.getWeight() + " lb" + ", "
-                    + "id:" + armor.getSId()
-                    + "\n" + "      " + "D: " + StringTools.truncate(armor.getDescription(), 50)
-                    );
-            p("     id: " + armor.getObjectId() + "\n");
-            displayNotes(item);
-        }
-
-    	//done
-        for (Item item : libraryMeleeWeapon) {
-            Weapon weapon = (Weapon) item;
-            
-            p(weapon.getClass().getSimpleName() + ": " + weapon.getName()
-                    + "\n" + "    $" + weapon.getCost() + ", " + weapon.getWeight() + " lb" + ", " + "id:" + weapon.getSId()
-                    + "\n" + "      " + weapon.getAttackOptionsNumber()  
-                    + "\n" + weapon.getAttackOptionsString() 
-                    + "      " + weapon.getWeaponId()
-                    + "\n" + "      " + "D: " + StringTools.truncate(weapon.getDescription(), 50)
-                    );
-            p("     id: " + weapon.getObjectId() + "\n");
-            displayNotes(item);
-        }
-
-        //done
-        for (AttackOption ao : libraryMeleeWeaponOption) {
-            p(ao.toString());
-        }
-
-        //done
-        for (Item item : libraryShield) {
-            p(item.getClass().getSimpleName() + ": " + item.getName()
-                    + "\n" + "    $" + item.getCost() + ", " + item.getWeight() + " lb" + ", "
-                    + "id:" + item.getSId()
-                    + "\n" + "      " + "D: " + StringTools.truncate(item.getDescription(), 50)
-                    );
-            p("     id: " + item.getObjectId() + "\n");
-            displayNotes(item);
-        }
-        
-        //done
-        for (Advantage a : libraryAdvs) {
-            p(a.getClass().getSimpleName() + ": " + a.getsName()
-                    + "\n" + "    c:" + a.getiCalcCost() + ", p#" + a.getiPage() + "" + ", "
-                    + "id:" + a.getiId()
-                    + "\n" + "      " + "D: " + StringTools.truncate(a.getsDescription(), 50)
-                    );
-            p("     id: " + a.getObjectId() + "\n");
-            displayNotes(a);
-        }
-        
-        //done
-        for (Skill s : librarySkills) {
-            p(s.getClass().getSimpleName() + ": " + s.getsNameString()
-                    + "\n" + "    att:" + s.getsAttribute() + ", diff:" + s.getsDifficulty() + "" + ", "
-                    + "id:" + s.getiId()
-                    + "\n" + "      " + "D: " + StringTools.truncate(s.getsDescription(), 50)
-                    + "\n" + "      " + "Def: " + s.getLsDefaults()
-                    );
-            p("      id: " + s.getObjectId() + "\n");
-            displayNotes(s);
-        }
-    }
-*/
-    
-    private void displayNotes(GURPSObject obj, List<GURPSObject> listGO) {
-        List<GURPSObject> list;
-    	if (listGO != null) 
-    		list = listGO;
-    	else // go ahead and use the program registry
-    		list = new ArrayList<GURPSObject>(GURPSObject.getObjectRegistry().values());
-    	
-    	int noteCount = 0;
-		for (int i = 0; i < list.size(); i++) {
-			for (Note n : list.get(i).getNotes()) {
-				noteCount++;
-				String timestamp = new SimpleDateFormat("hh:mm M/d/yyyy",
-						Locale.ENGLISH).format(new Date(n.getTimeCreated()));
-				String noteText = n.getNoteText();
-				String hostObject = n.getHostObject().getClass().getSimpleName()
-						+ "[" + n.getHostObject().getName() + "]";
-				log(timestamp + ": " + noteText + " on " + hostObject);
+	
+	private void showDifference(List<GURPSObject> l1, List<GURPSObject> l2) {
+		for (GURPSObject go1 : l1) {
+			boolean displayMe = true;
+			for (GURPSObject go2 : l2) {
+				if (go1.getObjectId() == go2.getObjectId())
+					displayMe = false;
 			}
+			if (displayMe) log(go1.getClass().getSimpleName() + ": " + go1.getName());
 		}
-		
-		if (noteCount == 0) 
-			log("No Notes Found.");
-    }
+	}
     
-    private void runRandomizer() {
-        PersonalityTraits pt = new PersonalityTraits();
-        int ptId = pt.genOnePersonalityTraitId();
-        p("[" + ptId + "] "
-                + pt.getOnePersonalityTraitString(ptId, PersonalityTraits.NAME) + " : " 
-                + pt.getOnePersonalityTraitString(ptId, PersonalityTraits.DESCRIPTION));
-    }
+//  private void displayNotes(GURPSObject obj, List<GURPSObject> listGO) {
+//      List<GURPSObject> list;
+//    	if (listGO != null) 
+//    		list = listGO;
+//    	else // go ahead and use the program registry
+//    		list = new ArrayList<GURPSObject>(GURPSObject.getObjectRegistry().values());
+//    	
+//    	int noteCount = 0;
+//		for (int i = 0; i < list.size(); i++) {
+//			for (Note n : list.get(i).getNotes()) {
+//				noteCount++;
+//				String timestamp = new SimpleDateFormat("hh:mm M/d/yyyy",
+//						Locale.ENGLISH).format(new Date(n.getTimeCreated()));
+//				String noteText = n.getNoteText();
+//				String hostObject = n.getHostObject().getClass().getSimpleName()
+//						+ "[" + n.getHostObject().getName() + "]";
+//				log(timestamp + ": " + noteText + " on " + hostObject);
+//			}
+//		}
+//		
+//		if (noteCount == 0) 
+//			log("No Notes Found.");
+//  }
+    
+//    private void runRandomizer() {
+//        PersonalityTraits pt = new PersonalityTraits();
+//        int ptId = pt.genOnePersonalityTraitId();
+//        p("[" + ptId + "] "
+//                + pt.getOnePersonalityTraitString(ptId, PersonalityTraits.NAME) + " : " 
+//                + pt.getOnePersonalityTraitString(ptId, PersonalityTraits.DESCRIPTION));
+//    }
     
     public static void p(String s) {
         sb.append("\n" + s);
@@ -295,25 +250,33 @@ public class ImportTesting {
     	if (displayLogging) p(s);
     }
 
-    private void addRandomNotes() {
-        // add randomly generated notes to objects
-        or = GURPSObject.getObjectRegistry();
-        for (Long goId : or.keySet()) {
-            GURPSObject host = GURPSObject.getObjectRegistry().get(goId);
-            int iR = new Random().nextInt(5);
-            for (int x = 0; x < iR; x++) {
-                host.addNote(new Note(host, "test", new Random().nextInt() + "x"));
-            }
-        }
-    }
+//  private void addRandomNotes() {
+//        // add randomly generated notes to objects
+//        or = GURPSObject.getObjectRegistry();
+//        for (Long goId : or.keySet()) {
+//            GURPSObject host = GURPSObject.getObjectRegistry().get(goId);
+//            int iR = new Random().nextInt(5);
+//            for (int x = 0; x < iR; x++) {
+//                host.addNote(new Note(host, "test", new Random().nextInt() + "x"));
+//            }
+//        }
+//  }
     
 	private <T> int numOf(Class<T> c) {
 		int count = 0;
-		for (Object o : libraryEverything) {
-			if (c.isInstance(o))
+		for (GURPSObject go : libraryEverything) {
+			if (c.isInstance(go))
 				count++;
 		}
 		return count;
 	}
 
+	private <T> int numOf(List<GURPSObject> lGO) {
+		int count = 0;
+		for (GURPSObject go : lGO) {
+			count++;
+		}
+		return count;
+	}
+	
 }

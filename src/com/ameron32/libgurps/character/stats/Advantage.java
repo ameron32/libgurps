@@ -6,7 +6,7 @@ package com.ameron32.libgurps.character.stats;
 
 import java.io.Serializable;
 
-import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.impl.GURPSObject;
 import com.ameron32.libgurps.tools.StringTools;
 
 public class Advantage extends GURPSObject {
@@ -223,7 +223,8 @@ public class Advantage extends GURPSObject {
 
 	@Override
 	public String toString() {
-		return (this.getClass().getSimpleName() + ": " + this.getsName() + "\n"
+		return super.toString()
+				+ (this.getClass().getSimpleName() + ": " + this.getsName() + "\n"
 				+ "    c:" + this.getiCalcCost() + ", p#" + this.getiPage()
 				+ "" + ", " + "id:" + this.getiId() + "\n" + "      " + "D: "
 				+ StringTools.truncate(this.getsDescription(), 50)

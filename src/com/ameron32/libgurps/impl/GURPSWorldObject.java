@@ -1,26 +1,23 @@
-package com.ameron32.libgurps.frmwk;
+package com.ameron32.libgurps.impl;
+
+import com.ameron32.libgurps.impl.GURPSObject.ObjectType;
 
 public abstract class GURPSWorldObject extends GURPSObject {
 	private static final long serialVersionUID = 2294522971962017741L;
 
 	protected GURPSWorldObject(long id) {
 		super(id);
+		setObjectType(ObjectType.WorldObject);
 	}
 	
 	protected GURPSWorldObject(String id) {
 		super(id);
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		setObjectType(ObjectType.WorldObject);
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return super.getName() + "[" + objectType.name() + "]";
 	}
 
 }

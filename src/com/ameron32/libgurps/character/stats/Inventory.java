@@ -4,7 +4,7 @@ import java.lang.ref.Reference;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ameron32.libgurps.frmwk.GURPSObject;
+import com.ameron32.libgurps.impl.GURPSObject;
 import com.ameron32.libgurps.items.frmwk.ItemOwner;
 import com.ameron32.libgurps.items.library.LibraryArmor;
 import com.ameron32.libgurps.items.library.LibraryItem;

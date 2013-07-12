@@ -1,4 +1,4 @@
-package com.ameron32.libgurps.frmwk;
+package com.ameron32.libgurps.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,19 +9,18 @@ import java.util.Set;
 
 import com.ameron32.libgurps.Note;
 import com.ameron32.libgurps.tools.GenTools;
+import com.ameron32.libgurps.tools.StringTools;
 
 public abstract class GURPSObject implements Serializable {
     private static final long serialVersionUID = -108925174014605476L;
 
     // REFERENCE
     private long objectId;
+    private String name, description, sId;
     
     // TYPE OF OBJECT
-    public enum ObjectType { LibraryObject, WorldObject, NoteObject };
+    public enum ObjectType { LibraryObject, WorldObject, InterfaceObject, NoteObject };
     protected ObjectType objectType;
-    
-    // OWNERSHIP
-    private User owner;
     
     // OBJECT NOTES
     Set<Note> myNotes;
@@ -34,8 +33,7 @@ public abstract class GURPSObject implements Serializable {
     protected GURPSObject(long id) {
         if (id != 0l) {
             objectId = id;
-        }
-        else {
+        } else {
             setRandomLongId();
         }
         register();
@@ -75,17 +73,39 @@ public abstract class GURPSObject implements Serializable {
             return false;
     }
     
+    /**
+     * Return the unique long id generated when this object was created.
+     * 
+     * @return unique long id of this object
+     */
     public long getObjectId() {
         return objectId;
     }
+    
+    /**
+     * Return the object registered in the global GURPS registry with this unique long id.
+     * 
+     * @param id of object to find
+     * @return GURPSObject associated with this long id
+     */
     public static GURPSObject findGURPSObjectById(long id) {
     	return objectRegistry.get(id);
     }
     
+	/**
+	 * In rare cases, an objectId may need to be replaced with the objectId of
+	 * another object. This is not a standard practice.
+	 * 
+	 * @param objectId
+	 *            to overwrite onto this object
+	 */
     public void overwriteObjectId(long objectId) {
         this.objectId = objectId; 
     }
     
+    /**
+     * Eliminate this GURPSObject from the registry, thereby removing it from existence.
+     */
     public void destroy() {
         if (objectRegistry.containsKey(this.objectId))
             objectRegistry.remove(this.objectId);
@@ -100,27 +120,50 @@ public abstract class GURPSObject implements Serializable {
      * 
      * @return A CLONE OF ObjectRegistry
      */
-    public static Hashtable<Long, GURPSObject> getObjectRegistry() {
-        return (Hashtable<Long, GURPSObject>) objectRegistry.clone();
-    }
+//    public static Hashtable<Long, GURPSObject> getObjectRegistry() {
+//        return (Hashtable<Long, GURPSObject>) objectRegistry.clone();
+//    }
 
+    /**
+	 * Returns TRUE if this long id is registered with the registry. Returns
+	 * FALSE is this long id is not registered. Since all GURPSObject long ids are
+	 * registered at creation, FALSE would indicate a flaw in the programming.
+	 * 
+	 * @param id the id to check
+	 * @return boolean T/F: id is registered
+	 */
     public static boolean isRegistered(long id) {
         return objectRegistry.containsKey(id);
     }
     
+    /**
+	 * Returns TRUE if this GURPSObject is registered with the registry. Returns
+	 * FALSE is this GURPSObject is not registered. Since all GURPSObjects are
+	 * registered at creation, FALSE would indicate a flaw in the programming.
+	 * 
+	 * @param obj GURPSObject to check
+	 * @return T/F: id is registered
+	 */
     public static boolean isRegistered(GURPSObject obj) {
         return objectRegistry.containsValue(obj);
     }
     
-    public static List<Object> getAll(Class<?> c, List<Object> list) {
-    	List<Object> matchingObjects = new ArrayList<Object>();
-    	for (Object o : list) {
-    		if (o.getClass().isInstance(c)) {
-    			matchingObjects.add(o);
-    		}
-    	}
-    	return matchingObjects;
-    }
+    /**
+     * Scans the registry for all GURPSObjects registered of the given Class type. Returns
+     * an ArrayList of those GURPSObjects.
+     * 
+     * @param c
+     * @return
+     */
+	public static List<GURPSObject> getAll(Class<?> c) {
+		List<GURPSObject> matchingGURPSObjects = new ArrayList<GURPSObject>();
+		for (GURPSObject go : objectRegistry.values()) {
+			if (c.isInstance(go)) {
+				matchingGURPSObjects.add(go);
+			}
+		}
+		return matchingGURPSObjects;
+	}
     
     /* NOTES */
     
@@ -139,11 +182,43 @@ public abstract class GURPSObject implements Serializable {
     
     
     
-    @Override
-    public abstract String toString();
+
     
-    public abstract String getName();
+
+
+	@Override
+	public String toString() {
+		return "GURPSObject: " + this.getClass().getSimpleName() + " > " + this.getName() + "\n"
+//				+ " ********************************* \n"
+				+ " " + StringTools.encase("name=" + name, 30)
+				+ " " + StringTools.encase("objectId=" + objectId, 29) 
+				+ " " + StringTools.encase("objectType=" + objectType, 24) 
+//				+ "\n " + StringTools.encase("myNotes=" + myNotes, 24+28+30+10) 
+				+ "\n ********** \n";
+	}
+
+	public String getName() {
+    	return name;
+    }
+	
+	protected void setName(String name) {
+		this.name = name;
+	}
     
-// TODO    public abstract String getDescription();
+    public String getDescription() {
+    	return description;
+    }
+    
+    protected void setDescription(String description) {
+    	this.description = description;
+    }
+    
+    public String getSID() {
+    	return sId;
+    }
+    
+    protected void setSID(String sId) {
+    	this.sId = sId;
+    }
     
 }
