@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import com.ameron32.libcharacter.library.PersonalityTraits;
 import com.ameron32.libgurps.Step;
 import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 import com.ameron32.libgurps.attackoptions.ThrownAttackOption;
@@ -13,7 +14,6 @@ import com.ameron32.libgurps.character.stats.Skill;
 import com.ameron32.libgurps.impl.GURPSObject;
 import com.ameron32.libgurps.items.library.LibraryAddon;
 import com.ameron32.libgurps.items.library.LibraryArmor;
-import com.ameron32.libgurps.items.library.LibraryItem;
 import com.ameron32.libgurps.items.library.LibraryMeleeWeapon;
 import com.ameron32.libgurps.items.library.LibraryRangedWeapon;
 import com.ameron32.libgurps.items.library.LibraryRangedWeaponAmmunition;
@@ -31,11 +31,18 @@ public class Importer {
         Armor, Shield,
         Addon, // more
 
+        PersonalityTrait,
+        
         FlowChart;
         
         public static ImportType getImportTypeFromString(String s) {
             return ImportType.valueOf(s);
         }
+    }
+    
+    PersonalityTraits pt;
+    public Importer(PersonalityTraits pt) {
+    	this.pt = pt;
     }
 
     private CsvReader fileReader;
@@ -113,6 +120,10 @@ public class Importer {
                         	readAttachment(appendToThisList, ver);
                         	break;
                             
+                        case PersonalityTrait:
+                        	readPersonalityTrait(appendToThisList, ver);
+                        	break;
+                        	
                         case FlowChart:
                             readStep(appendToThisList, ver);
                             break;
@@ -139,7 +150,16 @@ public class Importer {
         return appendToThisList;
     }
 
-    private void readStep(List<GURPSObject> list, int ver)
+    private void readPersonalityTrait(List<GURPSObject> list, int ver) 
+    		throws IOException, FileNotFoundException {
+    	pt.addImportedPersonalityTrait(
+    			getString("sName"),
+    			getString("sDescription"),
+    			getString("sId")
+    			);
+	}
+
+	private void readStep(List<GURPSObject> list, int ver)
             throws IOException, FileNotFoundException {
         Step oneStep = new Step(
                 getString("step"),

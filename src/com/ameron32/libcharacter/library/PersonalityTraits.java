@@ -1,16 +1,18 @@
 package com.ameron32.libcharacter.library;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.HashMap;
 
 public class PersonalityTraits {
-
-    public static final int NAME = 0;
-    public static final int DESCRIPTION = 1;
+// TODO verify PersonalityTraits import correctly
+	
+	public static final int NAME = 0;
+	public static final int DESCRIPTION = 1;
+	
+	
+    private static final HashMap<String, String[]> personalityTraits = new HashMap<String, String[]>();
     
-    private String[][] personalityTraits = {
+    /* REPLACED v2 
+    private String[][] personalityTraitsO = {
             {
                     "Able",
                     "Able - adj. (usually followed by `to') having the necessary means or skill or know-how or authority to do something; having inherent physical or mental ability or capacity; have the skills and qualifications to do things well; having a strong healthy body"
@@ -1703,30 +1705,42 @@ public class PersonalityTraits {
             }
     };
 
-    List<String[]> personalityTraitsList = new ArrayList<String[]>();
+    List<String[]> personalityTraitsListO = new ArrayList<String[]>();
+    */
     
     public PersonalityTraits() {
-//      /* REPLACED */
+    	
+    	/* REPLACED */
 //      personalityTraitsListOld = Arrays.asList(personalityTraitsOld);
-        personalityTraitsList = Arrays.asList(personalityTraits);
+        /* REPLACED v2 */
+//    	personalityTraitsListO = Arrays.asList(personalityTraitsO);
     }
     
+    public void addImportedPersonalityTrait(String name, String description, String sId) {
+    	personalityTraits.put(sId, new String[] { name, description } );
+    }
+    
+    
+    
+    
+    /* REPLACED v2
     public int genOnePersonalityTraitId() {
         Random r = new Random();
-        return r.nextInt(personalityTraitsList.size());
+        return r.nextInt(personalityTraitsListO.size());
     }
     
     public String[] getOnePersonalityTraitArray(int id) {
-        return personalityTraitsList.get(id);
+        return personalityTraitsListO.get(id);
     }
     
     public String getOnePersonalityTraitString(int id, int type) {
-        return personalityTraitsList.get(id)[type];
+        return personalityTraitsListO.get(id)[type];
     }
+    */
     
    
     
-    /* REPLACED */
+    /* REPLACED 
 
     private String[] personalityTraitsOld = {
             "Able",
@@ -2183,4 +2197,5 @@ public class PersonalityTraits {
         int random = r.nextInt(personalityTraitsListOld.size());
         return personalityTraitsListOld.get(random);
     }
+    */
 }

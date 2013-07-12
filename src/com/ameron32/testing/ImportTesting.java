@@ -102,7 +102,7 @@ public class ImportTesting {
     
     private Hashtable<Long, GURPSObject> or;
     public byte importer() {
-        Importer imp = new Importer();
+        Importer imp = new Importer(); // add PersonalityTraits importing
         for (int i = 0; i < allFiles.length; i++) {
             imp.readCSVIntoList(dirPath + allFiles[i][0], 
                     libraryEverything, 
