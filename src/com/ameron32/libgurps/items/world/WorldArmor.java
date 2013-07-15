@@ -3,6 +3,9 @@ package com.ameron32.libgurps.items.world;
 import com.ameron32.libgurps.impl.GURPSWorldObject;
 
 public class WorldArmor extends WorldItem {
+	
+	
+	
 	protected WorldArmor() {
 		super();
 		// TODO Auto-generated constructor stub

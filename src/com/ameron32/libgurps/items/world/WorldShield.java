@@ -6,6 +6,9 @@ import com.ameron32.libgurps.items.frmwk.DamageReceiver;
 import com.ameron32.libgurps.items.frmwk.DamageReducer;
 
 public class WorldShield extends WorldArmor implements DamageGenerator, DamageReducer, DamageReceiver {
+	
+	// TODO WorldShield needs to implement ArmorReducer and Weaponable... or whatever
+	
 	private static final long serialVersionUID = 5266127013720563455L;
 
 	@Override

@@ -2,14 +2,17 @@ package com.ameron32.libcharacter.library;
 
 import java.util.HashMap;
 
-public class PersonalityTraits {
-// TODO verify PersonalityTraits import correctly
+import com.ameron32.libgurps.impl.GURPSObject;
+
+public class PersonalityTraits extends GURPSObject {
+	private static final long serialVersionUID = 608799372534638266L;
+	// TODO verify PersonalityTraits import correctly
+
+	public static final int ID = 0;
+	public static final int NAME = 1;
+	public static final int DESCRIPTION = 2;
 	
-	public static final int NAME = 0;
-	public static final int DESCRIPTION = 1;
-	
-	
-    private static final HashMap<String, String[]> personalityTraits = new HashMap<String, String[]>();
+    private final HashMap<String, PersonalityTrait> personalityTraits = new HashMap<String, PersonalityTrait>();
     
     /* REPLACED v2 
     private String[][] personalityTraitsO = {
@@ -1709,15 +1712,19 @@ public class PersonalityTraits {
     */
     
     public PersonalityTraits() {
+    	super("random");
     	
-    	/* REPLACED */
-//      personalityTraitsListOld = Arrays.asList(personalityTraitsOld);
-        /* REPLACED v2 */
-//    	personalityTraitsListO = Arrays.asList(personalityTraitsO);
+    	/* REPLACED 
+        personalityTraitsListOld = Arrays.asList(personalityTraitsOld);
+    	*/
+    	
+        /* REPLACED v2 
+    	personalityTraitsListO = Arrays.asList(personalityTraitsO);
+    	*/
     }
     
-    public void addImportedPersonalityTrait(String name, String description, String sId) {
-    	personalityTraits.put(sId, new String[] { name, description } );
+    public void addImportedPersonalityTrait(String sId, String name, String description) {
+    	personalityTraits.put(sId, new PersonalityTrait(sId, name, description) );
     }
     
     
@@ -1738,10 +1745,7 @@ public class PersonalityTraits {
     }
     */
     
-   
-    
     /* REPLACED 
-
     private String[] personalityTraitsOld = {
             "Able",
             "Absent-minded",
@@ -2198,4 +2202,5 @@ public class PersonalityTraits {
         return personalityTraitsListOld.get(random);
     }
     */
+    
 }

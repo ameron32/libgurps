@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import com.ameron32.libcharacter.library.PersonalityTrait;
 import com.ameron32.libcharacter.library.PersonalityTraits;
 import com.ameron32.libgurps.Step;
 import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
@@ -27,7 +28,7 @@ public class Importer {
         Item,
         MeleeWeapon, MeleeWeaponOption, 
         RangedWeapon, RangedWeaponAmmo, 
-        ThrownProjectile, ThrownWeaponOption, // TODO change thrown weapon to throwable item
+        ThrownProjectile, ThrownWeaponOption,
         Armor, Shield,
         Addon, // more
 
@@ -40,11 +41,6 @@ public class Importer {
         }
     }
     
-    PersonalityTraits pt;
-    public Importer(PersonalityTraits pt) {
-    	this.pt = pt;
-    }
-
     private CsvReader fileReader;
 
     /**
@@ -63,7 +59,7 @@ public class Importer {
         
         if (appendToThisList != null) {
             try {
-                int ver = 155;
+                int ver = 158;
 
                 if (fileReader == null)
                     fileReader = new CsvReader(path);
@@ -152,11 +148,16 @@ public class Importer {
 
     private void readPersonalityTrait(List<GURPSObject> list, int ver) 
     		throws IOException, FileNotFoundException {
-    	pt.addImportedPersonalityTrait(
+    	
+    	/*
+    	 * Import version 158
+    	 */
+    	PersonalityTrait onePersonalityTrait = new PersonalityTrait(
+    			getString("sId"),
     			getString("sName"),
-    			getString("sDescription"),
-    			getString("sId")
-    			);
+    			getString("sDescription")
+    	);
+    	list.add(onePersonalityTrait);
 	}
 
 	private void readStep(List<GURPSObject> list, int ver)
@@ -177,52 +178,55 @@ public class Importer {
             throws IOException, FileNotFoundException {
 
         /*
-         * Import version 155
+         * Import version 158
          */
         Advantage oneAdvantage = new Advantage(
-                getInt("iId"), 
-                getString("sAorD"), 
-                getString("sName"), 
-                getString("sAdvType"),
-                getString("sSuperType"), 
-                getString("sBookCost"), 
-                getInt("iPage"),
-                getBoolean("isLeveled"), 
-                getBoolean("isMultiCost"), 
-                getBoolean("isVariableCost"),
-                getInt("iBaseCost"), 
-                getString("sMultiCost"), 
-                getInt("iPerLevelCost"),
-                getString("sPerLevelMultiCost"), 
-                getBoolean("hasNotes"), 
-                getBoolean("isFakeCost"),
-                getInt("iCalcCost"), 
-                getBoolean("isForbidden"), 
-                getString("sListPMSESM"),
-                getString("sRefs"), 
-                getString("sDescription"));
-
-        // getInt("id"),
-        // ver,
-        // getString("aORd"),
-        // getString("advTypeString"),
-        // getString("superTypeString"),
-        // getString("superTypeString"),
-        // getString("cost"),
-        // getInt("pageInt"),
-        // getBoolean("isLeveled"),
-        // getBoolean("hasNotes"),
-        // getBoolean("isFakeCost"),
-        // getInt("calcCost"),
-        // getBoolean("isPhysical"),
-        // getBoolean("isMental"),
-        // getBoolean("isSocial"),
-        // getBoolean("isExotic"),
-        // getBoolean("isSuper"),
-        // getBoolean("isMundane"),
-        // getBoolean("isForbidden"),
-        // getString("description"));
-        //
+//        		ver,
+        		getString("sName"),
+        		getString("sDescription"),
+                getString("sId") // , 
+//                getString("sADPQ"), 
+//                getString("sAdvType"),
+//                getString("sSuperType"), 
+//                getString("sBookCost"), 
+//                getInt("iPage"),
+//                getBoolean("isLeveled"), 
+//                getBoolean("isMultiCost"), 
+//                getBoolean("isVariableCost"),
+//                getInt("iBaseCost"), 
+//                getString("sMultiCost"), 
+//                getInt("iPerLevelCost"),
+//                getString("sPerLevelMultiCost"), 
+//                getBoolean("hasNotes"), 
+//                getBoolean("isFakeCost"),
+//                getInt("iCalcCost"), 
+//                getString("sListPMSESM"),
+//                getString("sRefs"), 
+//                getString("documentSource"),
+//                getBoolean("isForbidden")
+                );
+        oneAdvantage.setImportVersion(ver);
+        
+        oneAdvantage.setsADPQ(getString("sADPQ"));
+        oneAdvantage.setsAdvType(getString("sAdvType"));
+        oneAdvantage.setsSuperType(getString("sSuperType"));
+        oneAdvantage.setsBookCost(getString("sBookCost"));
+        oneAdvantage.setiPage(getInt("iPage"));
+        oneAdvantage.setbIsLeveled(getBoolean("bIsLeveled"));
+        oneAdvantage.setbIsMultiCost(getBoolean("bIsMultiCost"));
+        oneAdvantage.setbIsVariableCost(getBoolean("bIsVariableCost"));
+        oneAdvantage.setiBaseCost(getInt("iBaseCost"));
+        oneAdvantage.setsMultiCost(getString("sMultiCost"));
+        oneAdvantage.setiPerLevelCost(getInt("iPerLevelCost"));
+        oneAdvantage.setsPerLevelMultiCost(getString("sPerLevelMultiCost"));
+        oneAdvantage.setbHasNotes(getBoolean("bHasNotes"));
+        oneAdvantage.setbIsFakeCost(getBoolean("bIsFakeCost"));
+        oneAdvantage.setiCalcCost(getInt("iCalcCost"));
+        oneAdvantage.setsListPMSESM(getString("sListPMSESM"));
+        oneAdvantage.setsRefs(getString("sRefs"));
+        oneAdvantage.setsDocumentSource(getString("sDocumentSource"));
+        oneAdvantage.setbIsForbidden(getBoolean("bIsForbidden"));
+        		
         list.add(oneAdvantage);
     }
 
@@ -230,19 +234,38 @@ public class Importer {
             throws IOException, FileNotFoundException {
 
         /*
-         * Import version 155
+         * Import version 158
          */
         Skill oneSkill = new Skill(
-                ver,
-                getInt("iId"),
-                ver,
-                getString("sNameString"),
-                getBoolean("bIsLeveled"),
-                getString("sAttribute"),
-                getString("sDifficulty"),
-                getBoolean("bHasSubSkills"),
-                getString("lsDefaults"),
-                getString("sDescription"));
+        		getString("sName"), 
+        		getString("sDescription"), 
+        		getString("sId")
+//                ver,
+//                getInt("iId"),
+//                ver,
+//                getString("sNameString"),
+//                getBoolean("bIsLeveled"),
+//                getString("sAttribute"),
+//                getString("sDifficulty"),
+//                getBoolean("bHasSubSkills"),
+//                getString("lsDefaults"),
+//                getString("sDescription")
+                );
+        oneSkill.setImportVersion(ver);
+        
+        oneSkill.setbIsLeveled(getBoolean("bIsLeveled"));
+        oneSkill.setsAttribute(getString("sAttribute"));
+        oneSkill.setsDifficulty(getString("sDifficulty"));
+        oneSkill.setbHasSubSkills(getBoolean("bHasSubSkills"));
+        oneSkill.setsDefaults(getString("lsDefaults"));
+        oneSkill.setbExist(getBoolean("bExist"));
+        oneSkill.setsAltAtt(getString("sAltAtt"));
+        oneSkill.setsAltDiff(getString("sAltDiff"));
+        oneSkill.setsCategoriesAndSubCategories(getString("lsCategories-SubCategories"));
+        oneSkill.setbRequiresSpecialization(getBoolean("bRequiresSpecialization"));
+        oneSkill.setiPage(getInt("iPage"));
+        oneSkill.setsDocumentSource(getString("sDocumentSource"));
+        
         list.add(oneSkill);
     }
     
@@ -250,13 +273,19 @@ public class Importer {
             throws IOException, FileNotFoundException {
 
         /*
-         * Import version 157    // 155
+         * Import version 157
          */
         LibraryShield oneShield = new LibraryShield(
+                getString("sName"),
+                getString("sDescription"),
                 getString("sId"),
+                getInt("iTL"),
+                
+                
                 getString("sType"),
                 getString("sMaterial"),
-                getString("sDescription"),
+                getString("sCoversDetail"),
+                
                 getInt("iDB"),
                 getInt("iDR"),
                 getInt("iHits"),
@@ -264,6 +293,7 @@ public class Importer {
                 getInt("iCost"),
                 getString("sNotes")
                 );
+        
         list.add(oneShield);
     }
     
@@ -397,7 +427,7 @@ public class Importer {
                 getInt("iMinST"),
                 getInt("iBulk"),
                 getString("sSpecialNotes")
-                ); // TODO create importer constructor
+                ); 
         list.add(oneThrowableProjectile);
     }
     

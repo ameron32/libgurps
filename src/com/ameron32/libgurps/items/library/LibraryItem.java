@@ -13,7 +13,7 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
     float weight;
     ItemType itemType;
 
-    String specialNotes; // TODO move description to GURPSObject
+    String specialNotes;
 
 //Consider rewrite    
 //    /**
@@ -76,6 +76,7 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
       setName(name);
       setDescription(description);
       setSID(sId);
+      
       this.cost = cost;
       this.tl = (short)tl;
       this.weight = (float)weight;

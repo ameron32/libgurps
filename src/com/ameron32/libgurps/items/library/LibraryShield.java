@@ -1,15 +1,15 @@
 package com.ameron32.libgurps.items.library;
 
-import com.ameron32.libgurps.damage.Damage;
-import com.ameron32.libgurps.items.frmwk.DamageGenerator;
-import com.ameron32.libgurps.items.frmwk.DamageReceiver;
-import com.ameron32.libgurps.items.frmwk.DamageReducer;
+import com.ameron32.libgurps.tools.StringTools;
 
-public class LibraryShield extends LibraryArmor  {
+public class LibraryShield extends LibraryItem  {
     private static final long serialVersionUID = 8287792029935856404L;
 
-    short db;
-    short hp;
+    // TODO WorldShield needs to implement ArmorReducer and Weaponable... or whatever
+    
+    String material;
+    String[] covers;
+    short dr, db, hp;
      
     /**
      * Importer constructor
@@ -25,7 +25,7 @@ public class LibraryShield extends LibraryArmor  {
      * @param cost
      * @param notes
      */
-    public LibraryShield(String sId, String type, String material, String description, int db, int dr, int hp, 
+    public LibraryShield(String name, String description, String sId, int tl, String type, String material, String covers, int db, int dr, int hp, 
             double weight, int cost, String notes) {
     	// TODO review shield information below
 //        super(description, sId, cost, 0, weight, notes, material + ", " + type, material, 
@@ -33,13 +33,21 @@ public class LibraryShield extends LibraryArmor  {
 //                dr, 
 //                0, 0 // FIXME should have don and holdout, if only 0, from data source
 //                );
-        super(sId, description, material, "", 0, // needs TL and covers!
-        		dr, cost, weight, 
-        		0, 0 // needs don, holdout
+        super(name, sId, cost, tl, weight, notes, description
+//        		sId, description, material, 
+//        		covers, tl,
+//        		dr, cost, weight, 
+//        		0, 0 // needs don, holdout
         		);
+        setName(name);
+        setDescription(description);
+        setSID(sId);
+        
+        this.material = material;
+        this.covers = StringTools.genList(covers).toArray(new String[0]);
+        this.dr = (short)dr;
         this.db = (short)db;
         this.hp = (short)hp;
-        setObjectType(ObjectType.LibraryObject);
     }
     
     

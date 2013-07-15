@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import com.ameron32.libcharacter.library.PersonalityTrait;
 import com.ameron32.libcharacter.library.PersonalityTraits;
 import com.ameron32.libgurps.Note;
 import com.ameron32.libgurps.attackoptions.AttackOption;
@@ -33,6 +34,15 @@ import com.ameron32.libgurps.tools.StringTools;
 
 public class ImportTesting {
     
+	/**
+	 * 
+	 */
+	public static final int VERSION = 158;
+	public static int getVERSION() {
+		return VERSION;
+	}
+	
+	
 	// SB to get the final text output
     private static final StringBuilder sb = new StringBuilder();
     public static String getSB() { return sb.toString(); }
@@ -48,17 +58,21 @@ public class ImportTesting {
     
     // list of files to import
     private static final String[][] allFiles = new String[][] { 
-            { "adv156-modifications.csv", "Advantage" },
-            { "item156-armor.csv", "Armor" },
-            { "item156-attachments.csv", "Addon" },
-            { "item156-meleeattackoptions.csv", "MeleeWeaponOption" },
-            { "item156-meleeweapons.csv", "MeleeWeapon" },
-            { "item156-rangedammo.csv", "RangedWeaponAmmo" },
-            { "item156-rangedweapons.csv", "RangedWeapon" },
-            { "item156-shield.csv", "Shield" },
-            { "item156-thrownattackoptions.csv", "ThrownWeaponOption" },
-            { "item156-thrownweapons.csv", "ThrownProjectile" },
-            { "skills156-wdefaults.csv", "Skill" }
+//            { "adv158-modifications.csv", "Advantage" },
+    	{ "LT-ArmorWeaponsAdvSkills-Advantages.csv", "Advantage" } ,
+//            { "item156-armor.csv", "Armor" },
+//            { "item156-attachments.csv", "Addon" },
+//            { "item156-meleeattackoptions.csv", "MeleeWeaponOption" },
+//            { "item156-meleeweapons.csv", "MeleeWeapon" },
+//            { "item156-rangedammo.csv", "RangedWeaponAmmo" },
+//            { "item156-rangedweapons.csv", "RangedWeapon" },
+//            { "item156-shield.csv", "Shield" },
+//            { "item156-thrownattackoptions.csv", "ThrownWeaponOption" },
+//            { "item156-thrownweapons.csv", "ThrownProjectile" },
+//            { "skills158-wdefaults.csv", "Skill" },
+    	{ "LT-ArmorWeaponsAdvSkills-Skills.csv", "Skill" } ,
+//            { "personalitytraits158.csv", "PersonalityTrait" }
+    	{ "LT-ArmorWeaponsAdvSkills-PersonalityTraits.csv" , "PersonalityTrait" }
     };
     public static String[] getAllFilenames() { 
     	List<String> fileNames = new ArrayList<String>();
@@ -68,6 +82,16 @@ public class ImportTesting {
     	return fileNames.toArray(new String[0]);
     }
     
+	Class<?>[] exclude = {
+	// Advantage.class,
+	// LibraryAddon.class,
+	// LibraryArmor.class, MeleeAttackOption.class, LibraryMeleeWeapon.class,
+	// LibraryRangedWeaponAmmunition.class, LibraryRangedWeapon.class,
+	// LibraryShield.class,
+	// ThrownAttackOption.class, LibraryThrowableProjectile.class,
+	// Skill.class,
+	// PersonalityTrait.class
+	};
     
     
     
@@ -101,6 +125,7 @@ public class ImportTesting {
 	}
     
     private Hashtable<Long, GURPSObject> or;
+    private final PersonalityTraits pt = new PersonalityTraits();
     public byte importer() {
         Importer imp = new Importer(); // add PersonalityTraits importing
         for (int i = 0; i < allFiles.length; i++) {
@@ -126,6 +151,7 @@ public class ImportTesting {
         log(numOf(ThrownAttackOption.class) + " thrownattackoptions [" + numOf(GURPSObject.getAll(ThrownAttackOption.class)) + "]");
         log(numOf(LibraryThrowableProjectile.class) + " throwableprojectiles [" + numOf(GURPSObject.getAll(LibraryThrowableProjectile.class)) + "]");
         log(numOf(Skill.class) + " skills [" + numOf(GURPSObject.getAll(Skill.class)) + "]");
+        log(numOf(PersonalityTrait.class) + " personality traits [" + numOf(GURPSObject.getAll(PersonalityTrait.class)) + "]");
         log("\n");
         
         return 1;
@@ -155,16 +181,6 @@ public class ImportTesting {
 		}
 	}
 	    
-    
-    Class<?>[] exclude = { 
-//    		Advantage.class,     		
-//    		LibraryAddon.class, 
-//    		LibraryArmor.class, MeleeAttackOption.class, LibraryMeleeWeapon.class, 
-//    		LibraryRangedWeaponAmmunition.class, LibraryRangedWeapon.class, LibraryShield.class,
-//    		ThrownAttackOption.class, LibraryThrowableProjectile.class,
-//    		Skill.class 
-    		};
-
 	public byte display2() {
         for (GURPSObject go : libraryEverything) {
 //			if (go instanceof GURPSObject) {

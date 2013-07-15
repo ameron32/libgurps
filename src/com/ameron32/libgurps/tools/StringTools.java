@@ -40,6 +40,21 @@ public class StringTools {
         return genList;
     }
     
+    /**
+     * Short method to replace bars "|" in a String to new line breaks "\n"
+     * 
+     * @param s
+     * @return
+     */
+	public static String convertBars(String s) {
+		char[] conversion = s.toCharArray();
+		for (int i = 0; i < conversion.length; i++) {
+			if (conversion[i] == '|')
+				conversion[i] = '\n';
+		}
+		return String.copyValueOf(conversion);
+	}
+    
     public static int getInteger(String s) {
         return ((s == "") ? 0 : Integer.parseInt(s));
     }
