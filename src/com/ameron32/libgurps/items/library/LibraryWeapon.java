@@ -52,11 +52,11 @@ public abstract class LibraryWeapon extends LibraryItem {
      * @param weight
      * @param minST
      */
-    public LibraryWeapon(String weaponId, String group, String name, int numberOfAttacks,
-            int cost, double weight, int minST, String weaponNotes) {
-        super(name, weaponId, cost, 0, // FIXME no TL
+    public LibraryWeapon(String weaponId, String group, String name, String description, int numberOfAttacks,
+            int cost, int tl, double weight, int minST, String weaponNotes, String documentSource) {
+        super(name, weaponId, cost, tl, // FIXME no TL
                 weight, weaponNotes,
-                ""); // FIXME no specialNotes?
+                description, documentSource); 
         this.weaponId = weaponId;
         this.weaponGroup = group;
         this.minST = (short) minST;

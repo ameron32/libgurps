@@ -26,14 +26,14 @@ public class LibraryShield extends LibraryItem  {
      * @param notes
      */
     public LibraryShield(String name, String description, String sId, int tl, String type, String material, String covers, int db, int dr, int hp, 
-            double weight, int cost, String notes) {
+            double weight, int cost, String notes, String documentSource) {
     	// TODO review shield information below
 //        super(description, sId, cost, 0, weight, notes, material + ", " + type, material, 
 //                new String[] { }, // FIXME should have cover but doesn't for testing
 //                dr, 
 //                0, 0 // FIXME should have don and holdout, if only 0, from data source
 //                );
-        super(name, sId, cost, tl, weight, notes, description
+        super(name, sId, cost, tl, weight, notes, description, documentSource
 //        		sId, description, material, 
 //        		covers, tl,
 //        		dr, cost, weight, 

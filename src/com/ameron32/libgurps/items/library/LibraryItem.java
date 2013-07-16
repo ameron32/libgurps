@@ -14,8 +14,15 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
     ItemType itemType;
 
     String specialNotes;
-
-//Consider rewrite    
+    
+    String documentSource;
+    
+    /* ADDED CATEGORY FIELD */
+    String itemCategory; 
+    public String getCategory() { return itemCategory; } 
+    public void setCategory(String itemCategory) { this.itemCategory = itemCategory; } 
+    
+    //Consider rewrite    
 //    /**
 //     * Standard Constructor
 //     * 
@@ -71,11 +78,12 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
      * @param description
      */
     public LibraryItem(String name, String sId, int cost, int tl,
-			double weight, String notes, String description) {
+			double weight, String notes, String description, String documentSource) {
       super("random");
       setName(name);
       setDescription(description);
       setSID(sId);
+      setDocumentSource(documentSource);
       
       this.cost = cost;
       this.tl = (short)tl;
@@ -155,7 +163,7 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
 
 	@Override
 	public void setSID(String sId) {
-		this.setSID(sId);
+		super.setSID(sId);
 	}
 
 	@Override
@@ -167,6 +175,9 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
 				+ StringTools.truncate(this.getDescription(), 50) + "     id: "
 				+ this.getObjectId() + "\n";
 	}
+
+
+
 	
 	/* HARVEST for toString()
     @Override
@@ -179,5 +190,15 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
                 ;
     }
     */
+
+	@Override
+	public String getDocumentSource() {
+		return documentSource;
+	}
+
+	@Override
+	public void setDocumentSource(String documentSource) {
+		this.documentSource = documentSource;
+	}
 
 }

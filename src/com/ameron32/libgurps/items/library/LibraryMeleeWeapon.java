@@ -32,9 +32,9 @@ public class LibraryMeleeWeapon extends LibraryWeapon {
      * @param armorDivisor
      * @param weaponNotes
      */
-    public LibraryMeleeWeapon(String weaponId, String group, String name, int numberOfAttacks, int cost, double weight, int minST,
-            boolean throwable, boolean cannotParry, int breakage, double armorDivisor, String weaponNotes) {
-        super(weaponId, group, name, numberOfAttacks, cost, weight, minST, weaponNotes);
+    public LibraryMeleeWeapon(String weaponId, String group, String name, String description, int numberOfAttacks, int cost, int tl, double weight, int minST,
+            boolean throwable, boolean cannotParry, int breakage, double armorDivisor, String weaponNotes, String documentSource) {
+        super(weaponId, group, name, description, numberOfAttacks, cost, tl, weight, minST, weaponNotes, documentSource);
         this.throwable = throwable;
         this.cannotParry = cannotParry;
         this.breakage = (byte) breakage;

@@ -69,10 +69,10 @@ public class LibraryArmor extends LibraryItem {
      * @param don
      * @param holdout
      */
-    public LibraryArmor(String sId, String name, String material, String covers, int tl, int dr,
-            int cost, double weight, int don, int holdout) {
+    public LibraryArmor(String sId, String name, String description, String material, String covers, int tl, int dr,
+            int cost, double weight, int don, int holdout, String documentSource) {
         super(name, sId, cost, tl, weight, 
-                "", ""); // FIXME shouldn't be blank
+                "", "", documentSource); // FIXME shouldn't be blank
         this.covers = StringTools.genList(covers).toArray(new String[0]);
         this.material = material;
         this.dr = (short) dr;

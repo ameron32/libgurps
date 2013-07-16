@@ -40,12 +40,15 @@ public class LibraryRangedWeapon extends LibraryWeapon{
      * @param minST 
      * @param specialNotes
      */
-    public LibraryRangedWeapon(String sId, String group, String type, String weapon, String damageType,
+    public LibraryRangedWeapon(String sId, String group, String type, String weapon, String description, String damageType,
             String baseDamage, int rollModifier,
             String damageAmountString, int accuracy, double halfDamageRange, double maxRange,
-            double weight, int cost, int minST, int bulk, String specialNotes) {       
+            double weight, int cost, int tl, int minST, int bulk, String specialNotes, String documentSource) {       
         
-        super(sId, group, weapon, 1, cost, weight, minST, specialNotes);
+        super(sId, group, weapon, description, 1, // only 1 attack on import
+        		cost, tl, weight, minST, specialNotes, documentSource
+//        		sId, group, weapon, 1, cost, weight, minST, specialNotes, documentSource
+        		);
 //        * @param damageType  // no damageType needed on ranged currently
         this.type = baseDamage; 
 //        * @param rollModifier

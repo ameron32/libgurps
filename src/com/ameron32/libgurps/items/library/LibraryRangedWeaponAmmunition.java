@@ -19,9 +19,9 @@ public class LibraryRangedWeaponAmmunition extends LibraryProjectile {
 	 * @param specialNotes
 	 */
 	public LibraryRangedWeaponAmmunition(String sId, String group,
-			String type, String name, String damageType, double modifier,
-			double weight, int cost, String specialNotes) {
-		super(sId, name, damageType, modifier, weight, cost, specialNotes);
+			String type, String name, String description, String damageType, double modifier,
+			double weight, int cost, int tl, String specialNotes, String documentSource) {
+		super(sId, name, description, damageType, modifier, weight, cost, tl, specialNotes, documentSource);
 		this.setGroup(group);
 		this.setType(type);
 	}

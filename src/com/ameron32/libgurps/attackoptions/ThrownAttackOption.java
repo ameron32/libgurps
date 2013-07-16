@@ -15,7 +15,7 @@ public class ThrownAttackOption extends AttackOption {
     
     public ThrownAttackOption(String damageType, Roll damage) {
         super(damageType, damage,
-        		"x0", "x0", "x0");
+        		"x0", "x0", "x0", "x0", "x0", "x0");
         // TODO Auto-generated constructor stub
     }
     
@@ -38,16 +38,17 @@ public class ThrownAttackOption extends AttackOption {
      * @param iMinST
      * @param iBulk
      * @param sSpecialNotes
+     * @param documentSource 
      */
-    public ThrownAttackOption(String sId, String sWeaponId, String sGroup, String sWeapon,
+    public ThrownAttackOption(String sId, String name, String description, String sWeaponId, String sGroup, String sWeapon,
             String damageType, String sBaseDamage, int iModifier, String sAmt, int iAcc,
             Double fHalfDmgRangeAtSTx, Double fMaxDmgRangeAtSTx, 
           //  Double fWeight, int iCost, 
             int iMinST, 
           //  int iBulk, 
-            String sSpecialNotes) {
+            String sSpecialNotes, String documentSource) {
         super(damageType, null,
-        		sId, sWeaponId, sGroup); // FIXME null roll
+        		sId, name, description, sWeaponId, sGroup, documentSource); // FIXME null roll
         weaponName = sWeapon;
         baseRoll = BaseRoll.getBaseRollFromAbbrev(sBaseDamage);
         modifier = iModifier;

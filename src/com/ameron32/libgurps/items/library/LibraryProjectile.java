@@ -22,15 +22,14 @@ public class LibraryProjectile extends LibraryItem {
      * @param cost
      * @param specialNotes
      */
-	public LibraryProjectile(String sId, String name, String damageType, double damageBoost,
-			double weight, int cost, String specialNotes) {
-		super(name, sId, cost, 0, // needs TL
-				weight, specialNotes, "");
+	public LibraryProjectile(String sId, String name, String description, String damageType, double damageBoost,
+			double weight, int cost, int tl, String specialNotes, String documentSource) {
+		super(name, sId, cost, tl, // needs TL
+				weight, specialNotes, description, documentSource);
 		setSID(sId);
 		this.damageBoost = (float) damageBoost; // TODO double check the math on this
 		this.damageType = DamageType.valueOf(damageType);
 //		this.quantityOnHand = 0;
-		setObjectType(ObjectType.LibraryObject);
 	}
 
 	@Override

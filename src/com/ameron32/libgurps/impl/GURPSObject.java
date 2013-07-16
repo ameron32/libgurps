@@ -201,7 +201,7 @@ public abstract class GURPSObject implements Serializable {
     	return name;
     }
 	
-	protected void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
     
@@ -209,7 +209,7 @@ public abstract class GURPSObject implements Serializable {
     	return description;
     }
     
-    protected void setDescription(String description) {
+    public void setDescription(String description) {
     	this.description = description;
     }
     
@@ -217,7 +217,7 @@ public abstract class GURPSObject implements Serializable {
     	return sId;
     }
     
-    protected void setSID(String sId) {
+    public void setSID(String sId) {
     	this.sId = sId;
     }
     

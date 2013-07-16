@@ -15,6 +15,7 @@ import com.ameron32.libgurps.character.stats.Skill;
 import com.ameron32.libgurps.impl.GURPSObject;
 import com.ameron32.libgurps.items.library.LibraryAddon;
 import com.ameron32.libgurps.items.library.LibraryArmor;
+import com.ameron32.libgurps.items.library.LibraryItem;
 import com.ameron32.libgurps.items.library.LibraryMeleeWeapon;
 import com.ameron32.libgurps.items.library.LibraryRangedWeapon;
 import com.ameron32.libgurps.items.library.LibraryRangedWeaponAmmunition;
@@ -108,9 +109,9 @@ public class Importer {
                             readThrownWeaponOption(appendToThisList, ver);
                             break;
 
-//                        case Item:
-//                            
-//                           break;
+                        case Item:
+                            readGenericItem(appendToThisList, ver);
+                           break;
                             
                         case Addon:
                         	readAttachment(appendToThisList, ver);
@@ -269,29 +270,48 @@ public class Importer {
         list.add(oneSkill);
     }
     
+    private void readGenericItem(List<GURPSObject> list, int ver)
+            throws IOException, FileNotFoundException {
+    	
+    	/*
+    	 * Import version 158
+    	 */
+    	LibraryItem oneItem = new LibraryItem(
+    			getString("sName"),
+    			getString("sId"),
+    			getInt("iCost"),
+    			getInt("iTL"),
+    			getDouble("fWeight"),
+    			getString("sSpecialNotes"),
+    			getString("sDescription"),
+    			getString("sDocumentSource")
+    			);
+    	oneItem.setCategory(getString("sGroup"));
+    	list.add(oneItem);
+    }
+    
+    
     private void readShield(List<GURPSObject> list, int ver)
             throws IOException, FileNotFoundException {
 
         /*
-         * Import version 157
+         * Import version 158
          */
         LibraryShield oneShield = new LibraryShield(
                 getString("sName"),
                 getString("sDescription"),
                 getString("sId"),
                 getInt("iTL"),
-                
-                
                 getString("sType"),
                 getString("sMaterial"),
                 getString("sCoversDetail"),
-                
                 getInt("iDB"),
                 getInt("iDR"),
                 getInt("iHits"),
                 getDouble("fWeight"),     // getDouble("iWeight"),
                 getInt("iCost"),
-                getString("sNotes")
+                getString("sNotes"),
+                getString("sDocumentSource")
                 );
         
         list.add(oneShield);
@@ -301,19 +321,22 @@ public class Importer {
             throws IOException, FileNotFoundException {
     
         /*
-         * Import version 156
+         * Import version 158
          */
         LibraryArmor oneArmor = new LibraryArmor(
                 getString("sId"),
                 getString("sName"),
+                getString("sDescription"),
                 getString("sMaterial"),
-                getString("sCovers"),
+                getString("sCoversDetail"), // TODO verify?
                 getInt("iTL"),
                 getInt("iDR"),
                 getInt("iCost"),
                 getDouble("fWeight"),
                 getInt("iDon"),
-                getInt("iHoldout"));
+                getInt("iHoldout"),
+                getString("sDocumentSource")
+                );
         oneArmor.setSpecialModifiers(        
                 getInt("iVsCr"),
                 getInt("iVsImp"),
@@ -338,21 +361,24 @@ public class Importer {
             throws IOException, FileNotFoundException {
         
         /*
-         * Import version 156
+         * Import version 158
          */
     	LibraryMeleeWeapon oneMeleeWeapon = new LibraryMeleeWeapon(
                 getString("sId"),
                 getString("sGroup"),
                 getString("sName"),
+                getString("sDescription"),
                 getInt("iNumberOfAttacks"),
-                getInt("iCalcCost"),
-                getDouble("fCalcWeight"),
+                getInt("iCost"),
+                getInt("iTL"),
+                getDouble("fWeight"),
                 getInt("iMinST"),
                 getBoolean("bThrowable"),
                 getBoolean("bCannotParry"),
                 getInt("iBreakageQuality"),
                 getDouble("fArmorDivisor"),
-                getString("sWeaponNotes")
+                getString("sSpecialNotes"),
+                getString("sDocumentSource")
                 );
         list.add(oneMeleeWeapon);
     }
@@ -361,60 +387,14 @@ public class Importer {
             throws IOException, FileNotFoundException {
         
         /*
-         * Import version 156
+         * Import version 158
          */
     	LibraryRangedWeapon oneRangedWeapon = new LibraryRangedWeapon(
                 getString("sId"),
                 getString("sGroup"),
                 getString("sType"),
-                getString("sWeapon"),
-                getString("sDamageType"),
-                getString("sBaseDamage"),
-                getInt("iModifier"),
-                getString("sAmt"),
-                getInt("iAcc"),
-                getDouble("dHalfDmgRangeAtSTx"),
-                getDouble("dMaxDmgRangeAtSTx"),
-                getDouble("dWeight"),
-                getInt("iCost"),
-                getInt("iMinST"),
-                getInt("iBulk"),
-                getString("sSpecialNotes")
-                );
-        list.add(oneRangedWeapon);
-    }
-    
-    private void readRangedWeaponAmmo(List<GURPSObject> list, int ver) 
-            throws IOException, FileNotFoundException {
-        
-        /*
-         * Import version 157
-         */
-    	LibraryRangedWeaponAmmunition oneRangedWeaponAmmunition = new LibraryRangedWeaponAmmunition(
-                getString("sId"),
-                getString("sGroup"),
-                getString("sType"),
-                getString("sWeapon"),
-                getString("sDamageType"),
-                getDouble("fModifier"),
-                getDouble("fWeight"),
-                getInt("iCost"),
-                getString("sSpecialNotes")
-                );
-        list.add(oneRangedWeaponAmmunition);
-    }
-    
-    private void readThrowableProjectile(List<GURPSObject> list, int ver) 
-            throws IOException, FileNotFoundException {
-        
-        /*
-         * Import version 156
-         */
-    	LibraryThrowableProjectile oneThrowableProjectile = new LibraryThrowableProjectile(
-                getString("sId"),
-                getString("sGroup"),
-                getString("sType"),
-                getString("sWeapon"),
+                getString("sName"),
+                getString("sDescription"),
                 getString("sDamageType"),
                 getString("sBaseDamage"),
                 getInt("iModifier"),
@@ -424,9 +404,64 @@ public class Importer {
                 getDouble("fMaxDmgRangeAtSTx"),
                 getDouble("fWeight"),
                 getInt("iCost"),
+                getInt("iTL"),
                 getInt("iMinST"),
                 getInt("iBulk"),
-                getString("sSpecialNotes")
+                getString("sSpecialNotes"),
+                getString("sDocumentSource")
+                );
+        list.add(oneRangedWeapon);
+    }
+    
+    private void readRangedWeaponAmmo(List<GURPSObject> list, int ver) 
+            throws IOException, FileNotFoundException {
+        
+        /*
+         * Import version 158
+         */
+    	LibraryRangedWeaponAmmunition oneRangedWeaponAmmunition = new LibraryRangedWeaponAmmunition(
+                getString("sId"),
+                getString("sGroup"),
+                getString("sType"),
+                getString("sName"),
+                getString("sDescription"),
+                getString("sDamageType"),
+                getDouble("fModifier"),
+                getDouble("fWeight"),
+                getInt("iCost"),
+                getInt("iTL"),
+                getString("sSpecialNotes"),
+                getString("sDocumentSource")
+                );
+        list.add(oneRangedWeaponAmmunition);
+    }
+    
+    private void readThrowableProjectile(List<GURPSObject> list, int ver) 
+            throws IOException, FileNotFoundException {
+        
+        /*
+         * Import version 158
+         */
+    	LibraryThrowableProjectile oneThrowableProjectile = new LibraryThrowableProjectile(
+                getString("sId"),
+                getString("sGroup"),
+                getString("sType"),
+                getString("sName"),
+                getString("sDescription"),
+                getString("sDamageType"),
+                getString("sBaseDamage"),
+                getInt("iModifier"),
+                getString("sAmt"),
+                getInt("iAcc"),
+                getDouble("fHalfDmgRangeAtSTx"),
+                getDouble("fMaxDmgRangeAtSTx"),
+                getDouble("fWeight"),
+                getInt("iCost"),
+                getInt("iTL"),
+                getInt("iMinST"),
+                getInt("iBulk"),
+                getString("sSpecialNotes"),
+                getString("sDocumentSource")
                 ); 
         list.add(oneThrowableProjectile);
     }
@@ -435,10 +470,12 @@ public class Importer {
             throws IOException, FileNotFoundException {
         
         /*
-         * Import version 156
+         * Import version 158
          */
     	MeleeAttackOption oneMWOption = new MeleeAttackOption(
                 getString("sId"),
+                getString("sName"),
+                getString("sDescription"),
     			getString("sWeaponId"),
                 getString("sGroup"),
                 getInt("iAttack"),
@@ -449,7 +486,8 @@ public class Importer {
                 getString("sAmt"),
                 getString("liReach"),
                 getInt("iMinST"),
-                getString("sAttackNotes")
+                getString("sSpecialNotes"),
+                getString("sDocumentSource")
                 );
         list.add(oneMWOption);
     }
@@ -458,18 +496,21 @@ public class Importer {
 			throws IOException, FileNotFoundException {
 
 		/*
-		 * Import version 156
+		 * Import version 158
 		 */
 		LibraryAddon addon = new LibraryAddon(
 				getString("sId"),
-				getString("sType"),
+				getString("sGroup"),
 				getString("sAttachTo"),
+				getString("sName"),
 				getString("sDescription"),
 				getString("sMaterial"),
 				getDouble("fWeight"),
 				getInt("iCost"),
+				getInt("iTL"),
 				getInt("iMinST"),
-				getString("sNotes")
+				getString("sSpecialNotes"),
+				getString("sDocumentSource")
 				);
 		list.add(addon);
 	}
@@ -478,10 +519,12 @@ public class Importer {
             throws IOException, FileNotFoundException {
         
         /*
-         * Import version 156
+         * Import version 158
          */
     	ThrownAttackOption oneTWOption = new ThrownAttackOption(
                 getString("sId"), 
+                getString("sName"),
+                getString("sDescription"),
                 getString("sWeaponId"), 
                 getString("sGroup"),
                 getString("sWeapon"), 
@@ -496,7 +539,8 @@ public class Importer {
 //                getInt("iCost"), 
                 getInt("iMinST"), 
 //                getInt("iBulk"),
-                getString("sSpecialNotes")
+                getString("sSpecialNotes"),
+                getString("sDocumentSource")
                 );
         list.add(oneTWOption);
     }        
@@ -519,6 +563,7 @@ public class Importer {
     }
 
     private String getString(String s) throws IOException, FileNotFoundException {
-        return fileReader.get(s);
+    	String t = fileReader.get(s);
+    	return t.replace("Â", "");
     }
 }

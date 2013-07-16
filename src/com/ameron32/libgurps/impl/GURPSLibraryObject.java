@@ -15,7 +15,7 @@ public abstract class GURPSLibraryObject extends GURPSObject {
 
 	@Override
 	public String toString() {
-		return super.toString() + "\n" + super.getName() + "[" + objectType.name() + "]";
+		return super.toString() + super.getName() + "[" + objectType.name() + "]";
 	}
 
 }

@@ -77,4 +77,21 @@ public class TestingTools {
         out.close();
     }
     
+	public static <T> int numOf(Class<T> c) {
+		int count = 0;
+		for (GURPSObject go : ImportTesting.getEverything()) {
+			if (c.isInstance(go))
+				count++;
+		}
+		return count;
+	}
+
+	public static <T> int numOf(List<GURPSObject> lGO) {
+		int count = 0;
+		for (GURPSObject go : lGO) {
+			count++;
+		}
+		return count;
+	}
+    
 }

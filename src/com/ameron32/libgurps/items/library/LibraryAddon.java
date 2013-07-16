@@ -4,6 +4,7 @@ public class LibraryAddon extends LibraryItem {
     private static final long serialVersionUID = 8995766780255219350L;
 	
     private String material, attachTo, type;
+    int minST;
 
     /**
      * Importer constructor
@@ -18,12 +19,13 @@ public class LibraryAddon extends LibraryItem {
      * @param minST
      * @param notes
      */
-    public LibraryAddon(String sId, String type, String attachTo, String name, String material, double weight, int cost, int minST, String notes) {
-    	super(name, sId, cost, 0, // needs TL
-    			weight, notes, "");
+    public LibraryAddon(String sId, String type, String attachTo, String name, String description, String material, double weight, int cost, int tl, int minST, String notes, String documentSource) {
+    	super(name, sId, cost, tl,
+    			weight, notes, description, documentSource);
     	this.type = type;
     	this.attachTo = attachTo;
     	this.material = material;
+    	this.minST = minST;
     }
 
 	@Override

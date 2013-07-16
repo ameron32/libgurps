@@ -24,7 +24,7 @@ public class MeleeAttackOption extends AttackOption {
 
     public MeleeAttackOption(String damageType, Roll damage, short[] reach) {
         super(damageType, damage, 
-        		"x0", "x0", "x0"); // FIXME not accurate
+        		"x0", "x0", "x0", "x0", "x0", "x0"); // FIXME not accurate
         this.reach = reach;
     }
     
@@ -44,10 +44,11 @@ public class MeleeAttackOption extends AttackOption {
      * @param minST
      * @param attackNotes
      */
-    public MeleeAttackOption(String sId, String weaponId, String group, int attackNumber, String weaponName, 
+    public MeleeAttackOption(String sId, String name, String description, String weaponId, String group, int attackNumber, String weaponName,
             String damageType, String baseRoll, int modifier, String damageDescription, String loReachChoices,
-            int minST, String attackNotes) {
-        super(damageType, new Roll(), sId, weaponId, group);
+            int minST, String attackNotes, String documentSource) {
+        super(damageType, new Roll(), sId, name, description, weaponId, group, documentSource);
+        
         this.weaponId = weaponId;
         this.group = group;
         this.attackNumber = (short) attackNumber;
@@ -88,5 +89,5 @@ public class MeleeAttackOption extends AttackOption {
                 + "\n" + "      " + "loReachChoices=[" + loReachChoices
                 + "], attackNumber=" + attackNumber + ", minST=" + minST + "";
     }
-    
+
 }

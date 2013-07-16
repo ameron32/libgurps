@@ -15,11 +15,18 @@ public abstract class AttackOption extends GURPSObject implements CharacterAmpli
     String damageDescription;
     LibraryWeapon attackOptionFor;
     
-    public AttackOption(String damageType, Roll damage, String sId, String weaponId, String group) {
+    String documentSource;
+    
+    public AttackOption(String damageType, Roll damage, String sId, String name, String description, 
+    		String weaponId, String group, String documentSource) {
         super("random");
     	this.damageType = Damage.getDamageTypeByString(damageType);
         this.damage = damage;
         setSID(sId);
+        setName(name);
+        setDescription(description);
+        setDocumentSource(documentSource);
+        
         this.weaponId = weaponId;
         this.group = group;
     }
@@ -59,22 +66,18 @@ public abstract class AttackOption extends GURPSObject implements CharacterAmpli
     	attackOptionFor = governingWeapon;
     }
     
-    public String detailString() {
-    	return this.toString();
-    }
-    
     public String getWeaponId() {
         return weaponId;
     }
-    
-    @Override
-    public String getName() {
-    	return damageDescription;
-    }
-    
-    @Override
-    public void setSID(String sId) {
-    	super.setSID(sId);
-    }
-    
+
+	@Override
+	public String getDocumentSource() {
+		return documentSource;
+	}
+
+	@Override
+	public void setDocumentSource(String documentSource) {
+		this.documentSource = documentSource;
+	}
+	
 }

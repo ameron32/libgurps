@@ -50,7 +50,7 @@ public class ImportTesting {
     
     // libraryEverything to store all imported elements
     private static final List<GURPSObject> libraryEverything = new ArrayList<GURPSObject>();
-    public List<GURPSObject> getEverything() { return libraryEverything; }
+    public static List<GURPSObject> getEverything() { return libraryEverything; }
     
     // settings, including the directory to find the downloaded/saved files
     private static String dirPath;
@@ -58,21 +58,19 @@ public class ImportTesting {
     
     // list of files to import
     private static final String[][] allFiles = new String[][] { 
-//            { "adv158-modifications.csv", "Advantage" },
     	{ "LT-ArmorWeaponsAdvSkills-Advantages.csv", "Advantage" } ,
-//            { "item156-armor.csv", "Armor" },
-//            { "item156-attachments.csv", "Addon" },
-//            { "item156-meleeattackoptions.csv", "MeleeWeaponOption" },
-//            { "item156-meleeweapons.csv", "MeleeWeapon" },
-//            { "item156-rangedammo.csv", "RangedWeaponAmmo" },
-//            { "item156-rangedweapons.csv", "RangedWeapon" },
-//            { "item156-shield.csv", "Shield" },
-//            { "item156-thrownattackoptions.csv", "ThrownWeaponOption" },
-//            { "item156-thrownweapons.csv", "ThrownProjectile" },
-//            { "skills158-wdefaults.csv", "Skill" },
+    	{ "LT-ArmorWeaponsAdvSkills-Armor.csv", "Armor" } ,
+    	{ "LT-ArmorWeaponsAdvSkills-Attachments.csv", "Addon" } ,
+        { "LT-ArmorWeaponsAdvSkills-MeleeAttackOptions.csv", "MeleeWeaponOption" } ,
+    	{ "LT-ArmorWeaponsAdvSkills-MeleeWeapons.csv", "MeleeWeapon" } ,
+    	{ "LT-ArmorWeaponsAdvSkills-RangedWeapons.csv", "RangedWeapon" } ,
+    	{ "LT-ArmorWeaponsAdvSkills-Ammo.csv", "RangedWeaponAmmo" } ,
+        { "LT-ArmorWeaponsAdvSkills-Shield.csv", "Shield" } ,
+        { "LT-ArmorWeaponsAdvSkills-ThrownAttackOptions.csv", "ThrownWeaponOption" } ,
+        { "LT-ArmorWeaponsAdvSkills-ThrownProjectiles.csv", "ThrownProjectile" } ,
     	{ "LT-ArmorWeaponsAdvSkills-Skills.csv", "Skill" } ,
-//            { "personalitytraits158.csv", "PersonalityTrait" }
-    	{ "LT-ArmorWeaponsAdvSkills-PersonalityTraits.csv" , "PersonalityTrait" }
+    	{ "LT-ArmorWeaponsAdvSkills-PersonalityTraits.csv" , "PersonalityTrait" } ,
+    	{ "LT-ArmorWeaponsAdvSkills-Items.csv" , "Item" }
     };
     public static String[] getAllFilenames() { 
     	List<String> fileNames = new ArrayList<String>();
@@ -82,7 +80,8 @@ public class ImportTesting {
     	return fileNames.toArray(new String[0]);
     }
     
-	Class<?>[] exclude = {
+	private static final Class<?>[] exclude = {
+	// LibraryItem.class,
 	// Advantage.class,
 	// LibraryAddon.class,
 	// LibraryArmor.class, MeleeAttackOption.class, LibraryMeleeWeapon.class,
@@ -92,6 +91,9 @@ public class ImportTesting {
 	// Skill.class,
 	// PersonalityTrait.class
 	};
+	public static Class<?>[] getExcludes() {
+		return exclude;
+	}
     
     
     
@@ -140,18 +142,19 @@ public class ImportTesting {
     public byte display1() {
 
     	log("\n" + libraryEverything.size() + " total items");
-        log(numOf(Advantage.class) + " advantages [" + numOf(GURPSObject.getAll(Advantage.class)) + "]");
-        log(numOf(LibraryArmor.class) + " armors [" + numOf(GURPSObject.getAll(LibraryArmor.class)) + "]");
-        log(numOf(LibraryAddon.class) + " addons [" + numOf(GURPSObject.getAll(LibraryAddon.class)) + "]");
-        log(numOf(MeleeAttackOption.class) + " meleeattackoptions [" + numOf(GURPSObject.getAll(MeleeAttackOption.class)) + "]");
-        log(numOf(LibraryMeleeWeapon.class) + " meleeweapons [" + numOf(GURPSObject.getAll(LibraryMeleeWeapon.class)) + "]");
-        log(numOf(LibraryRangedWeaponAmmunition.class) + " rangedweaponammo [" + numOf(GURPSObject.getAll(LibraryRangedWeaponAmmunition.class)) + "]");
-        log(numOf(LibraryRangedWeapon.class) + " rangedweapons [" + numOf(GURPSObject.getAll(LibraryRangedWeapon.class)) + "]");
-        log(numOf(LibraryShield.class) + " shields [" + numOf(GURPSObject.getAll(LibraryShield.class)) + "]");
-        log(numOf(ThrownAttackOption.class) + " thrownattackoptions [" + numOf(GURPSObject.getAll(ThrownAttackOption.class)) + "]");
-        log(numOf(LibraryThrowableProjectile.class) + " throwableprojectiles [" + numOf(GURPSObject.getAll(LibraryThrowableProjectile.class)) + "]");
-        log(numOf(Skill.class) + " skills [" + numOf(GURPSObject.getAll(Skill.class)) + "]");
-        log(numOf(PersonalityTrait.class) + " personality traits [" + numOf(GURPSObject.getAll(PersonalityTrait.class)) + "]");
+        log(TestingTools.numOf(Advantage.class) + " advantages [" + TestingTools.numOf(GURPSObject.getAll(Advantage.class)) + "]");
+        log(TestingTools.numOf(LibraryArmor.class) + " armors [" + TestingTools.numOf(GURPSObject.getAll(LibraryArmor.class)) + "]");
+        log(TestingTools.numOf(LibraryAddon.class) + " addons [" + TestingTools.numOf(GURPSObject.getAll(LibraryAddon.class)) + "]");
+        log(TestingTools.numOf(MeleeAttackOption.class) + " meleeattackoptions [" + TestingTools.numOf(GURPSObject.getAll(MeleeAttackOption.class)) + "]");
+        log(TestingTools.numOf(LibraryMeleeWeapon.class) + " meleeweapons [" + TestingTools.numOf(GURPSObject.getAll(LibraryMeleeWeapon.class)) + "]");
+        log(TestingTools.numOf(LibraryRangedWeaponAmmunition.class) + " rangedweaponammo [" + TestingTools.numOf(GURPSObject.getAll(LibraryRangedWeaponAmmunition.class)) + "]");
+        log(TestingTools.numOf(LibraryRangedWeapon.class) + " rangedweapons [" + TestingTools.numOf(GURPSObject.getAll(LibraryRangedWeapon.class)) + "]");
+        log(TestingTools.numOf(LibraryShield.class) + " shields [" + TestingTools.numOf(GURPSObject.getAll(LibraryShield.class)) + "]");
+        log(TestingTools.numOf(ThrownAttackOption.class) + " thrownattackoptions [" + TestingTools.numOf(GURPSObject.getAll(ThrownAttackOption.class)) + "]");
+        log(TestingTools.numOf(LibraryThrowableProjectile.class) + " throwableprojectiles [" + TestingTools.numOf(GURPSObject.getAll(LibraryThrowableProjectile.class)) + "]");
+        log(TestingTools.numOf(Skill.class) + " skills [" + TestingTools.numOf(GURPSObject.getAll(Skill.class)) + "]");
+        log(TestingTools.numOf(PersonalityTrait.class) + " personality traits [" + TestingTools.numOf(GURPSObject.getAll(PersonalityTrait.class)) + "]");
+        log(TestingTools.numOf(LibraryItem.class) + " generic items [" + TestingTools.numOf(GURPSObject.getAll(LibraryItem.class)) + "]");
         log("\n");
         
         return 1;
@@ -278,21 +281,4 @@ public class ImportTesting {
 //        }
 //  }
     
-	private <T> int numOf(Class<T> c) {
-		int count = 0;
-		for (GURPSObject go : libraryEverything) {
-			if (c.isInstance(go))
-				count++;
-		}
-		return count;
-	}
-
-	private <T> int numOf(List<GURPSObject> lGO) {
-		int count = 0;
-		for (GURPSObject go : lGO) {
-			count++;
-		}
-		return count;
-	}
-	
 }

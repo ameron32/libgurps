@@ -17,7 +17,7 @@ public class RangedAttackOption extends AttackOption {
     
     public RangedAttackOption(String damageType, Roll damage, ProjectileBucket pb) {
         super(damageType, damage,
-        		"x0", "x0", "x0");
+        		"x0", "x0", "x0", "x0", "x0", "x0");
         this.projectileBucket = pb;
         // TODO repair this
     }
