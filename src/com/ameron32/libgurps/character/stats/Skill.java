@@ -2,10 +2,11 @@ package com.ameron32.libgurps.character.stats;
 
 import java.util.ArrayList;
 
+import com.ameron32.libgurps.frmwk.Importable;
 import com.ameron32.libgurps.impl.GURPSLibraryObject;
 import com.ameron32.libgurps.tools.StringTools;
 
-public class Skill extends GURPSLibraryObject {
+public class Skill extends GURPSLibraryObject implements Importable {
 	private static final long serialVersionUID = 7662647146533261471L;
 	
     private int importVersion = 0;
@@ -266,6 +267,15 @@ public class Skill extends GURPSLibraryObject {
 		return lsCategoriesAndSubCategories;
 	}
 
+	@Override
+	public String getDocumentSource() {
+		return sDocumentSource;
+	}
+
+	@Override
+	public void setDocumentSource(String documentSource) {
+		this.sDocumentSource = documentSource;
+	}
 	
 	/* HARVEST for new toString()
     @Override

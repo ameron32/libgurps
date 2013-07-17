@@ -80,7 +80,7 @@ public class TestingTools {
 	public static <T> int numOf(Class<T> c) {
 		int count = 0;
 		for (GURPSObject go : ImportTesting.getEverything()) {
-			if (c.isInstance(go))
+			if (c.isInstance(go) && c.getSimpleName().equals(go.getClass().getSimpleName()))
 				count++;
 		}
 		return count;

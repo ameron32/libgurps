@@ -17,6 +17,7 @@ import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 import com.ameron32.libgurps.attackoptions.ThrownAttackOption;
 import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
+import com.ameron32.libgurps.character.stats.Technique;
 import com.ameron32.libgurps.impl.GURPSLibraryObject;
 import com.ameron32.libgurps.impl.GURPSObject;
 import com.ameron32.libgurps.items.library.LibraryAddon;
@@ -69,6 +70,7 @@ public class ImportTesting {
         { "LT-ArmorWeaponsAdvSkills-ThrownAttackOptions.csv", "ThrownWeaponOption" } ,
         { "LT-ArmorWeaponsAdvSkills-ThrownProjectiles.csv", "ThrownProjectile" } ,
     	{ "LT-ArmorWeaponsAdvSkills-Skills.csv", "Skill" } ,
+    	{ "LT-ArmorWeaponsAdvSkills-Techniques.csv", "Technique" } ,
     	{ "LT-ArmorWeaponsAdvSkills-PersonalityTraits.csv" , "PersonalityTrait" } ,
     	{ "LT-ArmorWeaponsAdvSkills-Items.csv" , "Item" }
     };
@@ -81,15 +83,16 @@ public class ImportTesting {
     }
     
 	private static final Class<?>[] exclude = {
-	// LibraryItem.class,
-	// Advantage.class,
-	// LibraryAddon.class,
-	// LibraryArmor.class, MeleeAttackOption.class, LibraryMeleeWeapon.class,
-	// LibraryRangedWeaponAmmunition.class, LibraryRangedWeapon.class,
-	// LibraryShield.class,
-	// ThrownAttackOption.class, LibraryThrowableProjectile.class,
-	// Skill.class,
-	// PersonalityTrait.class
+//	 LibraryItem.class,
+//	 Advantage.class,
+//	 Skill.class,
+//   Technique.class,
+//	 LibraryAddon.class,
+//	 LibraryArmor.class, MeleeAttackOption.class, LibraryMeleeWeapon.class,
+//	 LibraryRangedWeaponAmmunition.class, LibraryRangedWeapon.class,
+//	 LibraryShield.class,
+//	 ThrownAttackOption.class, LibraryThrowableProjectile.class,
+//	 PersonalityTrait.class
 	};
 	public static Class<?>[] getExcludes() {
 		return exclude;
@@ -153,6 +156,7 @@ public class ImportTesting {
         log(TestingTools.numOf(ThrownAttackOption.class) + " thrownattackoptions [" + TestingTools.numOf(GURPSObject.getAll(ThrownAttackOption.class)) + "]");
         log(TestingTools.numOf(LibraryThrowableProjectile.class) + " throwableprojectiles [" + TestingTools.numOf(GURPSObject.getAll(LibraryThrowableProjectile.class)) + "]");
         log(TestingTools.numOf(Skill.class) + " skills [" + TestingTools.numOf(GURPSObject.getAll(Skill.class)) + "]");
+        log(TestingTools.numOf(Technique.class) + " techniques [" + TestingTools.numOf(GURPSObject.getAll(Technique.class)) + "]");
         log(TestingTools.numOf(PersonalityTrait.class) + " personality traits [" + TestingTools.numOf(GURPSObject.getAll(PersonalityTrait.class)) + "]");
         log(TestingTools.numOf(LibraryItem.class) + " generic items [" + TestingTools.numOf(GURPSObject.getAll(LibraryItem.class)) + "]");
         log("\n");

@@ -12,6 +12,7 @@ import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 import com.ameron32.libgurps.attackoptions.ThrownAttackOption;
 import com.ameron32.libgurps.character.stats.Advantage;
 import com.ameron32.libgurps.character.stats.Skill;
+import com.ameron32.libgurps.character.stats.Technique;
 import com.ameron32.libgurps.impl.GURPSObject;
 import com.ameron32.libgurps.items.library.LibraryAddon;
 import com.ameron32.libgurps.items.library.LibraryArmor;
@@ -25,7 +26,7 @@ import com.ameron32.testing.ImportTesting;
 
 public class Importer {
     public enum ImportType {
-        Advantage, Skill,
+        Advantage, Skill, Technique,
         Item,
         MeleeWeapon, MeleeWeaponOption, 
         RangedWeapon, RangedWeaponAmmo, 
@@ -76,6 +77,10 @@ public class Importer {
                         case Skill:
                             readSkill(appendToThisList, ver);
                             break;
+                            
+                        case Technique:
+                        	readTechnique(appendToThisList, ver);
+                        	break;
                             
                         case Armor:
                             readArmor(appendToThisList, ver);
@@ -268,6 +273,27 @@ public class Importer {
         oneSkill.setsDocumentSource(getString("sDocumentSource"));
         
         list.add(oneSkill);
+    }
+    
+
+    private void readTechnique(List<GURPSObject> list, int ver)
+            throws IOException, FileNotFoundException {
+    	Technique oneTechnique = new Technique(
+    			getString("sName"),
+    			getString("sDescription"),
+    			getString("sId")
+    			);
+		oneTechnique.setName(getString("sName"));
+		oneTechnique.setDescription(getString("sDescription"));
+		oneTechnique.setSID(getString("sId"));
+		oneTechnique.setbIsLeveled(getBoolean("bIsLeveled"));
+		oneTechnique.setsDifficulty(getString("sDifficulty"));
+		oneTechnique.setbHasSubTechniques(getBoolean("bHasSubTechniques"));
+		oneTechnique.setsDefaults(getString("lsDefaults"));
+		oneTechnique.setsSpecialNotes(getString("sSpecialNotes"));
+		oneTechnique.setsRefs(getString("sRefs"));
+		oneTechnique.setDocumentSource(getString("sDocumentSource"));
+    	list.add(oneTechnique);
     }
     
     private void readGenericItem(List<GURPSObject> list, int ver)

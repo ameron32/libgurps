@@ -11,7 +11,7 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
     int cost;
     short tl;
     float weight;
-    ItemType itemType;
+    private ItemType itemType;
 
     String specialNotes;
     
@@ -88,9 +88,9 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
       this.cost = cost;
       this.tl = (short)tl;
       this.weight = (float)weight;
-      this.itemType = determineItemType(this);
+      this.setItemType(determineItemType(this));
 //      this.specialNotes = specialNotes;
-
+      determineItemType(this);
 	}
 
     
@@ -99,10 +99,10 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
      */
     
     public enum ItemType {
-        Item, 
-        Weapon, MeleeWeapon, RangedWeapon, 
+        GenericItem, Addon,
+        Weapon, MeleeWeapon, RangedWeapon, RangedWeaponAmmo, 
         Armor, Shield,
-        ProjectileBucket
+        Projectile, ThrowableProjectile
     }
     
 
@@ -120,11 +120,16 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
             return ItemType.Shield;
         else if (o instanceof LibraryArmor)
             return ItemType.Armor;
-        else if (o instanceof LibraryItem)
-            return ItemType.Item;
+        else if (o instanceof LibraryAddon)
+            return ItemType.Addon;
+        else if (o instanceof LibraryRangedWeaponAmmunition)
+        	return ItemType.RangedWeaponAmmo;
+        else if (o instanceof LibraryThrowableProjectile)
+        	return ItemType.ThrowableProjectile;
         else if (o instanceof LibraryProjectile)
-            return ItemType.ProjectileBucket;
-        else return null;
+            return ItemType.Projectile;
+        else 
+        	return ItemType.GenericItem;
     }
 
 
@@ -199,6 +204,9 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
 	@Override
 	public void setDocumentSource(String documentSource) {
 		this.documentSource = documentSource;
+	}
+	private void setItemType(ItemType itemType) {
+		this.itemType = itemType;
 	}
 
 }

@@ -1,13 +1,14 @@
 package com.ameron32.libgurps.character.stats;
 
+import com.ameron32.libgurps.frmwk.Importable;
 import com.ameron32.libgurps.impl.GURPSLibraryObject;
 import com.ameron32.libgurps.tools.StringTools;
 
-public class Advantage extends GURPSLibraryObject {
+public class Advantage extends GURPSLibraryObject implements Importable {
 	private static final long serialVersionUID = 2591651398215964681L;
 
 	private int importVersion = 0;
-	
+
 	private ADPQ adpq;
 	String sADPQ, sAdvType, sSuperType;
 	String sBookCost, sMultiCost, sPerLevelMultiCost;
@@ -18,11 +19,9 @@ public class Advantage extends GURPSLibraryObject {
 	String sListPMSESM;
 	String sRefs;
 	String sDocumentSource;
-	
+
 	boolean bIsForbidden;
-	
-	
-	
+
 	/**
 	 * Importer Constructor
 	 * 
@@ -63,7 +62,8 @@ public class Advantage extends GURPSLibraryObject {
 		setName(sName);
 		setDescription(sDescription);
 		setSID(sId);
-		
+		setDocumentSource(documentSource);
+
 		this.importVersion = importVersion;
 
 		this.sADPQ = sADPQ;
@@ -84,22 +84,23 @@ public class Advantage extends GURPSLibraryObject {
 		this.bIsFakeCost = bIsFakeCost;
 		this.sListPMSESM = sListPMSESM;
 		this.sRefs = sRefs;
-		this.sDocumentSource = documentSource;
+
 		this.bIsForbidden = bIsForbidden;
 	}
-	
+
 	/**
-	 * Blank Constructor. Only use if planning to manually set all necessary elements.
+	 * Blank Constructor. Only use if planning to manually set all necessary
+	 * elements.
 	 */
 	public Advantage(String name, String description, String sId) {
 		super("random");
 		setName(name);
 		setDescription(description);
 		setSID(sId);
-		
+
 		setBlankDefaults();
 	}
-	
+
 	private void setBlankDefaults() {
 		this.sADPQ = "~";
 		this.setADPQ(convertStringToADPQ(this.sADPQ));
@@ -123,122 +124,125 @@ public class Advantage extends GURPSLibraryObject {
 		this.bIsForbidden = true;
 	}
 
-//    private String sId;
-//    private String sADPQ;
-//    private String sName;
-//    private String sAdvType;
-//    private String sSuperType;
-//    private String sBookCost;
-//    private int iPage;
-//    private boolean isLeveled;
-//    private boolean isMultiCost;
-//    private boolean isVariableCost;
-//    private int iBaseCost;
-//    private String sMultiCost;
-//    private int iPerLevelCost;
-//    private String sPerLevelMultiCost;
-//    private boolean hasNotes;
-//    private boolean isFakeCost;
-//    private int iCalcCost;
-//    private boolean isForbidden;
-//    private String sListPMSESM;
-//    private String sRefs;
-//    private String sDescription;
-    
-//    /**
-//     * Importer Constructor
-//     * 
-//     * @param iId
-//     * @param sADPQ
-//     * @param sName
-//     * @param sAdvType
-//     * @param sSuperType
-//     * @param sBookCost
-//     * @param iPage
-//     * @param isLeveled
-//     * @param isMultiCost
-//     * @param isVariableCost
-//     * @param iBaseCost
-//     * @param sMultiCost
-//     * @param iPerLevelCost
-//     * @param sPerLevelMultiCost
-//     * @param hasNotes
-//     * @param isFakeCost
-//     * @param iCalcCost
-//     * @param isForbidden
-//     * @param sListPMSESM
-//     * @param sRefs
-//     * @param sDescription
-//     */
-//    public Advantage(String sId, String sADPQ, String sName, String sAdvType, String sSuperType,
-//            String sBookCost, int iPage, boolean isLeveled, boolean isMultiCost,
-//            boolean isVariableCost, int iBaseCost, String sMultiCost, int iPerLevelCost,
-//            String sPerLevelMultiCost, boolean hasNotes, boolean isFakeCost, int iCalcCost,
-//            boolean isForbidden, String sListPMSESM, String sRefs, String sDescription) {
-//        super("random");
-//        this.sId = sId;
-//        this.sADPQ = sADPQ;
-//        this.sName = sName;
-//        this.sAdvType = sAdvType;
-//        this.sSuperType = sSuperType;
-//        this.sBookCost = sBookCost;
-//        this.iPage = iPage;
-//        this.isLeveled = isLeveled;
-//        this.isMultiCost = isMultiCost;
-//        this.isVariableCost = isVariableCost;
-//        this.iBaseCost = iBaseCost;
-//        this.sMultiCost = sMultiCost;
-//        this.iPerLevelCost = iPerLevelCost;
-//        this.sPerLevelMultiCost = sPerLevelMultiCost;
-//        this.hasNotes = hasNotes;
-//        this.isFakeCost = isFakeCost;
-//        this.iCalcCost = iCalcCost;
-//        this.isForbidden = isForbidden;
-//        this.sListPMSESM = sListPMSESM;
-//        this.sRefs = sRefs;
-//        this.sDescription = sDescription;
-//        setObjectType(ObjectType.LibraryObject);
-//    }
-   
-//    /**
-//     * Copy Constructor
-//     */
-//    public Advantage(Advantage source) {
-//        super("random");
-//        this.iId = source.iId;
-//        this.sAorD = source.sAorD;
-//        this.sName = source.sName;
-//        this.sAdvType = source.sAdvType;
-//        this.sSuperType = source.sSuperType;
-//        this.sBookCost = source.sBookCost;
-//        this.iPage = source.iPage;
-//        this.isLeveled = source.isLeveled;
-//        this.isMultiCost = source.isMultiCost;
-//        this.isVariableCost = source.isVariableCost;
-//        this.iBaseCost = source.iBaseCost;
-//        this.sMultiCost = source.sMultiCost;
-//        this.iPerLevelCost = source.iPerLevelCost;
-//        this.sPerLevelMultiCost = source.sPerLevelMultiCost;
-//        this.hasNotes = source.hasNotes;
-//        this.isFakeCost = source.isFakeCost;
-//        this.iCalcCost = source.iCalcCost;
-//        this.isForbidden = source.isForbidden;
-//        this.sListPMSESM = source.sListPMSESM;
-//        this.sRefs = source.sRefs;
-//        this.sDescription = source.sDescription;
-//        setObjectType(ObjectType.WorldObject);
-//    }
-    
+	// private String sId;
+	// private String sADPQ;
+	// private String sName;
+	// private String sAdvType;
+	// private String sSuperType;
+	// private String sBookCost;
+	// private int iPage;
+	// private boolean isLeveled;
+	// private boolean isMultiCost;
+	// private boolean isVariableCost;
+	// private int iBaseCost;
+	// private String sMultiCost;
+	// private int iPerLevelCost;
+	// private String sPerLevelMultiCost;
+	// private boolean hasNotes;
+	// private boolean isFakeCost;
+	// private int iCalcCost;
+	// private boolean isForbidden;
+	// private String sListPMSESM;
+	// private String sRefs;
+	// private String sDescription;
 
+	// /**
+	// * Importer Constructor
+	// *
+	// * @param iId
+	// * @param sADPQ
+	// * @param sName
+	// * @param sAdvType
+	// * @param sSuperType
+	// * @param sBookCost
+	// * @param iPage
+	// * @param isLeveled
+	// * @param isMultiCost
+	// * @param isVariableCost
+	// * @param iBaseCost
+	// * @param sMultiCost
+	// * @param iPerLevelCost
+	// * @param sPerLevelMultiCost
+	// * @param hasNotes
+	// * @param isFakeCost
+	// * @param iCalcCost
+	// * @param isForbidden
+	// * @param sListPMSESM
+	// * @param sRefs
+	// * @param sDescription
+	// */
+	// public Advantage(String sId, String sADPQ, String sName, String sAdvType,
+	// String sSuperType,
+	// String sBookCost, int iPage, boolean isLeveled, boolean isMultiCost,
+	// boolean isVariableCost, int iBaseCost, String sMultiCost, int
+	// iPerLevelCost,
+	// String sPerLevelMultiCost, boolean hasNotes, boolean isFakeCost, int
+	// iCalcCost,
+	// boolean isForbidden, String sListPMSESM, String sRefs, String
+	// sDescription) {
+	// super("random");
+	// this.sId = sId;
+	// this.sADPQ = sADPQ;
+	// this.sName = sName;
+	// this.sAdvType = sAdvType;
+	// this.sSuperType = sSuperType;
+	// this.sBookCost = sBookCost;
+	// this.iPage = iPage;
+	// this.isLeveled = isLeveled;
+	// this.isMultiCost = isMultiCost;
+	// this.isVariableCost = isVariableCost;
+	// this.iBaseCost = iBaseCost;
+	// this.sMultiCost = sMultiCost;
+	// this.iPerLevelCost = iPerLevelCost;
+	// this.sPerLevelMultiCost = sPerLevelMultiCost;
+	// this.hasNotes = hasNotes;
+	// this.isFakeCost = isFakeCost;
+	// this.iCalcCost = iCalcCost;
+	// this.isForbidden = isForbidden;
+	// this.sListPMSESM = sListPMSESM;
+	// this.sRefs = sRefs;
+	// this.sDescription = sDescription;
+	// setObjectType(ObjectType.LibraryObject);
+	// }
+
+	// /**
+	// * Copy Constructor
+	// */
+	// public Advantage(Advantage source) {
+	// super("random");
+	// this.iId = source.iId;
+	// this.sAorD = source.sAorD;
+	// this.sName = source.sName;
+	// this.sAdvType = source.sAdvType;
+	// this.sSuperType = source.sSuperType;
+	// this.sBookCost = source.sBookCost;
+	// this.iPage = source.iPage;
+	// this.isLeveled = source.isLeveled;
+	// this.isMultiCost = source.isMultiCost;
+	// this.isVariableCost = source.isVariableCost;
+	// this.iBaseCost = source.iBaseCost;
+	// this.sMultiCost = source.sMultiCost;
+	// this.iPerLevelCost = source.iPerLevelCost;
+	// this.sPerLevelMultiCost = source.sPerLevelMultiCost;
+	// this.hasNotes = source.hasNotes;
+	// this.isFakeCost = source.isFakeCost;
+	// this.iCalcCost = source.iCalcCost;
+	// this.isForbidden = source.isForbidden;
+	// this.sListPMSESM = source.sListPMSESM;
+	// this.sRefs = source.sRefs;
+	// this.sDescription = source.sDescription;
+	// setObjectType(ObjectType.WorldObject);
+	// }
 
 	@Override
 	public String toString() {
 		return super.toString()
-				+ (this.getClass().getSimpleName() + ": " + this.getName() + "\n"
-				+ "    c:" + this.getiCalcCost() + ", p#" + this.getiPage()
-				+ "" + ", " + "id:" + this.getSID() + "\n" + "      " + "D: "
-				+ StringTools.truncate(this.getDescription(), 50)
-				+ "     id: " + this.getObjectId() + "\n");
+				+ (this.getClass().getSimpleName() + ": " + this.getName()
+						+ "\n" + "    c:" + this.getiCalcCost() + ", p#"
+						+ this.getiPage() + "" + ", " + "id:" + this.getSID()
+						+ "\n" + "      " + "D: "
+						+ StringTools.truncate(this.getDescription(), 50)
+						+ "     id: " + this.getObjectId() + "\n");
 	}
 
 	public int getImportVersion() {
@@ -400,11 +404,11 @@ public class Advantage extends GURPSLibraryObject {
 	public void setbIsForbidden(boolean bIsForbidden) {
 		this.bIsForbidden = bIsForbidden;
 	}
-	
+
 	public enum ADPQ {
 		Advantage, Disadvantage, Perk, Quirk, none
 	}
-	
+
 	private static ADPQ convertStringToADPQ(String advString) {
 		if (advString.equalsIgnoreCase("A")) {
 			return ADPQ.Advantage;
@@ -426,5 +430,15 @@ public class Advantage extends GURPSLibraryObject {
 	public void setADPQ(ADPQ adpq) {
 		this.adpq = adpq;
 	}
-	
+
+	@Override
+	public String getDocumentSource() {
+		return sDocumentSource;
+	}
+
+	@Override
+	public void setDocumentSource(String documentSource) {
+		this.sDocumentSource = documentSource;
+	}
+
 }

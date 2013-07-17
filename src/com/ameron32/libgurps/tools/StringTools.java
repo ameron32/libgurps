@@ -41,6 +41,27 @@ public class StringTools {
     }
     
     /**
+	 * Short method to convert a List of Strings without semicolons into a
+	 * string separated with semicolons.
+	 * 
+	 * @param s
+	 * @return
+	 */
+    public static String combineList(List<String> ls) {
+    	String result = "";
+		if (!ls.isEmpty()) {
+			for (String s : ls) {
+				if (!(s.charAt(s.length() - 1) == ';')) {
+					result = result + s + ";";
+				} else {
+					result = result + s;
+				}
+			}
+		}
+    	return result;
+    }
+    
+    /**
      * Short method to replace bars "|" in a String to new line breaks "\n"
      * 
      * @param s
@@ -53,6 +74,22 @@ public class StringTools {
 				conversion[i] = '\n';
 		}
 		return String.copyValueOf(conversion);
+	}
+	
+    /**
+     * Short method to replace bars "|" in a String to new line breaks "\n"
+     * 
+     * @param s
+     * @return
+     */
+	public static String convertBarsToParagraphs(String s) {
+//		char[] conversion = s.toCharArray();
+//		for (int i = 0; i < conversion.length; i++) {
+//			if (conversion[i] == '|')
+//				conversion[i] = '\n';
+//		}
+		
+		return s.replace("| ","\n     ").replace("|","\n      ");
 	}
     
     public static int getInteger(String s) {
