@@ -4,7 +4,7 @@ import com.ameron32.libgurps.frmwk.Importable;
 import com.ameron32.libgurps.impl.GURPSLibraryObject;
 import com.ameron32.libgurps.tools.StringTools;
 
-public class Advantage extends GURPSLibraryObject implements Importable {
+public class Advantage extends Enhancement implements Importable {
 	private static final long serialVersionUID = 2591651398215964681L;
 
 	private int importVersion = 0;
@@ -58,10 +58,7 @@ public class Advantage extends GURPSLibraryObject implements Importable {
 			boolean bHasNotes, boolean bIsFakeCost, int iCalcCost,
 			String sListPMSESM, String sRefs, String documentSource,
 			boolean bIsForbidden) {
-		super("random");
-		setName(sName);
-		setDescription(sDescription);
-		setSID(sId);
+		super(sName, sDescription, sId);
 		setDocumentSource(documentSource);
 
 		this.importVersion = importVersion;
@@ -93,11 +90,8 @@ public class Advantage extends GURPSLibraryObject implements Importable {
 	 * elements.
 	 */
 	public Advantage(String name, String description, String sId) {
-		super("random");
-		setName(name);
-		setDescription(description);
-		setSID(sId);
-
+		super(name, description, sId);
+		
 		setBlankDefaults();
 	}
 

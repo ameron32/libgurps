@@ -6,7 +6,7 @@ import com.ameron32.libgurps.frmwk.Importable;
 import com.ameron32.libgurps.impl.GURPSLibraryObject;
 import com.ameron32.libgurps.tools.StringTools;
 
-public class Skill extends GURPSLibraryObject implements Importable {
+public class Skill extends Enhancement implements Importable {
 	private static final long serialVersionUID = 7662647146533261471L;
 	
     private int importVersion = 0;
@@ -72,10 +72,7 @@ public class Skill extends GURPSLibraryObject implements Importable {
 
 
     public Skill(String name, String description, String sId) {
-		super("random");
-		setName(name);
-		setDescription(description);
-		setSID(sId);
+		super(name, description, sId);
 
 		setBlankDefaults();
 	}

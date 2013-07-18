@@ -3,9 +3,12 @@ package com.ameron32.libgurps.character;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.ameron32.libgurps.DataSet;
+import com.ameron32.libgurps.character.stats.Enhancement;
 import com.ameron32.libgurps.character.stats.Inventory;
 import com.ameron32.libgurps.damage.Damage;
 import com.ameron32.libgurps.damage.Roll;
@@ -41,8 +44,7 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
             mShieldSkill, // convert to Skill[shield]
             mSM;
     boolean mCombatReflexes;
-    // Skill[] skills;
-    // Trait[] traits; // aka Advantages
+    private final Set<Enhancement> mEnhancements = new HashSet<Enhancement>();
     Inventory mInventory;
 
     /**

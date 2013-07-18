@@ -7,7 +7,7 @@ import com.ameron32.libgurps.frmwk.Importable;
 import com.ameron32.libgurps.impl.GURPSLibraryObject;
 import com.ameron32.libgurps.tools.StringTools;
 
-public class Technique extends GURPSLibraryObject implements Importable {
+public class Technique extends Enhancement implements Importable {
 	private static final long serialVersionUID = 6134116924681106592L;
 
 	boolean bIsLeveled, bHasSubTechniques;
@@ -18,11 +18,8 @@ public class Technique extends GURPSLibraryObject implements Importable {
 	private String sSpecialNotes;
 	
 	public Technique(String name, String description, String sId) {
-		super("random");
-		setName(name);
-		setDescription(description);
-		setSID(sId);
-
+		super(name, description, sId);
+		
 		setBlankDefaults();
 	}
     
