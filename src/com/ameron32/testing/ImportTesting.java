@@ -98,9 +98,9 @@ public class ImportTesting {
 		return exclude;
 	}
     
-    
-    
-    /**
+
+	
+	/**
      * 
      * @param Array of Strings, of which only String[0] is used.
      * String 0 is the directoryPath of where the downloaded/saved files are stored.
@@ -143,7 +143,6 @@ public class ImportTesting {
     }
     
     public byte display1() {
-
     	log("\n" + libraryEverything.size() + " total items");
         log(TestingTools.numOf(Advantage.class) + " advantages [" + TestingTools.numOf(GURPSObject.getAll(Advantage.class)) + "]");
         log(TestingTools.numOf(LibraryArmor.class) + " armors [" + TestingTools.numOf(GURPSObject.getAll(LibraryArmor.class)) + "]");

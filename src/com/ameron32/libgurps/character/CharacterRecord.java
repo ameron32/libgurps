@@ -44,8 +44,8 @@ public class CharacterRecord extends GURPSObject implements Serializable, Damage
             mShieldSkill, // convert to Skill[shield]
             mSM;
     boolean mCombatReflexes;
-    private final Set<Enhancement> mEnhancements = new HashSet<Enhancement>();
-    Inventory mInventory;
+//  private final Set<myEnhancement> mEnhancements = new HashSet<myEnhancement>(); 
+    private Inventory mInventory;
 
     /**
      * Create a new CharacterRecord. Use setEnhanced(), setStrikingST(),
