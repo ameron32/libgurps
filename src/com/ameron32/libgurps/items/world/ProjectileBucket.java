@@ -3,7 +3,10 @@ package com.ameron32.libgurps.items.world;
 public class ProjectileBucket extends WorldItem {
 	private static final long serialVersionUID = 4833972859456673742L;
 	
-	
+	public ProjectileBucket (String sId) {
+		super("random");
+		//TODO finish
+	}
 	
 	
 	/*

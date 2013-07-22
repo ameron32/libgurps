@@ -21,22 +21,25 @@ public class ActivityTools {
 		this.directory = directory;
 	}
 	
-    public void openInPDF(String[] refBookPage) {
-        int pageNumber = 0;
+    public void openInPDF(String bookCode, String pageNumber) {
+    	String[] refBookPage = new String[] { bookCode, pageNumber };
+    	
+        int pdfPageNumber = 0;
         int pageOffset = References.getOffsetByInitials(refBookPage[0]);
 
         File file = new File(directory
                 + References.getFileNameByInitials(refBookPage[0]));
         Log.e("", directory
                 + References.getFileNameByInitials(refBookPage[0]));
-        pageNumber = Integer.parseInt(refBookPage[1]) + pageOffset;
+        pdfPageNumber = Integer.parseInt(refBookPage[1]) + pageOffset;
+        Log.e("", pdfPageNumber + "");
 
         if (file.exists()) {
             Uri path = Uri.fromFile(file);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(path, "application/pdf");
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra("page", pageNumber);
+            intent.putExtra("page", pdfPageNumber);
 
             try {
                 a.startActivity(intent);

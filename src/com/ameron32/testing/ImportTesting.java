@@ -12,6 +12,7 @@ import java.util.Random;
 import com.ameron32.libcharacter.library.PersonalityTrait;
 import com.ameron32.libcharacter.library.PersonalityTraits;
 import com.ameron32.libgurps.Note;
+import com.ameron32.libgurps.References;
 import com.ameron32.libgurps.attackoptions.AttackOption;
 import com.ameron32.libgurps.attackoptions.MeleeAttackOption;
 import com.ameron32.libgurps.attackoptions.ThrownAttackOption;
@@ -78,6 +79,9 @@ public class ImportTesting {
     	List<String> fileNames = new ArrayList<String>();
     	for (String[] aS : allFiles.clone()) {
     		fileNames.add(aS[0]);
+    	}
+    	for (String[] aS : References.getReferences()) {
+    		fileNames.add(aS[3]);
     	}
     	return fileNames.toArray(new String[0]);
     }

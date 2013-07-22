@@ -6,8 +6,8 @@ public class WorldArmor extends WorldItem {
 	
 	
 	
-	protected WorldArmor() {
-		super();
+	protected WorldArmor(String sId) {
+		super("random");
 		// TODO Auto-generated constructor stub
 	}
 

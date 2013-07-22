@@ -181,9 +181,6 @@ public abstract class GURPSObject implements Serializable {
     }
     
     
-    
-
-    
 
 
 	@Override

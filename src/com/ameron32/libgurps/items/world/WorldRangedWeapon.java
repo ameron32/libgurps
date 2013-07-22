@@ -8,6 +8,11 @@ import com.ameron32.libgurps.items.library.LibraryProjectile;
 public class WorldRangedWeapon extends WorldWeapon {
 	private static final long serialVersionUID = 6291439920022329204L;
 
+	public WorldRangedWeapon(String sId) {
+		super("random");
+		// TODO finish
+	}
+	
 	/**
      * Readies the ammo on this weapon.
      * 

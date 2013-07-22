@@ -14,20 +14,27 @@ import com.ameron32.libgurps.items.frmwk.DamageReceiver;
 import com.ameron32.libgurps.items.frmwk.DamageReducer;
 import com.ameron32.libgurps.items.frmwk.EquipmentUser;
 import com.ameron32.libgurps.items.frmwk.Equippable;
+import com.ameron32.libgurps.items.frmwk.LibraryDuplicate;
 import com.ameron32.libgurps.items.frmwk.ThrowableItem;
+import com.ameron32.libgurps.items.library.Library;
 
-public class WorldItem extends GURPSWorldObject implements DamageGenerator, DamageReducer, Equippable, AttachmentCarrier, ThrowableItem {
+public class WorldItem extends GURPSWorldObject implements DamageGenerator, DamageReducer, Equippable, AttachmentCarrier, ThrowableItem, LibraryDuplicate {
 	private static final long serialVersionUID = 1086080560858324155L;
 
     // TODO Notes: consider interfaces for Ownable, Personalizable/Customizable
 	// TODO REVIEW EVERYTHING!!!
 	
 	// TODO constructor, include source
-	protected WorldItem() {
+	public WorldItem(String sId) {
 		super("random");
+		source = findCloneSource(sId);
 		// TODO Auto-generated constructor stub
 	}
-	private GURPSLibraryObject source;
+	@Override
+	public void requestSource(String sId) {
+		//TODO finish event
+	}
+	
 	
     // OWNERSHIP
     private User owner;
@@ -165,36 +172,22 @@ public class WorldItem extends GURPSWorldObject implements DamageGenerator, Dama
         this.user = user;
     }
 
-
-
-	public GURPSLibraryObject getSource() {
-		return source;
-	}
-
-
-
-	public void setSource(GURPSLibraryObject source) {
-		this.source = source;
-	}
-
-
-
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 
 	public String getSId() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
-
 	public float getWeight() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+
+
 }

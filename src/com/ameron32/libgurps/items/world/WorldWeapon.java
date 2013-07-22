@@ -13,7 +13,10 @@ public class WorldWeapon extends WorldItem {
 	
 	// TODO BROKEN ALL OVER THE PLACE
 	
-	
+	public WorldWeapon(String sId) {
+		super("random");
+		// TODO finish
+	}
 	
 	/*
      * GETTERS AND SETTERS

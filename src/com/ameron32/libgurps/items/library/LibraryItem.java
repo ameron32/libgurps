@@ -3,18 +3,18 @@ package com.ameron32.libgurps.items.library;
 
 import com.ameron32.libgurps.frmwk.Importable;
 import com.ameron32.libgurps.impl.*;
+import com.ameron32.libgurps.items.frmwk.LibraryDuplicate;
+import com.ameron32.libgurps.items.frmwk.LibraryOriginal;
 import com.ameron32.libgurps.tools.StringTools;
 
-public class LibraryItem extends GURPSLibraryObject implements Importable {
+public class LibraryItem extends GURPSLibraryObject implements Importable, LibraryOriginal {
     private static final long serialVersionUID = -4962512586546099923L;
 
     int cost;
     short tl;
     float weight;
     private ItemType itemType;
-
     String specialNotes;
-    
     String documentSource;
     
     /* ADDED CATEGORY FIELD */
@@ -22,49 +22,6 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
     public String getCategory() { return itemCategory; } 
     public void setCategory(String itemCategory) { this.itemCategory = itemCategory; } 
     
-    //Consider rewrite    
-//    /**
-//     * Standard Constructor
-//     * 
-//     * @param name
-//     * @param id
-//     * @param cost
-//     * @param tl
-//     * @param weight
-//     * @param specialNotes
-//     * @param description
-//     */
-//    public LibraryItem(String name, String sId, int cost, int tl, double weight, 
-//            String specialNotes, String description) {
-//        super("random");
-//        this.name = name;
-//        this.sId = sId;
-//        this.cost = cost;
-//        this.tl = (short)tl;
-//        this.weight = (float)weight;
-//        this.itemType = determineItemType(this);
-//        this.specialNotes = specialNotes;
-//        this.description = description;
-//    }
-//
-//    /**
-//     * Duplicate an existing template item
-//     * 
-//     * @param source
-//     */
-//    public LibraryItem(LibraryItem source) {
-//        super("random");
-//        this.name = source.name;
-//        this.sId = source.sId;
-//        this.cost = source.cost;
-//        this.tl = source.tl;
-//        this.weight = source.weight;
-//        this.itemType = source.itemType;
-//        this.specialNotes = source.specialNotes;
-//        this.description = source.description;
-//        
-//        this.user = source.user;      // TODO need to reEquip?
-//    }
 
     /**
      * Importer constructor
@@ -76,9 +33,10 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
      * @param weight
      * @param notes
      * @param description
+     * @param documentSource
      */
     public LibraryItem(String name, String sId, int cost, int tl,
-			double weight, String notes, String description, String documentSource) {
+			double weight, String specialNotes, String description, String documentSource) {
       super("random");
       setName(name);
       setDescription(description);
@@ -89,9 +47,30 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
       this.tl = (short)tl;
       this.weight = (float)weight;
       this.setItemType(determineItemType(this));
-//      this.specialNotes = specialNotes;
+      this.specialNotes = specialNotes;
       determineItemType(this);
 	}
+    
+    /**
+     * DEMO source duplicator for use with clone
+     * 
+     * @param source
+     */
+    public LibraryItem(LibraryItem source) {
+    	super("random");
+    	setName(source.getName());
+    	setDescription(source.getDescription());
+    	setSID(source.getSID());
+    	setDocumentSource(source.getDocumentSource());
+    	
+    	this.cost = source.cost;
+    	this.tl = source.tl;
+    	this.weight = source.weight;
+    	this.itemType = source.itemType;
+    	this.specialNotes = source.specialNotes;
+    	this.documentSource = source.documentSource;
+    	this.itemCategory = source.itemCategory;
+    }
 
     
     /**
@@ -105,10 +84,6 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
         Projectile, ThrowableProjectile
     }
     
-
-
-
-
 	private ItemType determineItemType(Object o) {
         if (o instanceof LibraryRangedWeapon)
             return ItemType.RangedWeapon;
@@ -181,21 +156,6 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
 				+ this.getObjectId() + "\n";
 	}
 
-
-
-	
-	/* HARVEST for toString()
-    @Override
-    public String toString() {
-        return "Item:" + this.getClass().getSimpleName() + " [name=" + name + ", id=" + sId + ", cost=" + cost + ", tl=" + tl + ", weight="
-                + weight + ", itemType=" + itemType + ", specialNotes=" + specialNotes
-                + ", description=" + description  
-//                + ", pName=" + pName + ", pDescription=" + pDescription 
-//                + ", user=" + user + ", attachments=" + attachments + "]"
-                ;
-    }
-    */
-
 	@Override
 	public String getDocumentSource() {
 		return documentSource;
@@ -208,5 +168,15 @@ public class LibraryItem extends GURPSLibraryObject implements Importable {
 	private void setItemType(ItemType itemType) {
 		this.itemType = itemType;
 	}
+	
+	@Override
+	public void onRequestSource(LibraryDuplicate ld) {
 
+	}
+	
+	@Override
+	public void register() {
+		Library.ORIGINALS.add(this);
+	}
+	
 }

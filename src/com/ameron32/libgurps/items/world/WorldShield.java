@@ -9,6 +9,11 @@ public class WorldShield extends WorldArmor implements DamageGenerator, DamageRe
 	
 	// TODO WorldShield needs to implement ArmorReducer and Weaponable... or whatever
 	
+	public WorldShield(String sId) {
+		super("random");
+		//TODO finish
+	}
+	
 	private static final long serialVersionUID = 5266127013720563455L;
 
 	@Override
