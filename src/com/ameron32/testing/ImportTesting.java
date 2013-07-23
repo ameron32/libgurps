@@ -137,6 +137,10 @@ public class ImportTesting {
     private final PersonalityTraits pt = new PersonalityTraits();
     public byte importer() {
         Importer imp = new Importer(); // add PersonalityTraits importing
+        
+        // reset in case of reload
+        libraryEverything.clear();
+        
         for (int i = 0; i < allFiles.length; i++) {
             imp.readCSVIntoList(dirPath + allFiles[i][0], 
                     libraryEverything, 
