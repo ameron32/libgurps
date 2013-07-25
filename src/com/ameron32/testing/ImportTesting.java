@@ -75,15 +75,15 @@ public class ImportTesting {
     	{ "LT-ArmorWeaponsAdvSkills-PersonalityTraits.csv" , "PersonalityTrait" } ,
     	{ "LT-ArmorWeaponsAdvSkills-Items.csv" , "Item" }
     };
-    public static String[] getAllFilenames() { 
-    	List<String> fileNames = new ArrayList<String>();
+    public static String[][] getAllFilenames() { 
+    	List<String[]> fileNames = new ArrayList<String[]>();
     	for (String[] aS : allFiles.clone()) {
-    		fileNames.add(aS[0]);
+    		fileNames.add(new String[] { aS[0] , "true" } );
     	}
     	for (String[] aS : References.getReferences()) {
-    		fileNames.add(aS[3]);
+    		fileNames.add(new String[] { aS[3] , "false" } );
     	}
-    	return fileNames.toArray(new String[0]);
+    	return fileNames.toArray(new String[0][0]);
     }
     
 	private static final Class<?>[] exclude = {
@@ -205,7 +205,9 @@ public class ImportTesting {
         			}
         		}
     			if (!mustExclude) {
-    				log("************************************************************** \n\n" + ((GURPSObject)go).toString() + "\n**************************************************************");
+    				log("************************************************************** \n\n" 
+    						+ ((GURPSObject)go).toString() 
+    						+ "\n**************************************************************");
     			}
 //        	} else if (go instanceof AttackOption) {
 //				boolean mustExclude = false;

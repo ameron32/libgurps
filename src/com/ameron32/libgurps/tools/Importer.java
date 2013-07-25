@@ -361,6 +361,7 @@ public class Importer {
                 getDouble("fWeight"),
                 getInt("iDon"),
                 getInt("iHoldout"),
+                getString("sSpecialNotes"),
                 getString("sDocumentSource")
                 );
         oneArmor.setSpecialModifiers(        

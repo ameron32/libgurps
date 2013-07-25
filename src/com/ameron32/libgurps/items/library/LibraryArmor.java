@@ -70,9 +70,9 @@ public class LibraryArmor extends LibraryItem {
      * @param holdout
      */
     public LibraryArmor(String sId, String name, String description, String material, String covers, int tl, int dr,
-            int cost, double weight, int don, int holdout, String documentSource) {
+            int cost, double weight, int don, int holdout, String specialNotes, String documentSource) {
         super(name, sId, cost, tl, weight, 
-                "", "", documentSource); // FIXME shouldn't be blank
+                specialNotes, description, documentSource);
         this.covers = StringTools.genList(covers).toArray(new String[0]);
         this.material = material;
         this.dr = (short) dr;
@@ -149,6 +149,7 @@ public class LibraryArmor extends LibraryItem {
 	public String toString() {
 //		setSubDetail("Armor--- \n" + "    " + "[" + this.getCoversString() + "]" + ", \n");
 		return super.toString()
+				+ "\nDesc: " + this.getDescription() + "\n"
 				+ "Armor--- \n" + "    " + "[" + getCoversAsString() + "]" + ", \n";
 	}
 	
