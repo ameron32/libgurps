@@ -19,7 +19,12 @@ public class LibraryAddon extends LibraryItem {
      * @param minST
      * @param notes
      */
-    public LibraryAddon(String sId, String type, String attachTo, String name, String description, String material, double weight, int cost, int tl, int minST, String notes, String documentSource) {
+    public LibraryAddon(String sId, String type, 
+    		String attachTo, String name, 
+    		String description, String material, 
+    		double weight, int cost, 
+    		int tl, int minST, 
+    		String notes, String documentSource) {
     	super(name, sId, cost, tl,
     			weight, notes, description, documentSource);
     	this.type = type;
