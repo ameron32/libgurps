@@ -72,13 +72,20 @@ public class ThrownAttackOption extends AttackOption {
     
     @Override
     public String toString() {
-        return super.toString() + "TAO: " + weaponName + ": range(half/max)= (" + halfDamageRange + "/" + maxRange + "), baseRoll=" + baseRoll
-                + ", modifier=" + modifier + ", id=" + sId + ", weaponId=" + weaponId + ", group="
-                + group + ", " 
-                + "\n" + "      " + "weaponName=" + weaponName + ", damageDescription=[" + damageDescription
-                + "], attackNotes=" + attackNotes + ", " 
-                + "\n" + "      " + "loReachChoices=[" + loReachChoices
-                + "], attackNumber=" + attackNumber + ", minST=" + minST + "";
+        return super.toString() 
+        		+ "TAO: " + getName() + " : " + this.description
+        		+ "\n" + "range(half/max)= (" + halfDamageRange + "/" + maxRange + ")"
+        		+ "\n" + "baseRoll=" + baseRoll
+                + "\n" + "modifier=" + modifier 
+                + "\n" + "id=" + sId 
+                + "\n" + "weaponId=" + weaponId 
+                + "\n" + "group=" + group 
+                + "\n" + "weaponName=" + weaponName 
+                + "\n" + "damageDescription=[" + damageDescription + "]"
+                + "\n" + "attackNotes=" + attackNotes 
+                + "\n" + "loReachChoices=[" + loReachChoices + "]"
+                + "\n" + "attackNumber=" + attackNumber 
+                + "\n" + "minST=" + minST + "\n";
     }
     
     

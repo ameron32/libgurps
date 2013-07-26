@@ -10,6 +10,10 @@ import com.ameron32.libgurps.items.library.LibraryWeapon;
 public class WorldWeapon extends WorldItem {
 	private static final long serialVersionUID = 1549531196091894752L;
 
+    
+    // EquipLocation[] equipLocation;
+    // IdleLocation[] idleLocation;
+	
 	
 	// TODO BROKEN ALL OVER THE PLACE
 	

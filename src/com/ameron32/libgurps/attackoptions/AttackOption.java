@@ -17,6 +17,13 @@ public abstract class AttackOption extends GURPSObject implements CharacterAmpli
     
     String documentSource;
     
+    @Override
+    public String getDescription() {
+    	return super.getDescription() + "\n"
+    			+ "Temporary Description-------"
+    			+ "\n" + toString();
+    }
+    
     public AttackOption(String damageType, Roll damage, String sId, String name, String description, 
     		String weaponId, String group, String documentSource) {
         super("random");
@@ -45,7 +52,9 @@ public abstract class AttackOption extends GURPSObject implements CharacterAmpli
     		linkedTo = attackOptionFor.getClass().getSimpleName() + ":" + attackOptionFor.getName();
     	else
     		linkedTo = "Currently not linked";
-        return "AttackOption:" + this.getClass().getSimpleName() + " [damageType=" + damageType + ", damage=" + damage + "]"
+        return "AttackOption:" + this.getClass().getSimpleName() 
+        		+ "\n" + "damageType=" + damageType 
+        		+ "\n" + "damage=" + damage
 				+ "\n" + "Linked to:" + linkedTo + "\n";
     }
     

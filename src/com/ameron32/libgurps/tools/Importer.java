@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import android.util.Log;
+
 import com.ameron32.libcharacter.library.PersonalityTrait;
 import com.ameron32.libcharacter.library.PersonalityTraits;
 import com.ameron32.libgurps.Step;
@@ -499,24 +501,30 @@ public class Importer {
         /*
          * Import version 158
          */
-    	MeleeAttackOption oneMWOption = new MeleeAttackOption(
-                getString("sId"),
-                getString("sName"),
-                getString("sDescription"),
-    			getString("sWeaponId"),
-                getString("sGroup"),
-                getInt("iAttack"),
-                getString("sWeapon"), 
-                getString("sType"),
-                getString("sBaseDamage"),
-                getInt("iModifier"),
-                getString("sAmt"),
-                getString("liReach"),
-                getInt("iMinST"),
-                getString("sSpecialNotes"),
-                getString("sDocumentSource")
-                );
-        list.add(oneMWOption);
+    	// FIXME temporary broken exclusion
+    	if (!getString("xBroken").equals("x")) {
+
+			MeleeAttackOption oneMWOption = new MeleeAttackOption(
+					getString("sId"), 
+					getString("sName"),
+					getString("sDescription"), 
+					getString("sWeaponId"),
+					getString("sGroup"), 
+					getInt("iAttack"),
+					getString("sWeapon"), 
+					getString("sType"),
+					getString("sBaseDamage"), 
+					getInt("iModifier"),
+					getString("sAmt"), 
+					getString("liReach"), 
+					getInt("iMinST"),
+					getString("sSpecialNotes"), 
+					getString("sDocumentSource"));
+			list.add(oneMWOption);
+
+    	} else {
+    		Log.e("xBroken", "skipping " + getString("sId") + " [" + getString("sName") + "]");
+    	}
     }
     
 	private void readAttachment(List<GURPSObject> list, int ver) 

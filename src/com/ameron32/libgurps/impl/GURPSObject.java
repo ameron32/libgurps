@@ -16,7 +16,11 @@ public abstract class GURPSObject implements Serializable {
 
     // REFERENCE
     private long objectId;
-    private String name, description, sId;
+    private String name;
+
+	protected String description;
+
+	private String sId;
     
     // TYPE OF OBJECT
     public enum ObjectType { LibraryObject, WorldObject, InterfaceObject, NoteObject };

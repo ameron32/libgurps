@@ -16,32 +16,28 @@ public abstract class LibraryWeapon extends LibraryItem {
     short quality;
     List<AttackOption> attackOptions;
 
-    // EquipLocation[] equipLocation;
-    // IdleLocation[] idleLocation;
+    /* FIXME override to display more information for Weapons */
+    @Override
+    public String getDescription() {
+    	StringBuilder sb;
+    	String weaponSpecificAddon = "\n"
+    			+ "Temporary Description-------"
+    			+ "\n" + "AttackOptions:" + "\n";
+		if (!(attackOptions == null || attackOptions.isEmpty())) {
+	    	sb = new StringBuilder();
+	    	int counter = 0;
+			for (AttackOption ao : attackOptions) {
+				counter++;
+				sb.append(counter + ": " + ao.toString() + "\n");
+			}
+			weaponSpecificAddon = weaponSpecificAddon + sb.toString();
+		} else {
+			weaponSpecificAddon = weaponSpecificAddon + "No attackOptions available.";
+		}
+		return super.getDescription() + weaponSpecificAddon;
+    }
 
-//    /**
-//     * Standard Constructor
-//     * 
-//     * @param name
-//     * @param id
-//     * @param cost
-//     * @param tl
-//     * @param weight
-//     * @param specialNotes
-//     * @param description
-//     * @param quality
-//     */
-//    public LibraryWeapon(String name, String sId, String weaponId, int cost, short tl, float weight,
-//            String specialNotes,
-//            String description, String weaponGroup, int minST, int quality) {
-//        super(name, sId, cost, tl, weight, specialNotes, description);
-//        this.weaponId = weaponId;
-//        this.weaponGroup = weaponGroup;
-//        this.minST = (short) minST;
-//        this.quality = (byte) quality;
-//    }
-
-    /**
+	/**
      * Importer Constructor
      * 
      * @param weaponId
@@ -57,6 +53,7 @@ public abstract class LibraryWeapon extends LibraryItem {
         super(name, weaponId, cost, tl, // FIXME no TL
                 weight, weaponNotes,
                 description, documentSource); 
+        // TODO setDescription?
         this.weaponId = weaponId;
         this.weaponGroup = group;
         this.minST = (short) minST;
@@ -76,6 +73,7 @@ public abstract class LibraryWeapon extends LibraryItem {
         }
     }
     
+    /* UNUSED CODE
     public boolean addAttackOptions(List<AttackOption> aos) {
         boolean allAdded = true;
         for (AttackOption ao : aos) {
@@ -83,6 +81,7 @@ public abstract class LibraryWeapon extends LibraryItem {
         }
         return allAdded;
     }
+    */
 
     
     
