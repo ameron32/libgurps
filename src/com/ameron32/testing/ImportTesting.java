@@ -151,22 +151,23 @@ public class ImportTesting {
     }
     
     public byte display1() {
-    	log("\n" + libraryEverything.size() + " total items");
-        log(TestingTools.numOf(Advantage.class) + " advantages [" + TestingTools.numOf(GURPSObject.getAll(Advantage.class)) + "]");
-        log(TestingTools.numOf(LibraryArmor.class) + " armors [" + TestingTools.numOf(GURPSObject.getAll(LibraryArmor.class)) + "]");
-        log(TestingTools.numOf(LibraryAddon.class) + " addons [" + TestingTools.numOf(GURPSObject.getAll(LibraryAddon.class)) + "]");
-        log(TestingTools.numOf(MeleeAttackOption.class) + " meleeattackoptions [" + TestingTools.numOf(GURPSObject.getAll(MeleeAttackOption.class)) + "]");
-        log(TestingTools.numOf(LibraryMeleeWeapon.class) + " meleeweapons [" + TestingTools.numOf(GURPSObject.getAll(LibraryMeleeWeapon.class)) + "]");
-        log(TestingTools.numOf(LibraryRangedWeaponAmmunition.class) + " rangedweaponammo [" + TestingTools.numOf(GURPSObject.getAll(LibraryRangedWeaponAmmunition.class)) + "]");
-        log(TestingTools.numOf(LibraryRangedWeapon.class) + " rangedweapons [" + TestingTools.numOf(GURPSObject.getAll(LibraryRangedWeapon.class)) + "]");
-        log(TestingTools.numOf(LibraryShield.class) + " shields [" + TestingTools.numOf(GURPSObject.getAll(LibraryShield.class)) + "]");
-        log(TestingTools.numOf(ThrownAttackOption.class) + " thrownattackoptions [" + TestingTools.numOf(GURPSObject.getAll(ThrownAttackOption.class)) + "]");
-        log(TestingTools.numOf(LibraryThrowableProjectile.class) + " throwableprojectiles [" + TestingTools.numOf(GURPSObject.getAll(LibraryThrowableProjectile.class)) + "]");
-        log(TestingTools.numOf(Skill.class) + " skills [" + TestingTools.numOf(GURPSObject.getAll(Skill.class)) + "]");
-        log(TestingTools.numOf(Technique.class) + " techniques [" + TestingTools.numOf(GURPSObject.getAll(Technique.class)) + "]");
-        log(TestingTools.numOf(PersonalityTrait.class) + " personality traits [" + TestingTools.numOf(GURPSObject.getAll(PersonalityTrait.class)) + "]");
-        log(TestingTools.numOf(LibraryItem.class) + " generic items [" + TestingTools.numOf(GURPSObject.getAll(LibraryItem.class)) + "]");
-        log("\n");
+    	/* currently ignore */
+//    	log("\n" + libraryEverything.size() + " total items");
+//        log(TestingTools.numOf(Advantage.class) + " advantages [" + TestingTools.numOf(GURPSObject.getAll(Advantage.class)) + "]");
+//        log(TestingTools.numOf(LibraryArmor.class) + " armors [" + TestingTools.numOf(GURPSObject.getAll(LibraryArmor.class)) + "]");
+//        log(TestingTools.numOf(LibraryAddon.class) + " addons [" + TestingTools.numOf(GURPSObject.getAll(LibraryAddon.class)) + "]");
+//        log(TestingTools.numOf(MeleeAttackOption.class) + " meleeattackoptions [" + TestingTools.numOf(GURPSObject.getAll(MeleeAttackOption.class)) + "]");
+//        log(TestingTools.numOf(LibraryMeleeWeapon.class) + " meleeweapons [" + TestingTools.numOf(GURPSObject.getAll(LibraryMeleeWeapon.class)) + "]");
+//        log(TestingTools.numOf(LibraryRangedWeaponAmmunition.class) + " rangedweaponammo [" + TestingTools.numOf(GURPSObject.getAll(LibraryRangedWeaponAmmunition.class)) + "]");
+//        log(TestingTools.numOf(LibraryRangedWeapon.class) + " rangedweapons [" + TestingTools.numOf(GURPSObject.getAll(LibraryRangedWeapon.class)) + "]");
+//        log(TestingTools.numOf(LibraryShield.class) + " shields [" + TestingTools.numOf(GURPSObject.getAll(LibraryShield.class)) + "]");
+//        log(TestingTools.numOf(ThrownAttackOption.class) + " thrownattackoptions [" + TestingTools.numOf(GURPSObject.getAll(ThrownAttackOption.class)) + "]");
+//        log(TestingTools.numOf(LibraryThrowableProjectile.class) + " throwableprojectiles [" + TestingTools.numOf(GURPSObject.getAll(LibraryThrowableProjectile.class)) + "]");
+//        log(TestingTools.numOf(Skill.class) + " skills [" + TestingTools.numOf(GURPSObject.getAll(Skill.class)) + "]");
+//        log(TestingTools.numOf(Technique.class) + " techniques [" + TestingTools.numOf(GURPSObject.getAll(Technique.class)) + "]");
+//        log(TestingTools.numOf(PersonalityTrait.class) + " personality traits [" + TestingTools.numOf(GURPSObject.getAll(PersonalityTrait.class)) + "]");
+//        log(TestingTools.numOf(LibraryItem.class) + " generic items [" + TestingTools.numOf(GURPSObject.getAll(LibraryItem.class)) + "]");
+//        log("\n");
         
         return 1;
     }
@@ -180,12 +181,12 @@ public class ImportTesting {
     }
     
 	private void addAttackOptionsForWeapons() {
-		for (Object o : libraryEverything) {
-			if (o instanceof LibraryWeapon) {
-				LibraryWeapon w = (LibraryWeapon) o;
-				for (Object o2 : libraryEverything) {
-					if (o2 instanceof AttackOption) {
-						AttackOption ao = (AttackOption) o2;
+		for (GURPSObject go : libraryEverything) {
+			if (go instanceof LibraryWeapon) {
+				LibraryWeapon w = (LibraryWeapon) go;
+				for (GURPSObject go2 : libraryEverything) {
+					if (go2 instanceof AttackOption) {
+						AttackOption ao = (AttackOption) go2;
 						if (w.getWeaponId().equalsIgnoreCase(ao.getWeaponId())) {
 							w.addAttackOption(ao);
 						}
@@ -196,32 +197,21 @@ public class ImportTesting {
 	}
 	    
 	public byte display2() {
-        for (GURPSObject go : libraryEverything) {
-//			if (go instanceof GURPSObject) {
-        		boolean mustExclude = false;
-        		for (Class<?> c : exclude) {
-        			if (c.isInstance(go)) {
-        				mustExclude = true;
-        			}
-        		}
-    			if (!mustExclude) {
-    				log("************************************************************** \n\n" 
-    						+ ((GURPSObject)go).toString() 
-    						+ "\n**************************************************************");
-    			}
-//        	} else if (go instanceof AttackOption) {
-//				boolean mustExclude = false;
-//				for (Class<?> c : exclude) {
-//					if (c.isInstance(go)) {
-//						mustExclude = true;
-//					}
+		/* NOTE currently skipping */
+		// TODO 
+//        for (GURPSObject go : libraryEverything) {
+//			boolean mustExclude = false;
+//			for (Class<?> c : exclude) {
+//				if (c.isInstance(go)) {
+//					mustExclude = true;
 //				}
-//				if (!mustExclude) {
-//					log("******************** \n"
-//							+ ((AttackOption) go).detailString() + "***");
-//				}
-//        	}
-        }
+//			}
+//			if (!mustExclude) {
+//				log("************************************************************** \n\n"
+//						+ ((GURPSObject) go).toString()
+//						+ "\n**************************************************************");
+//			}
+//        }
 //      showDifference(GURPSObject.getAll(GURPSObject.class), libraryEverything);
 
     
