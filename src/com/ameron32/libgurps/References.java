@@ -9,12 +9,38 @@ public class References {
 	public static final int PAGE_OFFSET = 4;
 	
 	public static final String[][] references = 
-		{
-			{"Combat Steps","x","https://dl.dropbox.com/u/949753/GURPS/combatflowchart.csv","combatflowchart.csv", "0"},
-			{"Basic Set","B","https://dl.dropbox.com/u/949753/GURPS/Resources/Official/GURPS 4th - Basic Set.pdf","G4eBS.pdf", "2"},
-			{"High Tech","HT","https://dl.dropbox.com/u/949753/GURPS/Resources/Official/GURPS 4th - High Tech.pdf","G4eHT.pdf", "1"},
-			{"Martial Arts","MA","https://dl.dropbox.com/u/949753/GURPS/Resources/Official/GURPS 4th - Martial Arts.pdf","G4eMA.pdf", "1"}
-		};
+ {
+			{
+					"Combat Steps",
+					"x",
+					"https://dl.dropbox.com/u/949753/GURPS/combatflowchart.csv",
+					"combatflowchart.csv", "0" 
+			},
+			{
+					"Basic Set",
+					"B",
+					"https://dl.dropbox.com/u/949753/GURPS/Resources/Official/GURPS 4th - Basic Set.pdf",
+					"G4eBS.pdf", "2" 
+			},
+			{
+					"High Tech",
+					"HT",
+					"https://dl.dropbox.com/u/949753/GURPS/Resources/Official/GURPS 4th - High Tech.pdf",
+					"G4eHT.pdf", "1" 
+			},
+			{
+					"Martial Arts",
+					"MA",
+					"https://dl.dropbox.com/u/949753/GURPS/Resources/Official/GURPS 4th - Martial Arts.pdf",
+					"G4eMA.pdf", "1" 
+			},
+			{
+				"Sadurian Marketplace",
+				"SM",
+				"https://dl.dropbox.com/u/949753/GURPS/GURPSBuilder/158/G4eSadurian.pdf",
+				"G4eSadurian.pdf", "0"
+			}
+};
 	
 	public static String getFileNameByInitials(String initials) {
 		for (String[] record : references) {
@@ -35,4 +61,5 @@ public class References {
 	public static String[][] getReferences() {
 		return references;
 	}
+
 }
